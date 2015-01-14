@@ -28,9 +28,9 @@ var QuizzSchema = new Schema({
 		}],
 		default: ['Classique']
 	},
-	difficulty: {
+	rate: {
 		type: Number,
-		min: 0,
+		min: 1,
 		max: 5,
 		default: 3
 	},
@@ -50,7 +50,7 @@ var QuizzSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	Date: {
+	endDate: {
 		type: Date,
 		default: Date.now
 	}
