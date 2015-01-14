@@ -31,7 +31,7 @@ var QuizzSchema = new Schema({
 	difficulty: {
 		type: Number,
 		min: 0,
-		max: 4,
+		max: 5,
 		default: 3
 	},
 	course: {
@@ -50,7 +50,7 @@ var QuizzSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	endDate: {
+	Date: {
 		type: Date,
 		default: Date.now
 	}
