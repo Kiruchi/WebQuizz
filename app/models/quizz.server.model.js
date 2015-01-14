@@ -10,24 +10,49 @@ var mongoose = require('mongoose'),
  * Quizz Schema
  */
 var QuizzSchema = new Schema({
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	title: {
+	name: {
 		type: String,
 		default: '',
 		trim: true,
-		required: 'Title cannot be blank'
+		required: 'Veuillez entrer le nom du site.'
 	},
-	content: {
+	description: {
 		type: String,
 		default: '',
 		trim: true
 	},
-	user: {
+	type: {
+		type: [{
+			type: String,
+			enum: ['TLMVPSP', 'Classique', 'MotsCroises']
+		}],
+		default: ['Classique']
+	},
+	difficulty: {
+		type: Number,
+		min: 0,
+		max: 4,
+		default: 3
+	},
+	course: {
+		type: String,
+		default: 'Général'
+	},
+	creator: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	created: {
+		type: Date,
+		default: Date.now
+	},
+	beginDate: {
+		type: Date,
+		default: Date.now
+	},
+	endDate: {
+		type: Date,
+		default: Date.now
 	}
 });
 
