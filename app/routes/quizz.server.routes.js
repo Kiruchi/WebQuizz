@@ -4,19 +4,19 @@
  * Module dependencies.
  */
 var users = require('../../app/controllers/users.server.controller'),
-	articles = require('../../app/controllers/articles.server.controller');
+	quizzs = require('../../app/controllers/quizzs.server.controller');
 
 module.exports = function(app) {
-	// Article Routes
-	app.route('/articles')
-		.get(articles.list)
-		.post(users.requiresLogin, articles.create);
+	// Quizz Routes
+	app.route('/quizzs')
+		.get(quizzs.list)
+		.post(users.requiresLogin, quizzs.create);
 
-	app.route('/articles/:articleId')
-		.get(articles.read)
-		.put(users.requiresLogin, articles.hasAuthorization, articles.update)
-		.delete(users.requiresLogin, articles.hasAuthorization, articles.delete);
+	app.route('/quizzs/:quizzId')
+		.get(quizzs.read)
+		.put(users.requiresLogin, quizzs.hasAuthorization, quizzs.update)
+		.delete(users.requiresLogin, quizzs.hasAuthorization, quizzs.delete);
 
-	// Finish by binding the article middleware
-	app.param('articleId', articles.articleByID);
+	// Finish by binding the quizz middleware
+	app.param('quizzId', quizzs.quizzByID);
 };
