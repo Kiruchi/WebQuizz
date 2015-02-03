@@ -14,7 +14,7 @@ var AnswerSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true,
-		required: 'Veuillez entrer l\'énoncé de la question.'
+		required: 'Veuillez entrer une réponse.'
 	}
 });
 

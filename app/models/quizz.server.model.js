@@ -14,7 +14,7 @@ var QuizzSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true,
-		required: 'Veuillez entrer le nom du site.'
+		required: 'Veuillez entrer le nom du quizz.'
 	},
 	description: {
 		type: String,

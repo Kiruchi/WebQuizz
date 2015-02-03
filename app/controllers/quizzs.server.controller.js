@@ -53,7 +53,7 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an quizz
+ * Delete a quizz
  */
 exports.delete = function(req, res) {
 	var quizz = req.quizz;

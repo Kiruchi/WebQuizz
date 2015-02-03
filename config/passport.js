@@ -27,7 +27,11 @@ module.exports = function() {
 	});
 
 	// Initialize strategies
-	config.getGlobbedFiles('./config/strategies/**/*.js').forEach(function(strategy) {
+
+	// Suppression des stratégies autres que l'authentification classique
+	// Mettre './config/strategies/**/*.js' si on les veut toutes au lieu de './config/strategies/**/local.js'
+
+	config.getGlobbedFiles('./config/strategies/**/local.js').forEach(function(strategy) {
 		require(path.resolve(strategy))();
 	});
 };
