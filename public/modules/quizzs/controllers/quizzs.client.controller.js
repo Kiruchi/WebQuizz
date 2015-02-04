@@ -85,7 +85,7 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 					}
 				]
 			}
-		]
+		];
 
 		$scope.addResponse = function() {
 

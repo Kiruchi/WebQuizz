@@ -1,11 +1,12 @@
 $brand-primary:         #967ADC;
 $brand-success:         #A0D468;
+$couleur-fond:			#e0e0e0;
 
 @import "../public/lib/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
 body {
   margin: 0;
-  background: #f0f0f0;
+  background: $couleur-fond;
 }
 
 h3 {
