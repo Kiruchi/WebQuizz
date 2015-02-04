@@ -32,5 +32,25 @@
 				<a href="/#!/signin">Connexion</a>
 			</li>
 		</ul>
+		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+			<li class="dropdown" dropdown>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle>
+					<span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="/#!/settings/profile">Modifier le profil</a>
+					</li>
+					<li data-ng-show="authentication.user.provider === 'local'">
+						<a href="/#!/settings/password">Modifier le mot de passe</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="/auth/signout">Déconnexion</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
 	</nav>
 </div>
