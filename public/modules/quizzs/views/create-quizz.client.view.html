@@ -1,24 +1,69 @@
 <section data-ng-controller="QuizzsController">
 	<div class="page-header">
-		<h1>New Quizz</h1>
+		<h1>Nouveau Quizz</h1>
 	</div>
 	<div class="col-md-12">
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate>
 			<fieldset>
 				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
-					<label class="control-label" for="title">Title</label>
+					<label class="control-label" for="title">Titre</label>
 					<div class="controls">
 						<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="content">Content</label>
+					<label class="control-label" for="title">Type</label>
+					<div class="controls">
+						<select name="type" id="type" class="form-control" required="required">
+							<option value="TLMVPSP">Tout le monde veut prendre sa place</option>
+							<option value="Classique">Classique</option>
+							<option value="MotsCroises">Mots croisés</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="rate">Difficulté</label>
+					<div class="radio">
+						<label>
+							<input type="radio" name="rate" id="input" value="1" checked="checked">
+							1<br>
+							<input type="radio" name="rate" id="input" value="2">
+							2<br>
+							<input type="radio" name="rate" id="input" value="3">
+							3<br>
+							<input type="radio" name="rate" id="input" value="4">
+							4<br>
+							<input type="radio" name="rate" id="input" value="5">
+							5
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="course">Matière</label>
+					<div class="controls">
+						<select name="type" id="type" class="form-control" required="required">
+							<option value="General">Général</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="content">Description</label>
 					<div class="controls">
 						<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
-					<input type="submit" class="btn btn-default">
+					<label class="control-label" for="beginDate">Date de début</label>
+					<input type="date" name="" id="input" class="form-control" value="beginDate" required="required" title="beginDate">
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="endDate">Date de fin</label>
+					<input type="date" name="" id="input" class="form-control" value="endDate" required="required" title="endDate">
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Valider"class="btn btn-default">
 				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
