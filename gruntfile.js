@@ -3,12 +3,13 @@
 module.exports = function(grunt) {
 	// Unified Watch Object
 	var watchFiles = {
-		serverViews: ['app/views/**/*.*'],
+		serverViews: ['app/views/**/*.*'], 
 		serverJS: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
-		clientViews: ['public/modules/**/views/**/*.html'],
+		clientViews: ['public/modules/**/views/*.html', 'style/*', 'public/css'],
 		clientJS: ['public/js/*.js', 'public/modules/**/*.js'],
 		clientCSS: ['public/modules/**/*.css'],
-		mochaTests: ['app/tests/**/*.js']
+		mochaTests: ['app/tests/**/*.js'],
+		sass: 'style/{,*/}*.{scss,sass}'
 	};
 
 	// Project Configuration
@@ -31,7 +32,7 @@ module.exports = function(grunt) {
 			clientViews: {
 				files: watchFiles.clientViews,
 				options: {
-					livereload: true
+					livereload: true,
 				}
 			},
 			clientJS: {
@@ -47,7 +48,21 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true
 				}
+			},
+			sass: {
+				files: watchFiles.sass,
+				tasks: ['sass:dev'],
+				options: {
+					livereload: true
+				}
+			},
+			livereload: {
+				files: ['*.html', '*.php', '*.scss' ,'*.js', '*.css','img/**/*.{png,jpg,jpeg,gif,webp,svg}'],
+				options: {
+					livereload: true
+				}
 			}
+
 		},
 		jshint: {
 			all: {
@@ -59,7 +74,7 @@ module.exports = function(grunt) {
 		},
 		csslint: {
 			options: {
-				csslintrc: '.csslintrc'
+				csslintrc: '.csslintrc',
 			},
 			all: {
 				src: watchFiles.clientCSS
@@ -105,27 +120,23 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		ngAnnotate: {
-			production: {
-				files: {
-					'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
-				}
-			}
-		},
+        ngmin: {
+            production: {
+                files: {
+                    'public/dist/application.js': '<%= applicationJavaScriptFiles %>'
+                }
+            }
+        },
 		concurrent: {
 			default: ['nodemon', 'watch'],
 			debug: ['nodemon', 'watch', 'node-inspector'],
 			options: {
-				logConcurrentOutput: true,
-				limit: 10
+				logConcurrentOutput: true
 			}
 		},
 		env: {
 			test: {
 				NODE_ENV: 'test'
-			},
-			secure: {
-				NODE_ENV: 'secure'
 			}
 		},
 		mochaTest: {
@@ -139,10 +150,28 @@ module.exports = function(grunt) {
 			unit: {
 				configFile: 'karma.conf.js'
 			}
+		},
+		sass: {
+			dev: {
+				files: {
+			      'public/css/style.css': 'style/{,*/}*.{scss,sass}'
+			      //next line is not necessary if you include your bootstrap into the *.scss files
+			      //'public/css/bootstrap.css': 'public/lib/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss'		      		     
+			    }
+		  	},
+			dist: {
+				options: {
+					sourceMap: true,
+					outputStyle: 'compressed'
+				},
+				files: {
+		      		'public/dist/style.min.css': 'style/{,*/}*.{scss,sass}'
+		    	}
+			}
 		}
 	});
 
-	// Load NPM tasks
+	// Load NPM tasks 
 	require('load-grunt-tasks')(grunt);
 
 	// Making grunt default to force in order not to break the project.
@@ -158,20 +187,19 @@ module.exports = function(grunt) {
 	});
 
 	// Default task(s).
-	grunt.registerTask('default', ['lint', 'concurrent:default']);
+	grunt.registerTask('default', ['lint', 'sass:dist', 'concurrent:default']);
 
 	// Debug task.
-	grunt.registerTask('debug', ['lint', 'concurrent:debug']);
-
-	// Secure task(s).
-	grunt.registerTask('secure', ['env:secure', 'lint', 'concurrent:default']);
+	grunt.registerTask('debug', ['lint', 'concurrent:debug', 'sass:dev']);
 
 	// Lint task(s).
-	grunt.registerTask('lint', ['jshint', 'csslint']);
+	grunt.registerTask('lint', ['jshint']);
 
 	// Build task(s).
-	grunt.registerTask('build', ['lint', 'loadConfig', 'ngAnnotate', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['lint', 'loadConfig', 'ngmin', 'uglify', 'cssmin']);
 
 	// Test task.
 	grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 };
