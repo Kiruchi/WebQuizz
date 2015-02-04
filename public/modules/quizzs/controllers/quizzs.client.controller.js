@@ -4,6 +4,7 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 	function($scope, $stateParams, $location, Authentication, Quizzs) {
 		$scope.authentication = Authentication;
 
+
 		$scope.create = function() {
 			var quizz = new Quizzs({
 				title: this.title,
@@ -54,5 +55,47 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 				quizzId: $stateParams.quizzId
 			});
 		};
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------*/
+
+		$scope.nbQuestion = 3;
+
+		$scope.questions=[
+			{
+				title:'question 1',
+				answer:'a',
+				propositions:[
+					{
+						answer:'response fausse 1'
+					},
+					{
+						answer:'response fausse 2'
+					}
+				]
+			},
+			{
+				title:'question 2',
+				answer:'c',
+				propositions:[
+					{
+						answer:'response fausse 3'
+					},
+					{
+						answer:'response fausse 4'
+					}
+				]
+			}
+		]
+
+		$scope.addResponse = function() {
+
+
+		};
+
+		$scope.addQuestion = function() {
+
+
+		};
+/* ------------------------------------------------------------------------------------------------------------------------------------------*/		
 	}
 ]);

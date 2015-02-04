@@ -63,6 +63,50 @@
 					<input type="date" name="" id="input" class="form-control" value="endDate" required="required" title="endDate">
 				</div>
 				<div class="form-group">
+					
+
+
+					<div class="form-group">
+					<label class="control-label" for="endDate">Date de fin</label>
+					<input type="date" name="" id="input" class="form-control" value="endDate" required="required" title="endDate">
+				</div>
+
+<!--- ####################################################################################################################### -->
+
+					<section id="todoapp" >
+						<header id="header">
+							<h1>Questions du quizz</h1>
+							<ul id="list-question">
+								<li ng-repeat="question in questions">
+									<label>{{question.title}}</label>
+									<label>{{question.answer}}</label>
+									<button type="button" class="btn btn-default"ng-click="removeQuestion($index)">Suprimez</button>
+									<ul class="list-group">
+										<li ng-repeat="proposition in question.propositions">
+											<label>proposition fausse : {{proposition.answer}}</label>
+										</li>
+									</ul>
+								</li>
+								<li id="question-form">
+									<input id="new-question" placeholder="Question" autofocus autocomplete="off">
+									<input type="text" id="reponse" placeholder="Response attendu">
+									<ul class="list-group">
+										<li>
+											<input type="text" id="reponse" placeholder="propsition">
+										</li>
+									</ul>									
+									<button type="button" class="btn btn-default">ajouter une reponse</button>
+								</li>
+							</ul>
+							<button type="button" class="btn btn-default">ajouter une question</button>
+						</header>
+						<footer><span><strong>Nombre de questions dans le quizz : {{nbQuestion}} questions créées</strong></span></footer>
+					</section>
+
+
+<!--- ####################################################################################################################### -->
+				</div>
+				<div class="form-group">
 					<input type="submit" value="Valider"class="btn btn-default">
 				</div>
 				<div data-ng-show="error" class="text-danger">
