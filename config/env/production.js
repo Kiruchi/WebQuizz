@@ -30,8 +30,7 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
 				'public/js/particleground-master/jquery-1.11.1.min.js',
-				'public/js/particleground-master/jquery.particleground.min',
-				'public/js/particleground-master/demo.js'
+				'public/js/particleground-master/jquery.particleground.min'
 			]
 		},
 		css: 'public/dist/application.min.css',
