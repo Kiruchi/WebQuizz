@@ -47,6 +47,8 @@ module.exports = {
 				'public/dist/style.css'
 			],
 			js: [
+				'public/dist/particleground-master/jquery-1.11.1.min.js',
+				'public/dist/particleground-master/jquery.particleground.min.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js',
 				'public/lib/angular-animate/angular-animate.js',

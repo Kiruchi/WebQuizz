@@ -1,3 +1,4 @@
+@import url("http://fonts.googleapis.com/css?family=Roboto:400,300,100");
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -5128,10 +5129,147 @@ button.close {
 
 body {
   margin: 0;
-  background: #e0e0e0; }
+  background: #f0f0f0;
+  font-family: "Roboto", "Arial", sans-serif;
+  -webkit-font-smoothing: antialiased; }
 
-h3 {
-  color: #fff; }
+.navbar {
+  background-color: #222222;
+  border-color: #000000; }
+  .navbar .navbar-brand {
+    color: #D6D6D6; }
+    .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
+      color: #ffffff; }
+  .navbar .navbar-text {
+    color: #D6D6D6; }
+  .navbar .navbar-nav > li > a {
+    cursor: pointer;
+    cursor: hand;
+    color: #D6D6D6; }
+    .navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
+      color: #ffffff;
+      background-color: #000000; }
+  .navbar .navbar-nav > li > .dropdown-menu {
+    background-color: #222222; }
+    .navbar .navbar-nav > li > .dropdown-menu > li > a {
+      color: #D6D6D6; }
+      .navbar .navbar-nav > li > .dropdown-menu > li > a:hover, .navbar .navbar-nav > li > .dropdown-menu > li > a:focus {
+        color: #ffffff;
+        background-color: #000000; }
+    .navbar .navbar-nav > li > .dropdown-menu .divider {
+      background-color: #000000; }
+  .navbar .navbar-nav > .active > a, .navbar .navbar-nav > .active > a:hover, .navbar .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color: #000000; }
+  .navbar .navbar-nav > .open > a, .navbar .navbar-nav > .open > a:hover, .navbar .navbar-nav > .open > a:focus {
+    color: #ffffff;
+    background-color: #000000; }
+  .navbar .navbar-toggle {
+    border-color: #000000; }
+    .navbar .navbar-toggle:hover, .navbar .navbar-toggle:focus {
+      background-color: #000000; }
+    .navbar .navbar-toggle .icon-bar {
+      background-color: #D6D6D6; }
+  .navbar .navbar-collapse, .navbar .navbar-form {
+    border-color: #D6D6D6; }
+  .navbar .navbar-link {
+    color: #D6D6D6; }
+    .navbar .navbar-link:hover {
+      color: #ffffff; }
 
-h4 {
-  color: #fff; }
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #D6D6D6; }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+      color: #ffffff; }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #000000; }
+ }
+
+/* particleground demo */
+#particles {
+  background-color: #000000;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.intro {
+  color: #fff;
+  position: absolute;
+  left: 0;
+  top: 30%;
+  padding: 0 20px;
+  width: 100%;
+  text-align: center; }
+
+h1 {
+  text-transform: uppercase;
+  font-size: 85px;
+  font-weight: 700;
+  letter-spacing: 0.015em; }
+
+p {
+  margin: 0 0 30px 0;
+  font-size: 24px; }
+
+.btn {
+  display: inline-block;
+  padding: 15px 30px;
+  border: 2px solid #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s; }
+
+.btn:hover {
+  color: #005544;
+  border-color: #005544; }
+
+@media only screen and (max-width: 1000px) {
+  h1 {
+    font-size: 70px; }
+ }
+
+@media only screen and (max-width: 800px) {
+  h1 {
+    font-size: 48px; }
+
+  h1::after {
+    height: 8px; }
+ }
+
+@media only screen and (max-width: 568px) {
+  .intro {
+    padding: 0 10px; }
+
+  h1 {
+    font-size: 30px; }
+
+  h1::after {
+    height: 6px; }
+
+  p {
+    font-size: 18px; }
+
+  .btn {
+    font-size: 16px; }
+ }
+
+@media only screen and (max-width: 320px) {
+  h1 {
+    font-size: 28px; }
+
+  h1::after {
+    height: 4px; }
+ }
