@@ -20,13 +20,20 @@ app.directive('particles', function() {
 		restrict: 'A',
 		link: function($scope, $elem, attrs) {
 			$elem.particleground({
-			    dotColor: '#5cbdaa',
+			    /*dotColor: '#5cbdaa',
 			    lineColor: '#5cbdaa',
 			    parallaxMultiplier: 5,
 			    maxSpeedX: 0.1,
 			    maxSpeedy: 0.1,
 			    density: 10000,
-			    proximity: 100
+			    proximity: 100*/
+			    dotColor: '#3da3ef',
+			    lineColor: '#dadbd7',
+			    particleRadius: 3,
+			    onInit: function() {
+			      $elem.delay(1000).fadeIn('slow');
+			    }
+    
 			});
 		}
 	};

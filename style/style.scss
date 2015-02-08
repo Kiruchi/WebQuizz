@@ -1,6 +1,22 @@
-$brand-primary:         #967ADC;
-$brand-success:         #A0D468;
-$couleur-fond:			#f0f0f0;
+$brand-primary:   #967ADC;
+$brand-success:   #A0D468;
+$couleur-fond:    #f4f5ef;
+$bleu-principal:  #3da3ef;
+$gris-fonce-principal: #636363;
+$gris-clair-secondaire: #acada5;
+// NAVBAR
+$bgDefault      : #222222;
+$bgHighlight    : #000000;
+$colDefault     : #D6D6D6;
+$colHighlight   : #ffffff;
+$dropDown       : true;
+$padding-top-navbar: 20px;
+$padding-bottom-navbar: 17px;
+$border-bottom-navbar: $padding-top-navbar - $padding-bottom-navbar;
+$padding-left-right-navbar: 30px;
+$margin-left-caret: 10px;
+$margin-left-menu-items: 30px;
+// FIN NAVBAR
 
 @import "../public/lib/bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import url("http://fonts.googleapis.com/css?family=Roboto:400,300,100");
@@ -12,34 +28,65 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.btn {
+    display: inline-block;
+    font-weight: 700;
+    border: 2px solid $bleu-principal;
+    color: $bleu-principal;
+    background-color: $couleur-fond;
+    text-decoration: none;
+    -webkit-transition: all 0.4s;
+       -moz-transition: all 0.4s;
+         -o-transition: all 0.4s;
+            transition: all 0.4s;
+  
+
+  &:hover {
+    color: darken($bleu-principal, 30%);
+    border-color: #005544;
+  }
+}
+
 // NAVBAR
 // Generated from http://twbscolor.smarchal.com/
 // Changed the first .navbar-default to .navbar
-$bgDefault      : #222222;
-$bgHighlight    : #000000;
-$colDefault     : #D6D6D6;
-$colHighlight   : #ffffff;
-$dropDown       : true;
 .navbar {
   background-color: $bgDefault;
   border-color: $bgHighlight;
+  box-shadow: inset 0px 0px 0px #777;
   .navbar-brand {
+    padding-top: $padding-top-navbar;
+    padding-bottom: $padding-bottom-navbar;
+    border-bottom: $border-bottom-navbar solid $bgDefault;
     color: $colDefault;
     &:hover, &:focus { 
       color: $colHighlight; }}
   .navbar-text {
     color: $colDefault; }
   .navbar-nav {
+    margin-bottom: -1px;
+    margin-left:  $margin-left-menu-items;
     > li {
       > a {
+        text-transform: uppercase;
+        padding-top: $padding-top-navbar;
+        padding-bottom: $padding-bottom-navbar;
+        padding-left: $padding-left-right-navbar;
+        padding-right: $padding-left-right-navbar;
+        border-bottom: $border-bottom-navbar solid $bgDefault;
         cursor: pointer;
         cursor: hand;
         color: $colDefault;
-        &:hover,  &:focus {
+        &:hover,  &:focus, &:active {
+          border-bottom: $border-bottom-navbar solid $bleu-principal;
           color: $colHighlight;
-          background-color: $bgHighlight; }}
+          background-color: $bgHighlight;
+        }
+      }
       @if $dropDown {
         > .dropdown-menu {
+          margin-top: -1px;
+          margin-left: -1px;
           background-color: $bgDefault;
           > li > a {
             color: $colDefault;
@@ -52,11 +99,13 @@ $dropDown       : true;
     > .active {
       > a, > a:hover, > a:focus {
         color: $colHighlight;
-        background-color: $bgHighlight; }}
+        background-color: $bgHighlight;
+        border-bottom: $border-bottom-navbar solid $bleu-principal;}}
     > .open {
       > a, > a:hover, > a:focus {
         color: $colHighlight;
-        background-color: $bgHighlight; }}}
+        background-color: $bgHighlight;
+        border-bottom: $border-bottom-navbar solid $bleu-principal; }}}
   .navbar-toggle {
     border-color: $bgHighlight;
     &:hover, &:focus {
@@ -71,24 +120,40 @@ $dropDown       : true;
     &:hover {
       color: $colHighlight; }}}
 @media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu {
+  .navbar .navbar-nav .open .dropdown-menu {
     > li > a {
       color: $colDefault;
       &:hover, &:focus {
-        color: $colHighlight; }}
+        color: $colHighlight;
+      }
+    }
     > .active {
       > a, > a:hover, > a:focus, {
+        padding-left: 0;
         color: $colHighlight;
-        background-color: $bgHighlight; }}}
+        background-color: $bgHighlight;
+      }
+    }
+  }
+
+  .navbar-collapse {
+      padding-left: 0;
+  }
+
+  .navbar .navbar-nav {
+    margin-left: 0;
+  }
+}
+
+.dropdown-toggle > .caret {
+  margin-left: $margin-left-caret;
 }
 // FIN NAVBAR
 
 // PARTICLES MAIN PAGE
 /* particleground demo */
-
-
 #particles {
-  background-color: #000000;
+  background-color: $couleur-fond;
   position: absolute;
   left: 0;
   top: 0;
@@ -105,79 +170,71 @@ $dropDown       : true;
   padding: 0 20px;
   width: 100%;
   text-align: center;
-}
-h1 {
-  text-transform: uppercase;
-  font-size: 85px;
-  font-weight: 700;
-  letter-spacing: 0.015em;
-}
-
-p {
-  margin: 0 0 30px 0;
-  font-size: 24px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 15px 30px;
-  border: 2px solid #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.015em;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1;
-  color: #fff;
-  text-decoration: none;
-  -webkit-transition: all 0.4s;
-     -moz-transition: all 0.4s;
-       -o-transition: all 0.4s;
-          transition: all 0.4s;
-}
-
-.btn:hover {
-  color: #005544;
-  border-color: #005544;
-}
-
-@media only screen and (max-width: 1000px) {
-  h1 {
-    font-size: 70px;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  h1 {
-    font-size: 48px;
-  }
-  h1::after {
-    height: 8px;
-  }
-}
-
-@media only screen and (max-width: 568px) {
-  .intro {
-    padding: 0 10px;
-  }
-  h1 {
-    font-size: 30px;
-  }
-  h1::after {
-    height: 6px;
-  }
-  p {
-    font-size: 18px;
-  }
+  
   .btn {
-    font-size: 16px;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.015em;
+    font-size: 18px;
+    line-height: 1;
   }
-}
 
-@media only screen and (max-width: 320px) {
   h1 {
-    font-size: 28px;
+    color: $gris-fonce-principal;
+    text-transform: uppercase;
+    font-size: 85px;
+    font-weight: 700;
+    letter-spacing: 0.015em;
   }
-  h1::after {
-    height: 4px;
+
+  p {
+    color: $gris-clair-secondaire;
+    margin: 0 0 30px 0;
+    font-size: 24px;
+  }
+
+  
+
+  @media only screen and (max-width: 1000px) {
+    h1 {
+      font-size: 70px;
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    h1 {
+      font-size: 48px;
+    }
+    h1::after {
+      height: 8px;
+    }
+  }
+
+  @media only screen and (max-width: 568px) {
+    .intro {
+      padding: 0 10px;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    h1::after {
+      height: 6px;
+    }
+    p {
+      font-size: 18px;
+    }
+    .btn {
+      font-size: 16px;
+    }
+  }
+
+  @media only screen and (max-width: 320px) {
+    h1 {
+      font-size: 28px;
+    }
+    h1::after {
+      height: 4px;
+    }
   }
 }
+// FIN PARTICLES MAIN PAGE
