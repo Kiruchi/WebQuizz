@@ -5148,6 +5148,9 @@ body {
     color: #0b5388;
     border-color: #005544; }
 
+.icon-left-navbar {
+  margin-right: 8px; }
+
 .navbar {
   background-color: #222222;
   border-color: #000000;
