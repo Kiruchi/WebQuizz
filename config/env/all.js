@@ -44,15 +44,19 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/dist/style.css'
+				'public/dist/style.css',
+				'public/lib/components-font-awesome/css/font-awesome.min.css'
 			],
 			js: [
+				'public/dist/particleground-master/jquery-1.11.1.min.js',
+				'public/dist/particleground-master/jquery.particleground.min.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js',
 				'public/lib/angular-animate/angular-animate.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+				'http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js'
 			]
 		},
 		css: [

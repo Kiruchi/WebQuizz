@@ -56,7 +56,7 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 			});
 		};
 
-/* ------------------------------------------------------------------------------------------------------------------------------------------*/
+		// DEBUT CREATION QUIZZ
 
 		$scope.nbQuestion = 3;
 
@@ -96,6 +96,7 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 
 
 		};
-/* ------------------------------------------------------------------------------------------------------------------------------------------*/		
+		
+		// FIN CREATION QUIZZ
 	}
 ]);

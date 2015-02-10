@@ -190,7 +190,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['lint', 'sass:dist', 'concurrent:default']);
 
 	// Debug task.
-	grunt.registerTask('debug', ['lint', 'concurrent:debug', 'sass:dev']);
+	grunt.registerTask('debug', ['lint', 'concurrent:debug', 'sass:dist']);
 
 	// Lint task(s).
 	grunt.registerTask('lint', ['jshint']);

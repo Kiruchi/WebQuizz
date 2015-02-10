@@ -1,7 +1,7 @@
 'use strict';
 
 // Setting up route
-angular.module('core').config(['$stateProvider', '$urlRouterProvider',
+var app = angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider) {
 		// Redirect to home view when route not found
 		$urlRouterProvider.otherwise('/');
@@ -14,3 +14,27 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		});
 	}
 ]);
+
+app.directive('particles', function() {
+	return {
+		restrict: 'A',
+		link: function($scope, $elem, attrs) {
+			$elem.particleground({
+			    /*dotColor: '#5cbdaa',
+			    lineColor: '#5cbdaa',
+			    parallaxMultiplier: 5,
+			    maxSpeedX: 0.1,
+			    maxSpeedy: 0.1,
+			    density: 10000,
+			    proximity: 100*/
+			    dotColor: '#3da3ef',
+			    lineColor: '#dadbd7',
+			    particleRadius: 3,
+			    onInit: function() {
+			      $elem.delay(1000).fadeIn('slow');
+			    }
+    
+			});
+		}
+	};
+});
