@@ -57,7 +57,6 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		// DEBUT CREATION QUIZZ
-3;
 
 		$scope.questions=[
 			{
