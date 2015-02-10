@@ -55,6 +55,15 @@ body {
 // NAVBAR
 // Generated from http://twbscolor.smarchal.com/
 // Changed the first .navbar-default to .navbar
+
+.navbar .navbar-nav > li > .dropdown-menu {
+  margin-right: -2px;
+}
+
+.dropdown-toggle > .caret {
+  margin-left: $margin-left-caret;
+}
+
 .navbar {
   background-color: $bgDefault;
   border-color: $bgHighlight;
@@ -126,7 +135,9 @@ body {
       color: $colHighlight; }}}
 @media (max-width: 767px) {
   .navbar .navbar-nav .open .dropdown-menu {
+    overflow: hidden;
     > li > a {
+      margin: 0;
       color: $colDefault;
       &:hover, &:focus {
         color: $colHighlight;
@@ -141,18 +152,16 @@ body {
     }
   }
 
-  .navbar-collapse {
-      padding-left: 0;
-  }
-
   .navbar .navbar-nav {
     margin-left: 0;
   }
+
+  .navbar .navbar-collapse {
+      padding-left: 0;
+      overflow: hidden !important;
+  }
 }
 
-.dropdown-toggle > .caret {
-  margin-left: $margin-left-caret;
-}
 // FIN NAVBAR
 
 // PARTICLES MAIN PAGE

@@ -5151,6 +5151,12 @@ body {
 .icon-left-navbar {
   margin-right: 8px; }
 
+.navbar .navbar-nav > li > .dropdown-menu {
+  margin-right: -2px; }
+
+.dropdown-toggle > .caret {
+  margin-left: 10px; }
+
 .navbar {
   background-color: #222222;
   border-color: #000000;
@@ -5214,24 +5220,25 @@ body {
       color: #ffffff; }
 
 @media (max-width: 767px) {
-  .navbar .navbar-nav .open .dropdown-menu > li > a {
-    color: #D6D6D6; }
-    .navbar .navbar-nav .open .dropdown-menu > li > a:hover, .navbar .navbar-nav .open .dropdown-menu > li > a:focus {
-      color: #ffffff; }
-  .navbar .navbar-nav .open .dropdown-menu > .active > a, .navbar .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
-    padding-left: 0;
-    color: #ffffff;
-    background-color: #000000; }
-
-  .navbar-collapse {
-    padding-left: 0; }
+  .navbar .navbar-nav .open .dropdown-menu {
+    overflow: hidden; }
+    .navbar .navbar-nav .open .dropdown-menu > li > a {
+      margin: 0;
+      color: #D6D6D6; }
+      .navbar .navbar-nav .open .dropdown-menu > li > a:hover, .navbar .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #ffffff; }
+    .navbar .navbar-nav .open .dropdown-menu > .active > a, .navbar .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
+      padding-left: 0;
+      color: #ffffff;
+      background-color: #000000; }
 
   .navbar .navbar-nav {
     margin-left: 0; }
- }
 
-.dropdown-toggle > .caret {
-  margin-left: 10px; }
+  .navbar .navbar-collapse {
+    padding-left: 0;
+    overflow: hidden !important; }
+ }
 
 /* particleground demo */
 #particles {
