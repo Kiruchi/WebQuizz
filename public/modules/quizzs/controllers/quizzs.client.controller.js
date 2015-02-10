@@ -87,14 +87,39 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 			}
 		];
 
-		$scope.addResponse = function() {
+		$scope.answers=[
+			{
+				answer:'response fausse 10'
+			},
+			{
+				answer:'response fausse 11'
+			}
+		];
 
+		$scope.removeQuestion = function(index){
+			$scope.questions.splice(index,1);
+		};
 
+		$scope.removeAnswer = function(index){
+			$scope.answers.splice(index,1);
+		};
+
+		$scope.addAnswer = function() {
+			$scope.answers.push({
+				answer: $scope.newAnswer
+			});
+			$scope.newAnswer='';
 		};
 
 		$scope.addQuestion = function() {
-
-
+			$scope.questions.push({
+				title: $scope.newQuestion,
+				answer: $scope.newGoodAnswer,
+				propositions: $scope.answers
+			});
+			$scope.newQuestion='';
+			$scope.newGoodAnswer='';
+			$scope.answers=[];
 		};
 		
 		// FIN CREATION QUIZZ

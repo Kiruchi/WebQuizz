@@ -69,15 +69,20 @@
 					<section id="todoapp" >
 						<h1>Questions du quizz</h1>
 						
-						<input id="new-question" placeholder="Question" autofocus autocomplete="off">
-						<input type="text" id="reponse" placeholder="Response attendu">
+						<input id="new-question" placeholder="Question" autofocus autocomplete="off" ng-model="newQuestion">
+						<input type="text" id="reponse" placeholder="Response attendu" ng-model="newGoodAnswer">
 						<ul class="list-group">
-							<li>
-								<input type="text" id="reponse" placeholder="propsition">
+
+							<li ng-repeat="answer in answers">
+								<label>{{answer.answer}}</label>
+								<button type="button" class="btn btn-default" ng-click="removeAnswer($index)">Suprimez</button>
 							</li>
-							<button type="button" class="btn btn-default">ajouter une reponse</button>
+							<li>
+								<input type="text" id="new-answer" placeholder="propsition" ng-model="newAnswer">
+								<button type="button" class="btn btn-default" ng-click="addAnswer()">ajouter une reponse</button>
+							</li>
 						</ul>
-						<button type="button" class="btn btn-default">ajouter la question</button>
+						<button type="button" class="btn btn-default" ng-click="addQuestion()">ajouter la question</button>
 
 						<h4><strong>Nombre de questions ajoutées dans le quizz : {{nbQuestion}} questions créées</strong></h4>
 
