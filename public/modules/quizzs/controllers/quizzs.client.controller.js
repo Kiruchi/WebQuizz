@@ -57,8 +57,7 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		// DEBUT CREATION QUIZZ
-
-		$scope.nbQuestion = 3;
+3;
 
 		$scope.questions=[
 			{
@@ -95,6 +94,10 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 				answer:'response fausse 11'
 			}
 		];
+
+		$scope.$watch('questions',function(){
+			$scope.nbQuestion=$scope.questions.length;
+		},true);
 
 		$scope.removeQuestion = function(index){
 			$scope.questions.splice(index,1);
