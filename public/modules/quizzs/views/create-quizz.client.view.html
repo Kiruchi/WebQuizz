@@ -3,79 +3,92 @@
 		<h1>Nouveau Quizz</h1>
 	</div>
 	<div class="col-md-12">
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate>
-			<fieldset>
-				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
-					<label class="control-label" for="title">Titre</label>
-					<div class="controls">
-						<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate ng-controller="CreateQuizzController">
+			<fieldset >
+				<section ng-show="!step">
+
+					<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
+						<label class="control-label" for="title">Titre</label>
+						<div class="controls">
+							<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="title">Type</label>
-					<div class="controls">
-						<select name="type" id="type" class="form-control" required="required">
-							<option value="TLMVPSP">Tout le monde veut prendre sa place</option>
-							<option value="Classique">Classique</option>
-							<option value="MotsCroises">Mots croisés</option>
-						</select>
+					<div class="form-group">
+						<label class="control-label" for="title">Type</label>
+						<div class="controls">
+							<select name="type" id="type" class="form-control" required="required">
+								<option value="TLMVPSP">Tout le monde veut prendre sa place</option>
+								<option value="Classique">Classique</option>
+								<option value="MotsCroises">Mots croisés</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="rate">Difficulté</label>
-					<div class="radio">
-						<label>
-							<input type="radio" name="rate" id="input" value="1" checked="checked">
-							1<br>
-							<input type="radio" name="rate" id="input" value="2">
-							2<br>
-							<input type="radio" name="rate" id="input" value="3">
-							3<br>
-							<input type="radio" name="rate" id="input" value="4">
-							4<br>
-							<input type="radio" name="rate" id="input" value="5">
-							5
-						</label>
+					<div class="form-group">
+						<label class="control-label" for="rate">Difficulté</label>
+						<div class="radio">
+							<label>
+								<input type="radio" n	ame="rate" id="input" value="1" checked="checked">
+								1<br>
+								<input type="radio" name="rate" id="input" value="2">
+								2<br>
+								<input type="radio" name="rate" id="input" value="3">
+								3<br>
+								<input type="radio" name="rate" id="input" value="4">
+								4<br>
+								<input type="radio" name="rate" id="input" value="5">
+								5
+							</label>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="course">Matière</label>
-					<div class="controls">
-						<select name="type" id="type" class="form-control" required="required">
-							<option value="General">Général</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-						</select>
+					<div class="form-group">
+						<label class="control-label" for="course">Matière</label>
+						<div class="controls">
+							<select name="type" id="type" class="form-control" required="required">
+								<option value="General">Général</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="content">Description</label>
-					<div class="controls">
-						<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+					<div class="form-group">
+						<label class="control-label" for="content">Description</label>
+						<div class="controls">
+							<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="beginDate">Date de début</label>
-					<input type="date" name="" id="input" class="form-control" value="beginDate" required="required" title="beginDate">
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="endDate">Date de fin</label>
-					<input type="date" name="" id="input" class="form-control" value="endDate" required="required" title="endDate">
-				</div>
+					<div class="form-group">
+						<label class="control-label" for="beginDate">Date de début</label>
+						<input type="date" name="" id="input" class="form-control" value="beginDate" required="required" title="beginDate">
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="endDate">Date de fin</label>
+						<input type="date" name="" id="input" class="form-control" value="endDate" required="required" title="endDate">
+					</div>
+					<button type="button" class="btn btn-default" ng-click="nextStep()">Etape suivante</button>
+				</section>
+				
 				
 
-<!--- DEBUT QUESTIONS/REPONSES QUIZZ -->
+				<!--- DEBUT QUESTIONS/REPONSES QUIZZ -->
 
-					<section id="todoapp" >
-						<h1>Questions du quizz</h1>
-						
+				<section ng-show="step" >
+					<button type="button" class="btn btn-default" ng-click="nextStep()">Etape précèdente</button>
+					<h1>Questions du quizz</h1>
+
+
+					<div ng-show="step">
+						<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ></pagination>
+						<pre>Page: {{currentPage}} / {{numPages}}</pre>
+					</div>
+
+					<div ng-show="lastPage">
 						<input id="new-question" placeholder="Question" autofocus autocomplete="off" ng-model="newQuestion">
 						<input type="text" id="reponse" placeholder="Response attendu" ng-model="newGoodAnswer">
 						<ul class="list-group">
 
 							<li ng-repeat="answer in answers">
 								<label>{{answer.answer}}</label>
-								<button type="button" class="btn btn-default" ng-click="removeAnswer($index)">Suprimez</button>
+								<button type="button" class="btn btn-default" ng-click="removeAnswer($index)">Suprimer</button>
 							</li>
 							<li>
 								<input type="text" id="new-answer" placeholder="propsition" ng-model="newAnswer">
@@ -83,28 +96,35 @@
 							</li>
 						</ul>
 						<button type="button" class="btn btn-default" ng-click="addQuestion()">ajouter la question</button>
+					</div >
 
-						<h4><strong>Nombre de questions ajoutées dans le quizz : {{nbQuestion}} questions créées</strong></h4>
-
-						<ul id="list-question">
-							<li ng-repeat="question in questions">
-								<label>{{question.title}}</label>
-								<label>{{question.answer}}</label>
-								<button type="button" class="btn btn-default"ng-click="removeQuestion($index)">Suprimez</button>
-								<ul class="list-group">
-									<li ng-repeat="proposition in question.propositions">
-										<label>proposition fausse : {{proposition.answer}}</label>
-									</li>
-								</ul>
+					<div ng-hide="lastPage">
+						<label>{{questions[currentPage-1].title}}</label>
+						<label>{{questions[currentPage-1].answer}}</label>
+						<button type="button" class="btn btn-default"ng-click="removeQuestion(currentPage-1)">Suprimer</button>
+						<ul class="list-group">
+							<li ng-repeat="proposition in questions[currentPage-1].propositions">
+								<label>proposition fausse : {{proposition.answer}}</label>
+								<button type="button" class="btn btn-default" ng-click="removeAnswerEdit($index)">Suprimer</button>
 							</li>
 						</ul>
-					</section>
+					</div>
+					<h4><strong>Nombre de questions ajoutées dans le quizz : {{nbQuestion}} questions créées</strong></h4>
+
+					<!-- liste des questions deja créées -->
+					
+
+					
+
+				</section>
 
 
-<!--- FIN QUESTIONS/REPONSES QUIZZ -->
-				</div>
-				<div class="form-group">
-					<input type="submit" value="Valider"class="btn btn-default">
+
+
+				<!--- FIN QUESTIONS/REPONSES QUIZZ -->
+
+				<div class="form-group" ng-show="nbQuestion">
+					<input type="submit" value="Valider"class="btn btn-default" >
 				</div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>

@@ -5,16 +5,34 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 
 		$scope.questions=[];
 
-		$scope.step=false;
+		$scope.step = true;
+
+		$scope.lastPage = true;
+
+		$scope.maxSize = 5;
+		$scope.TotalItems = 50;
+		$scope.currentPage = 1;
+		$scope.items_per_page = 1;
 
 		$scope.answers=[];
 
 		$scope.$watch('questions',function(){
 			$scope.nbQuestion=$scope.questions.length;
+
+			if($scope.currentPage == $scope.nbQuestion+1)
+			{
+				$scope.lastPage=true;
+			}
+			else
+			{
+				$scope.lastPage=false;
+			}
+
 		},true);
 
 		$scope.removeQuestion = function(index){
-			$scope.questions.splice(index,1);
+			$scope.questions.splice(index,1);		
+
 		};
 
 		$scope.nextStep = function () {
@@ -25,6 +43,10 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 
 		$scope.removeAnswer = function(index){
 			$scope.answers.splice(index,1);
+		};
+
+		$scope.removeAnswerEdit = function(index){
+			$scope.questions[$scope.currentPage-1].propositions.splice(index,1);
 		};
 
 		$scope.addAnswer = function() {
@@ -42,9 +64,26 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 			});
 			$scope.newQuestion='';
 			$scope.newGoodAnswer='';
+			$scope.newAnswer='';
 			$scope.answers=[];
+			$scope.currentPage ++;
 		};
 
+		$scope.setPage = function (pageNo) {
+			$scope.currentPage = pageNo;
+		};
 
-	}
+		$scope.pageChanged = function() {
+	    //$log.log('Page changed to: ' + $scope.currentPage);
+	    if($scope.currentPage == $scope.numPages)
+			{
+				$scope.lastPage=true;
+			}
+			else
+			{
+				$scope.lastPage=false;
+			}
+	};
+}
 ]);
+
