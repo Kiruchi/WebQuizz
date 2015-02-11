@@ -19,7 +19,7 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 		$scope.$watch('questions',function(){
 			$scope.nbQuestion=$scope.questions.length;
 
-			if($scope.currentPage == $scope.nbQuestion+1)
+			if($scope.currentPage === $scope.nbQuestion+1)
 			{
 				$scope.lastPage=true;
 			}
@@ -75,14 +75,34 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 
 		$scope.pageChanged = function() {
 	    //$log.log('Page changed to: ' + $scope.currentPage);
-	    if($scope.currentPage == $scope.numPages)
-			{
-				$scope.lastPage=true;
-			}
-			else
-			{
-				$scope.lastPage=false;
-			}
+	    if($scope.currentPage === $scope.numPages) {
+	    	$scope.lastPage=true;
+	    }
+	    else {
+	    	$scope.lastPage=false;
+	    }
+
+	    $scope.dateTimeNow = function() {
+	    	$scope.date = new Date();
+	    };
+
+	    $scope.dateTimeNow();
+
+	    $scope.toggleMinDate = function() {
+	    	$scope.minDate = $scope.minDate ? null : new Date();
+	    };
+
+	    // DEBUT DATETIMEPICKER
+	    //$scope.maxDate = new Date('2014-06-22');
+	    //$scope.toggleMinDate();
+	    $scope.hourStep = 1;
+	    $scope.minuteStep = 1;
+  
+	    $scope.dateOptions = {
+	  	  startingDay: 1,
+	  	  showWeeks: false
+	    };
+	    // FIN DATETIMEPICKER
 	};
 }
 ]);

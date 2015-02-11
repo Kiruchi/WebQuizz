@@ -57,12 +57,17 @@
 						</div>
 					</div>
 					<div class="form-group">
+
 						<label class="control-label" for="beginDate">Date de début</label>
-						<input type="date" name="" id="input" class="form-control" value="beginDate" required="required" title="beginDate">
+						<!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
+
+		      			<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></date-time-picker id="beginDate">
 					</div>
 					<div class="form-group">
 						<label class="control-label" for="endDate">Date de fin</label>
-						<input type="date" name="" id="input" class="form-control" value="endDate" required="required" title="endDate">
+						<!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
+
+		      			<datetimepicker min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></date-time-picker id="endDate">
 					</div>
 					<button type="button" class="btn btn-default" ng-click="nextStep()">Etape suivante</button>
 				</section>
