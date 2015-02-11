@@ -5133,6 +5133,21 @@ body {
   font-family: "Roboto", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased; }
 
+.btn {
+  display: inline-block;
+  font-weight: 700;
+  border: 2px solid #3da3ef;
+  color: #3da3ef;
+  background-color: #f4f5ef;
+  text-decoration: none;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s; }
+  .btn:hover {
+    color: #0b5388;
+    border-color: #005544; }
+
 .icon-left-navbar {
   margin-right: 8px; }
 
@@ -5176,8 +5191,6 @@ body {
       margin-top: -1px;
       margin-left: -1px;
       background-color: #222222; }
-      .navbar .navbar-nav > li > .dropdown-menu > .active > a {
-        background-color: #222222; }
       .navbar .navbar-nav > li > .dropdown-menu > li > a {
         color: #D6D6D6; }
         .navbar .navbar-nav > li > .dropdown-menu > li > a:hover, .navbar .navbar-nav > li > .dropdown-menu > li > a:focus {
@@ -5250,20 +5263,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.015em;
     font-size: 18px;
-    line-height: 1;
-    display: inline-block;
-    font-weight: 700;
-    border: 2px solid #3da3ef;
-    color: #3da3ef;
-    background-color: #f4f5ef;
-    text-decoration: none;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    transition: all 0.4s; }
-    .intro .btn:hover {
-      color: #0b5388;
-      border-color: #005544; }
+    line-height: 1; }
   .intro h1 {
     color: #636363;
     text-transform: uppercase;
@@ -5308,18 +5308,3 @@ body {
     .intro h1::after {
       height: 4px; }
  }
-
-.datetimepicker-wrapper {
-  vertical-align: middle;
-  display: inline-block; }
-
-.datetimepicker-wrapper > input {
-  margin-bottom: 0 !important;
-  width: 130px; }
-
-.datetimepicker-wrapper [ng-model=hours], [ng-model=minutes] {
-  width: 46px !important; }
-
-.ng-isolate-scope table {
-  text-decoration: none;
-  border: none; }

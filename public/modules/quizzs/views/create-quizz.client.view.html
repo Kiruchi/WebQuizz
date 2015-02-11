@@ -5,11 +5,6 @@
 	<div class="col-md-12">
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate>
 			<fieldset>
-			
-		    <br>
-		      <!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
-
-		      <date-time-picker min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="date" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></date-time-picker>
 				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
 					<label class="control-label" for="title">Titre</label>
 					<div class="controls">
@@ -29,7 +24,6 @@
 				<div class="form-group">
 					<label class="control-label" for="rate">Difficulté</label>
 					<div class="radio">
-
 						<label>
 							<input type="radio" name="rate" id="input" value="1" checked="checked">
 							1<br>
