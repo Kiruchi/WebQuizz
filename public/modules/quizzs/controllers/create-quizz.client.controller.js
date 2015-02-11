@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('quizzs').controller('CreateQuizzController', ['$scope',
+angular.module('quizzs').controller('CreateQuizzController', ['$scope', '$timeout',
 	function($scope) {
 
 		$scope.questions=[];
@@ -18,9 +18,7 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 		};
 
 		$scope.nextStep = function () {
-			
 			$scope.step = !$scope.step;
-
 		};
 
 		$scope.removeAnswer = function(index){
@@ -45,6 +43,24 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 			$scope.answers=[];
 		};
 
+	  $scope.dateTimeNow = function() {
+	    $scope.date = new Date();
+	  };
 
+	  $scope.dateTimeNow();
+	  
+	  $scope.toggleMinDate = function() {
+	    $scope.minDate = $scope.minDate ? null : new Date();
+	  };
+	   
+	  //$scope.maxDate = new Date('2014-06-22');
+	  //$scope.toggleMinDate();
+	    $scope.hourStep = 1;
+  		$scope.minuteStep = 1;
+
+	  $scope.dateOptions = {
+	    startingDay: 1,
+	    showWeeks: false
+	  };
 	}
 ]);

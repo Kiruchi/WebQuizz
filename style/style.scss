@@ -29,25 +29,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.btn {
-    display: inline-block;
-    font-weight: 700;
-    border: 2px solid $bleu-principal;
-    color: $bleu-principal;
-    background-color: $couleur-fond;
-    text-decoration: none;
-    -webkit-transition: all 0.4s;
-       -moz-transition: all 0.4s;
-         -o-transition: all 0.4s;
-            transition: all 0.4s;
-  
-
-  &:hover {
-    color: darken($bleu-principal, 30%);
-    border-color: #005544;
-  }
-}
-
 .icon-left-navbar {
   margin-right: 8px;
 }
@@ -102,6 +83,9 @@ body {
           margin-top: -1px;
           margin-left: -1px;
           background-color: $bgDefault;
+          > .active > a {
+              background-color: $bgDefault;
+          }
           > li > a {
             color: $colDefault;
             &:hover,  &:focus {
@@ -187,10 +171,25 @@ body {
   
   .btn {
     padding: 15px 30px;
-    text-transform: uppercase;
-    letter-spacing: 0.015em;
-    font-size: 18px;
-    line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.015em;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      font-weight: 700;
+      border: 2px solid $bleu-principal;
+      color: $bleu-principal;
+      background-color: $couleur-fond;
+      text-decoration: none;
+      -webkit-transition: all 0.4s;
+         -moz-transition: all 0.4s;
+           -o-transition: all 0.4s;
+              transition: all 0.4s;
+    
+    &:hover {
+      color: darken($bleu-principal, 30%);
+      border-color: #005544;
+    }
   }
 
   h1 {
@@ -252,3 +251,22 @@ body {
   }
 }
 // FIN PARTICLES MAIN PAGE
+
+.datetimepicker-wrapper {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.datetimepicker-wrapper > input {
+  margin-bottom: 0 !important;
+  width: 130px;
+}
+
+.datetimepicker-wrapper [ng-model=hours], [ng-model=minutes] {
+  width: 46px !important;
+}
+
+.ng-isolate-scope table {
+  text-decoration: none;
+  border:none;
+}
