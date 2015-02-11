@@ -23,7 +23,9 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 
 		$scope.questions=[];
 
-		$scope.step = true;
+		$scope.step1 = true;
+		$scope.step2 = false;
+		$scope.step3 = false;
 
 		$scope.lastPage = true;
 
@@ -55,8 +57,26 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 
 		$scope.nextStep = function () {
 			
-			$scope.step = !$scope.step;
+			if($scope.step1){
+				$scope.step1=false;
+				$scope.step2=true;
+			}
+			else{
+				$scope.step2=false;
+				$scope.step3=true;
+			}
+		};
 
+		$scope.previewStep = function () {
+			
+			if($scope.step2){
+				$scope.step2=false;
+				$scope.step1=true;
+			}
+			else{
+				$scope.step3=false;
+				$scope.step2=true;
+			}
 		};
 
 		$scope.removeAnswer = function(index){
