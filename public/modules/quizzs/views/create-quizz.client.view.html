@@ -24,21 +24,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" for="rate">Difficulté</label>
-						<div class="radio">
-							<label>
-								<input type="radio" n	ame="rate" id="input" value="1" checked="checked">
-								1<br>
-								<input type="radio" name="rate" id="input" value="2">
-								2<br>
-								<input type="radio" name="rate" id="input" value="3">
-								3<br>
-								<input type="radio" name="rate" id="input" value="4">
-								4<br>
-								<input type="radio" name="rate" id="input" value="5">
-								5
-							</label>
-						</div>
+						<label class="control-label" for="rate">Difficulté</label><br/>
+    <div ng-init="rate = 3"><rating ng-init="rate = 3" ng-model="rate" max="5" state-on="overstar" state-off="overstar = null"></rating>
 					</div>
 					<div class="form-group">
 						<label class="control-label" for="course">Matière</label>
