@@ -5136,6 +5136,12 @@ body {
 .icon-left-navbar {
   margin-right: 8px; }
 
+span, table {
+  outline-style: none; }
+
+.stars {
+  font-size: 25px; }
+
 .navbar .navbar-nav > li > .dropdown-menu {
   margin-right: -2px; }
 

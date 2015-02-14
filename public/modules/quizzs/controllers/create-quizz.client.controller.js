@@ -3,25 +3,9 @@
 angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 	function($scope) {
 
-		// DEBUT RATE
-		$scope.max = 5;
-		$scope.isReadonly = false;
-
-		$scope.hoveringOver = function(value) {
-		$scope.overStar = value;
-		$scope.percent = 100 * (value / $scope.max);
-		};
-
-		$scope.ratingStates = [
-		{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
-		{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
-		{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
-		{stateOn: 'glyphicon-heart'},
-		{stateOff: 'glyphicon-off'}
-		];
-	    // FIN RATE
-
 		$scope.questions=[];
+		$scope.type = "Classique";
+		$scope.course = "General"
 
 		$scope.step1 = true;
 		$scope.step2 = false;
@@ -67,7 +51,7 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 			}
 		};
 
-		$scope.previewStep = function () {
+		$scope.previousStep = function () {
 			
 			if($scope.step2){
 				$scope.step2=false;
@@ -129,8 +113,35 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 	    $scope.toggleMinDate = function() {
 	    	$scope.minDate = $scope.minDate ? null : new Date();
 	    };
+	};
+}
+]);
 
-	    // DEBUT DATETIMEPICKER
+angular.module('quizzs').controller('RateController', ['$scope',
+	function($scope) {
+		// DEBUT RATE
+		$scope.max = 5;
+		$scope.isReadonly = false;
+
+		$scope.hoveringOver = function(value) {
+		$scope.overStar = value;
+		$scope.percent = 100 * (value / $scope.max);
+		};
+
+		$scope.ratingStates = [
+		{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+		{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+		{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+		{stateOn: 'glyphicon-heart'},
+		{stateOff: 'glyphicon-off'}
+		];
+	    // FIN RATE
+	}
+]);
+
+angular.module('quizzs').controller('DateTimePickerController', ['$scope',
+	function($scope) {
+		// DEBUT DATETIMEPICKER
 	    //$scope.maxDate = new Date('2014-06-22');
 	    //$scope.toggleMinDate();
 	    $scope.hourStep = 1;
@@ -141,7 +152,5 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 	  	  showWeeks: false
 	    };
 	    // FIN DATETIMEPICKER
-	};
-}
+	}
 ]);
-
