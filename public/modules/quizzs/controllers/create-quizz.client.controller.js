@@ -4,8 +4,8 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 	function($scope) {
 
 		$scope.questions=[];
-		$scope.type = "Classique";
-		$scope.course = "General"
+		$scope.type = 'Classique';
+		$scope.course = 'General';
 
 		$scope.step1 = true;
 		$scope.step2 = false;
