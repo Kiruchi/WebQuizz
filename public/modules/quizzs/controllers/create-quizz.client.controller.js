@@ -3,9 +3,12 @@
 angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 	function($scope) {
 
-		$scope.questions=[];
+		
 		$scope.type = 'Classique';
 		$scope.course = 'General';
+		$scope.beginDate = new Date();
+		$scope.endDate = new Date();
+		$scope.questions = [];
 
 		$scope.step1 = true;
 		$scope.step2 = false;
@@ -18,7 +21,7 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope',
 		$scope.currentPage = 1;
 		$scope.items_per_page = 1;
 
-		$scope.answers=[];
+		$scope.answers = [];
 
 		$scope.$watch('questions',function(){
 			$scope.nbQuestion=$scope.questions.length;
