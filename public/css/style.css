@@ -5224,7 +5224,6 @@ span, table {
       .navbar .navbar-nav .open .dropdown-menu > li > a:hover, .navbar .navbar-nav .open .dropdown-menu > li > a:focus {
         color: #ffffff; }
     .navbar .navbar-nav .open .dropdown-menu > .active > a, .navbar .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
-      padding-left: 0;
       color: #ffffff;
       background-color: #000000; }
 

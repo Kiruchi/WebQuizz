@@ -92,7 +92,7 @@ span, table {
           margin-left: -1px;
           background-color: $bgDefault;
           > li > .active {
-          background-color: #000;
+            background-color: #000;
           }
           > li > a {
             color: $colDefault;
@@ -140,7 +140,6 @@ span, table {
     }
     > .active {
       > a, > a:hover, > a:focus, {
-        padding-left: 0;
         color: $colHighlight;
         background-color: $bgHighlight;
       }
