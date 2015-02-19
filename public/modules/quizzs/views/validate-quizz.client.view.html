@@ -1,0 +1,54 @@
+<section data-ng-controller="ValidateQuizzController">
+	<div class="page-header">
+		<h1>Nouveau Quizz</h1>
+	</div>
+	<div class="col-md-12">
+		<a href="/#!/quizzs/create/questions" class="btn btn-default" role="button">Etape précédente</a>
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate ng-controller="CreateQuizzController">
+			<fieldset >
+				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
+					<h1>{{title}}</h1>
+					<p>{{content}}</p>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="title">Type : {{type}}</label>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="rate">Difficulté</label>
+					<div class="stars">
+					<rating ng-init="rate = 3" ng-model="rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="course">Matière : {{course}}</label>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="beginDate">Date de début : {{beginDate | date : 'dd/mm/yyyy à HH:mm'}}</label>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="endDate">Date de fin : {{endDate | date : 'dd/mm/yyyy à HH:mm'}}</label>
+				</div>	
+				<div class="form-group">
+					<h2>Questions :</h2>						
+					<ul class="list-group">
+						<li ng-repeat="question in questions">
+							<label>{{question.title}}</label>
+							<ul>
+								<li>Bonne réponse : {{question.answer}}</li>
+								<li ng-repeat="proposition in question.propositions">
+									<label>Proposition fausse : {{proposition.answer}}</label>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Valider"class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

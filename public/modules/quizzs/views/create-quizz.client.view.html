@@ -1,166 +1,72 @@
-<section data-ng-controller="QuizzsController">
+<section data-ng-controller="CreateQuizzController">
 	<div class="page-header">
 		<h1>Nouveau Quizz</h1>
 	</div>
 	<div class="col-md-12">
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate ng-controller="CreateQuizzController">
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="createInfo()" novalidate ng-controller="CreateQuizzController">
 			<fieldset >
-				<section ng-show="step1">
-
-					<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
-						<label class="control-label" for="title">Titre</label>
-						<div class="controls">
-							<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Titre" autofocus required>
-						</div>
+				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
+					<label class="control-label" for="title">Titre</label>
+					<div class="controls">
+						<input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Titre" autofocus required>
 					</div>
-					<div class="form-group" >
-						<label class="control-label" for="content">Description</label>
-						<div class="controls">
-							<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="title">Type</label>
-						<div class="controls">
-							<select name="type" data-ng-model="type" id="type" class="form-control" required="required">
-								<option value="Classique" selected="selected">Classique</option>
-								<option value="TLMVPSP">Tout le monde veut prendre sa place</option>
-								<option value="MotsCroises">Mots croisés</option>
-							</select>
-						</div>
-					</div>
-					<div ng-controller="RateController">
-						<div class="form-group">
-							<label class="control-label" for="rate">Difficulté</label><br/>
-							<div class="stars">
-								<rating ng-init="rate = 3" ng-model="rate" max="5" state-on="overstar" state-off="overstar = null"></rating>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="course">Matière</label>
-						<div class="controls">
-							<select name="type" data-ng-model="course" id="type" class="form-control" required="required">
-								<option value="General" selected="selected">Général</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-							</select>
-						</div>
-					</div>
-					<div ng-controller="DateTimePickerController">
-						<div class="form-group">
-
-							<label class="control-label" for="beginDate">Date de début : </label>
-							<!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
-
-							<datetimepicker id="beginDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="beginDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="endDate">Date de fin : </label>
-							<!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
-
-							<datetimepicker id="endDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="endDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
-						</div>
-					</div>
-					<button type="button" class="btn btn-default" ng-click="nextStep()">Etape suivante</button>
-				</section>
-
-
-
-				<!--- DEBUT QUESTIONS/REPONSES QUIZZ -->
-				<section ng-show="step2" >
-					<button type="button" class="btn btn-default" ng-click="previousStep()">Etape précédente</button>
-					<h1>Questions du quizz</h1>
-
-					<div ng-show="step2">
-						<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ></pagination>
-					</div>
-
-					<div ng-show="lastPage">
-						<input id="new-question" placeholder="Question" autofocus autocomplete="off" ng-model="newQuestion">
-						<input type="text" id="reponse" placeholder="Bonne réponse" ng-model="newGoodAnswer">
-						<ul class="list-group">
-							<li ng-repeat="answer in answers">
-								<label>{{answer.answer}}</label>
-								<button type="button" class="btn btn-default" ng-click="removeAnswer($index)">Supprimer</button>
-							</li>
-							<li>
-								<input type="text" id="new-answer" placeholder="Proposition" ng-model="newAnswer">
-								<button type="button" class="btn btn-default" ng-click="addAnswer()">Ajouter une proposition</button>
-							</li>
-						</ul>
-						<button type="button" class="btn btn-default" ng-click="addQuestion()">Ajouter la question</button>
-					</div>
-
-					<div ng-hide="lastPage">
-						<p>{{questions[currentPage-1].title}}</p>
-						<p>{{questions[currentPage-1].answer}}</p>
-						<button type="button" class="btn btn-default"ng-click="removeQuestion(currentPage-1)">Supprimer</button>
-						<ul class="list-group">
-							<li ng-repeat="proposition in questions[currentPage-1].propositions">
-								<label>Proposition fausse : {{proposition.answer}}</label>
-								<button type="button" class="btn btn-default" ng-click="removeAnswerEdit($index)">Supprimer</button>
-							</li>
-						</ul>
-					</div>
-					<h4><small>{{nbQuestion}} question(s) créée(s)</small></h4>
-
-					<button type="button" class="btn btn-default" ng-click="nextStep()" ng-show="nbQuestion">Etape suivante</button>
-
-				</section>
-
-				<!-- Fin Question/réponse -->
-
-				<section ng-show="step3">
-
-					<button type="button" class="btn btn-default" ng-click="previousStep()">Etape précédente</button>
-
-					<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
-						<h1>{{title}}</h1>
-						<p>{{content}}</p>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="title">Type : {{type}}</label>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="rate">Difficulté</label>
-						<div class="stars">
-							<rating ng-init="rate = 3" ng-model="rate" max="5" state-on="overstar" state-off="overstar = null" enable="false"></rating>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="course">Matière : {{course}}</label>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="beginDate">Date de début : {{beginDate | date : 'dd/mm/yyyy à HH:mm'}}</label>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="endDate">Date de fin : {{endDate | date : 'dd/mm/yyyy à HH:mm'}}</label>
-					</div>	
-					<div class="form-group">
-						<h2>Questions :</h2>						
-						<ul class="list-group">
-							<li ng-repeat="question in questions">
-								<label>{{question.title}}</label>
-								<ul>
-									<li>Bonne réponse : {{question.answer}}</li>
-									<li ng-repeat="proposition in question.propositions">
-									<label>Proposition fausse : {{proposition.answer}}</label>
-								</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</section>
-
-				<div class="form-group" ng-show="nbQuestion">
-					<div class="form-group" ng-show="step3">
-						<input type="submit" value="Valider"class="btn btn-default" >
-					</div>
-					<div data-ng-show="error" class="text-danger">
-						<strong data-ng-bind="error"></strong>
-					</div>
-				</fieldset>
-				</form>
 				</div>
-			</section>
+				<div class="form-group" >
+					<label class="control-label" for="content">Description</label>
+					<div class="controls">
+						<textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="title">Type</label>
+					<div class="controls">
+						<select name="type" data-ng-model="type" id="type" class="form-control" required="required">
+							<option value="Classique" selected="selected">Classique</option>
+							<option value="TLMVPSP">Tout le monde veut prendre sa place</option>
+							<option value="MotsCroises">Mots croisés</option>
+						</select>
+					</div>
+				</div>
+				<div ng-controller="RateController">
+					<div class="form-group">
+						<label class="control-label" for="rate">Difficulté</label><br/>
+						<div class="stars">
+							<rating ng-init="rate = 3" ng-model="rate" max="5" state-on="overstar" state-off="overstar = null"></rating>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="course">Matière</label>
+					<div class="controls">
+						<select name="type" data-ng-model="course" id="type" class="form-control" required="required">
+							<option value="General" selected="selected">Général</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</select>
+					</div>
+				</div>
+				<div ng-controller="DateTimePickerController">
+					<div class="form-group">
+
+						<label class="control-label" for="beginDate">Date de début : </label>
+						<!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
+
+						<datetimepicker id="beginDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="beginDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="endDate">Date de fin : </label>
+						<!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
+
+						<datetimepicker id="endDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="endDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Etape suivante"class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

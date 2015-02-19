@@ -1,0 +1,52 @@
+<section data-ng-controller="CreateQuestionsController">
+	<div class="page-header">
+		<h1>Nouveau Quizz</h1>
+	</div>
+	<div class="col-md-12">
+		<a href="/#!/quizzs/create" class="btn btn-default" role="button">Etape précédente</a>
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="createQuestions()" novalidate ng-controller="CreateQuizzController">
+			<fieldset >
+				<h1>Questions du quizz</h1>
+
+				<div>
+					<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ></pagination>
+				</div>
+
+				<div>
+					<input id="new-question" placeholder="Question" autofocus autocomplete="off" ng-model="newQuestion">
+					<input type="text" id="reponse" placeholder="Bonne réponse" ng-model="newGoodAnswer">
+					<ul class="list-group">
+						<li ng-repeat="answer in answers">
+							<label>{{answer.answer}}</label>
+							<button type="button" class="btn btn-default" ng-click="removeAnswer($index)">Supprimer</button>
+						</li>
+						<li>
+							<input type="text" id="new-answer" placeholder="Proposition" ng-model="newAnswer">
+							<button type="button" class="btn btn-default" ng-click="addAnswer()">Ajouter une proposition</button>
+						</li>
+					</ul>
+					<button type="button" class="btn btn-default" ng-click="addQuestion()">Ajouter la question</button>
+				</div>
+
+				<div>
+					<p>{{questions[currentPage-1].title}}</p>
+					<p>{{questions[currentPage-1].answer}}</p>
+					<button type="button" class="btn btn-default"ng-click="removeQuestion(currentPage-1)">Supprimer</button>
+					<ul class="list-group">
+						<li ng-repeat="proposition in questions[currentPage-1].propositions">
+							<label>Proposition fausse : {{proposition.answer}}</label>
+							<button type="button" class="btn btn-default" ng-click="removeAnswerEdit($index)">Supprimer</button>
+						</li>
+					</ul>
+				</div>
+				<h4><small>{{nbQuestion}} question(s) créée(s)</small></h4>
+				<div class="form-group">
+					<input type="submit" value="Etape suivante"class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
