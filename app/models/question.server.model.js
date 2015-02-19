@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	ObjectId = mongoose.SchemaTypes.ObjectId;
+	Schema = mongoose.Schema;
 
 /**
  * Question Schema
@@ -17,8 +16,8 @@ var QuestionSchema = new Schema({
 		trim: true,
 		required: 'Veuillez entrer l\'énoncé de la question.'
 	},
-	answers: [{type: ObjectId, ref: 'Answer'}],
-	goodAnswers: [{type: ObjectId, ref: 'Answer'}]
+	answers: [{type: Schema.ObjectId, ref: 'Answer'}],
+	goodAnswers: [{type: Schema.ObjectId, ref: 'Answer'}]
 });
 
 mongoose.model('Question', QuestionSchema);

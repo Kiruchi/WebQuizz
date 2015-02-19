@@ -21,7 +21,7 @@ var QuizzSchema = new Schema({
 		default: '',
 		trim: true
 	},
-	type: {
+	typeQuizz: {
 		type: [{
 			type: String,
 			enum: ['TLMVPSP', 'Classique', 'MotsCroises']
@@ -53,7 +53,8 @@ var QuizzSchema = new Schema({
 	endDate: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	questions: [{type: Schema.ObjectId, ref: 'Question'}]
 });
 
 mongoose.model('Quizz', QuizzSchema);
