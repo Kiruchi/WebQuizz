@@ -6,14 +6,22 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Quizz = mongoose.model('Quizz'),
+	Question = mongoose.model('Question'),
 	_ = require('lodash');
 
 /**
  * Create a quizz
  */
 exports.create = function(req, res) {
-	var quizz = new Quizz(req.body);
-	quizz.user = req.user;
+	var quizz = new Quizz(req.body.infos);
+
+	for (var i = req.body.questions.length - 1; i >= 0; i--) {
+		var laQuestion = new Question(req.body.questions[i]);
+		quizz.questions.push(laQuestion);
+		laQuestion.save();
+	}
+
+	quizz.creator = req.user;
 
 	quizz.save(function(err) {
 		if (err) {
@@ -73,7 +81,7 @@ exports.delete = function(req, res) {
  * List of Quizzs
  */
 exports.list = function(req, res) {
-	Quizz.find().sort('-created').populate('user', 'displayName').exec(function(err, quizzs) {
+	Quizz.find().sort('-created').populate('creator', 'displayName').populate('questions').exec(function(err, quizzs) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -88,7 +96,7 @@ exports.list = function(req, res) {
  * Quizz middleware
  */
 exports.quizzByID = function(req, res, next, id) {
-	Quizz.findById(id).populate('user', 'displayName').exec(function(err, quizz) {
+	Quizz.findById(id).populate('creator', 'displayName').populate('questions').exec(function(err, quizz) {
 		if (err) return next(err);
 		if (!quizz) return next(new Error('Failed to load quizz ' + id));
 		req.quizz = quizz;

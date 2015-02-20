@@ -22,11 +22,9 @@ var QuizzSchema = new Schema({
 		trim: true
 	},
 	typeQuizz: {
-		type: [{
-			type: String,
-			enum: ['TLMVPSP', 'Classique', 'MotsCroises']
-		}],
-		default: ['Classique']
+		type: String,
+		enum: ['TLMVPSP', 'Classique', 'MotsCroises'],
+		default: 'Classique'
 	},
 	rate: {
 		type: Number,
