@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('quizzs').controller('ValidateQuizzController', ['$scope',
-	function($scope) {
-		// Controller Logic
-		// ...
+angular.module('quizzs').controller('ValidateQuizzController', ['$scope','quizzService',
+	function($scope, quizzService) {
+
+		$scope.quizzInfo=quizzService.getQuizzInfo();
+		$scope.quizzQuestions=quizzService.getQuizzQuestions();
+		
 	}
 ]);
