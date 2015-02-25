@@ -2,21 +2,47 @@
 	<div class="page-header">
 		<h1 data-ng-bind="quizz.title"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == quizz.user._id">
-		<a class="btn btn-primary" href="/#!/quizzs/{{quizz._id}}/edit">
+	<div class="pull-right" data-ng-show="authentication.user._id == quizz.creator._id">
+		<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
+		<a class="btn btn-danger" data-ng-click="remove();">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
 	<small>
 		<em class="text-muted">
-			Posted on
+			Créé le
 			<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="quizz.user.displayName"></span>
+			par
+			<span data-ng-bind="quizz.creator.displayName"></span>
 		</em>
 	</small>
-	<p class="lead" data-ng-bind="quizz.content"></p>
+	<h1 class="lead">{{quizz.name}}</h1>
+	<h1 class="lead"><small>{{quizz.description}}</small></h1>
+	<p>Date de début : {{quizz.beginDate | date:'shortTime' }}, {{quizz.beginDate | date:'fullDate' }}</p>
+	<p ng-if="quizz.endDate">Date de fin : {{quizz.endDate | date:'shortTime' }}, {{quizz.endDate | date:'fullDate' }}</p>
+	<p>Matière : {{quizz.course}}</p>
+	<p>Difficulté : 
+		<div class="stars">
+			<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+		</div>
+	</p>
+	<h2>Questions :</h2>						
+	<ul class="list-group">
+		<li ng-repeat="question in quizz.questions">
+			<p>{{question.label}}</p>
+			<ul>
+				<li ng-repeat="answer in question.answers">
+					<p>{{answer.label}}</p>
+					<div class="checkbox">
+						<p>
+							<input type="checkbox" ng-model="answer.isCorrect" disabled="true">
+							Correct
+						</p>
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
 </section>

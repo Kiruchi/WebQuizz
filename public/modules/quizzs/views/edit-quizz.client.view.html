@@ -5,6 +5,7 @@
 	<div class="col-md-12">
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="update(quizzForm.$valid)" novalidate>
 			<fieldset>
+			{{quizz.name}}
 				<div class="form-group" ng-class="{ 'has-error' : submitted && quizzForm.title.$invalid}">
 					<label class="control-label" for="title">Title</label>
 					<div class="controls">

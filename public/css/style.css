@@ -5142,6 +5142,18 @@ span, table {
 .stars {
   font-size: 25px; }
 
+.listQuizzsGroup {
+  text-decoration: none;
+  color: #000;
+  width: 100%;
+  height: 100%; }
+  .listQuizzsGroup:hover {
+    color: #000;
+    text-decoration: none; }
+
+.list-group-item:hover {
+  background-color: #E7E7E7; }
+
 .navbar .navbar-nav > li > .dropdown-menu {
   margin-right: -2px; }
 

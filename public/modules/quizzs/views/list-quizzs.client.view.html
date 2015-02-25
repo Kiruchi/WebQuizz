@@ -3,18 +3,29 @@
 		<h1>Quizzs</h1>
 	</div>
 	<div class="list-group">
-		<a data-ng-repeat="quizz in quizzs" data-ng-href="#!/quizzs/{{quizz._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
-				by
-				<span data-ng-bind="quizz.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="quizz.title"></h4>
-			<p class="list-group-item-text" data-ng-bind="quizz.content"></p>
-		</a>
+
+		<li data-ng-repeat="quizz in quizzs" class="list-group-item">
+			<span class="list-group-item-text pull-right" data-ng-show="authentication.user._id == quizz.creator._id">
+				<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
+					<i class="glyphicon glyphicon-edit"></i>
+				</a>
+				<a class="btn btn-danger" data-ng-click="remove();">
+					<i class="glyphicon glyphicon-trash"></i>
+				</a>
+			</span>
+			<a class="listQuizzsGroup" data-ng-href="#!/quizzs/{{quizz._id}}">
+				<small class="list-group-item-text">
+					Créé le
+					<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
+					par
+					<span data-ng-bind="quizz.creator.displayName"></span>
+				</small>
+				<h4 class="list-group-item-heading">{{quizz.name}}</h4>
+				<p class="list-group-item-text">{{quizz.questions.length}} questions créées</p>
+			</a>
+		</li>
 	</div>
 	<div class="alert alert-warning text-center" data-ng-if="quizzs.$resolved && !quizzs.length">
-		No quizzs yet, why don't you <a href="/#!/quizzs/create">create one</a>?
+		Vous n'avez pas encore créé de quizzs ! Pourquoi n'en <a href="/#!/quizzs/create">créez vous</a> pas un ?
 	</div>
 </section>
