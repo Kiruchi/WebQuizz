@@ -14,7 +14,7 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope', '$locati
 angular.module('quizzs').controller('RateController', ['$scope', 'quizzService',
 	function($scope, quizzService) {
 		// DEBUT RATE
-		$scope.rate = quizzService.getQuizzInfo().rate;
+		//$scope.rate = quizzService.getQuizzInfo().rate;
 		$scope.max = 5;
 		$scope.isReadonly = false;
 
@@ -39,6 +39,10 @@ angular.module('quizzs').controller('DateTimePickerController', ['$scope', 'quiz
 		// DEBUT DATETIMEPICKER
 	    //$scope.maxDate = new Date('2014-06-22');
 	    //$scope.toggleMinDate();
+	    $scope.dateTimeNow = function() {
+			$scope.quizzInfo.beginDate = new Date();
+		};
+		$scope.dateTimeNow();
 	    $scope.hourStep = 1;
 	    $scope.minuteStep = 1;
   
