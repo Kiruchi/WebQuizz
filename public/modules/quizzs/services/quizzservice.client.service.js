@@ -5,7 +5,10 @@ angular.module('quizzs').factory('quizzService', [
 		// Quizzservice service logic
 		var service = {
 			quizz :{
-				'infos': {rate : 3},
+				'infos': {
+					rate : 3,
+					endDate : null
+				},
 				'questions': []
 			},
 
