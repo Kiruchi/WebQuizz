@@ -3,18 +3,39 @@
 angular.module('quizzs').controller('CreateQuizzController', ['$scope', '$location', 'quizzService',
 	function($scope, $location, quizzService) {
 
+		//init variables pages 
+		$scope.buttonEndDate = "Ajouter une date de fin";
+		$scope.haveEndDate=false;
+
+		//recuperation des informations de la factory
 		$scope.quizzInfo=quizzService.getQuizzInfo();
+
+		//test si date de fin deja saisie
+		if ($scope.quizzInfo.endDate != null) {	$scope.haveEndDate=true; $scope.buttonEndDate = "Supprimer la date de fin"	;};
 
 		$scope.createInfo = function(){
 			$location.path('/quizzs/create/questions');
 		};
+
+		$scope.AddEndDate = function(){
+			$scope.haveEndDate =! $scope.haveEndDate;
+
+			if ($scope.haveEndDate ) 
+			{
+				$scope.buttonEndDate = "Supprimer la date de fin";
+			}
+			else
+			{
+				$scope.quizzInfo.endDate=null;
+				$scope.buttonEndDate = "Ajouter une date de fin";
+			}
+		}
 	}
 ]);
 
 angular.module('quizzs').controller('RateController', ['$scope', 'quizzService',
 	function($scope, quizzService) {
-		// DEBUT RATE
-		//$scope.rate = quizzService.getQuizzInfo().rate;
+		
 		$scope.max = 5;
 		$scope.isReadonly = false;
 
@@ -30,15 +51,12 @@ angular.module('quizzs').controller('RateController', ['$scope', 'quizzService',
 			{stateOn: 'glyphicon-heart'},
 			{stateOff: 'glyphicon-off'}
 		];
-	    // FIN RATE
 	}
 ]);
 
 angular.module('quizzs').controller('DateTimePickerController', ['$scope', 'quizzService',
 	function($scope, quizzService) {
-		// DEBUT DATETIMEPICKER
-	    //$scope.maxDate = new Date('2014-06-22');
-	    //$scope.toggleMinDate();
+	    
 	    $scope.dateTimeNow = function() {
 			$scope.quizzInfo.beginDate = new Date();
 		};
@@ -50,6 +68,5 @@ angular.module('quizzs').controller('DateTimePickerController', ['$scope', 'quiz
 	  	  startingDay: 1,
 	  	  showWeeks: false
 	    };
-	    // FIN DATETIMEPICKER
 	}
 ]);

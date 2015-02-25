@@ -1,19 +1,24 @@
 <section data-ng-controller="CreateQuestionsController">
+
 	<div class="page-header">
 		<h1>Nouveau Quizz</h1>
 	</div>
+
 	<div class="col-md-12">
 		<a href="/#!/quizzs/create" class="btn btn-default" role="button">Etape précédente</a>
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="createQuestions()">
 			<fieldset >
-				<h1>Questions du quizz</h1>
+
+				<h1>Questions du quizz</h1>    
 
 				<div>
 					<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ></pagination>
 				</div>
 
 				<div ng-show="lastPage">
+
 					<input id="new-question" placeholder="Question" autofocus autocomplete="off" ng-model="newQuestion.label">
+
 					<ul class="list-group">
 						<li ng-repeat="answer in newQuestion.answers">
 							<p>{{answer.label}}</p>
@@ -36,34 +41,48 @@
 							<button type="button" class="btn btn-default" ng-click="addAnswer()">Ajouter une proposition</button>
 						</li>
 					</ul>
+
 					<button type="button" class="btn btn-default" ng-click="addQuestion()">Ajouter la question</button>
+
 				</div>
 
 				<div ng-hide="lastPage">
+
 					<p>{{questions[currentPage-1].label}}</p>
+
 					<button type="button" class="btn btn-default"ng-click="removeQuestion(currentPage-1)">Supprimer</button>
+
 					<ul class="list-group">
 						<li ng-repeat="answer in questions[currentPage-1].answers">
-							<p>{{answer.label}}<p>
+							<p>{{answer.label}}</p>
+
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" ng-model="answer.isCorrect">
 									Correct
 								</label>
 							</div>
+
 							<button type="button" class="btn btn-default" ng-click="removeAnswerEdit($index)">Supprimer</button>
+
 						</li>
 					</ul>
+
 				</div>
 
 				<h4><small>{{nbQuestion}} question(s) créée(s)</small></h4>
+
 				<div class="form-group">
 					<input type="submit" value="Etape suivante"class="btn btn-default">
 				</div>
+
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
+
 			</fieldset>
 		</form>
+
 	</div>
+
 </section>

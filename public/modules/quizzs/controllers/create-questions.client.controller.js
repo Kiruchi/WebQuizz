@@ -3,11 +3,15 @@
 angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$location','quizzService',
 	function($scope, $location, quizzService) {
 
+		//recuperation des donnée de la factory
 		$scope.questions=quizzService.getQuizzQuestions();
 
+		//initialisation des variables de la pagination
 		$scope.lastPage=true;
 		$scope.currentPage=$scope.questions.length+1;
 		$scope.nbQuestion=$scope.questions.length;
+
+		//variables question/reponse
 		$scope.newQuestion={
 			label:'',
 			answers:[]
@@ -18,21 +22,17 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 		};
 
 		//Variables pagination
-
 		$scope.maxSize = 5;
 		$scope.TotalItems = 50;
 		$scope.currentPage = 1;
 		$scope.items_per_page = 1;
-
-		console.log($scope.lastPage);
 
 		$scope.createQuestions = function(){
 			$location.path('/quizzs/create/validate');
 		};
 
 		$scope.removeQuestion = function(index){
-			$scope.questions.splice(index,1);		
-
+			$scope.questions.splice(index,1);
 		};
 
 		$scope.removeAnswer = function(index){
@@ -61,21 +61,15 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 
 		$scope.$watch('questions',function(){
 			$scope.nbQuestion=$scope.questions.length;
-
-			console.log($scope.currentPage);
-			console.log($scope.numPages);
-
-			if($scope.currentPage === $scope.numPages)
+			
+			if($scope.currentPage == $scope.nbQuestion+1)
 			{
 				$scope.lastPage=true;
-				console.log('bon');
 			}
 			else
 			{
 				$scope.lastPage=false;
-				console.log('faux');
 			}
-
 		},true);
 
 		$scope.setPage = function (pageNo) {
@@ -84,15 +78,13 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 
 		$scope.pageChanged = function() {
 		    //$log.log('Page changed to: ' + $scope.currentPage);
-		    console.log($scope.currentPage);
-			console.log($scope.numPages);
-		    if($scope.currentPage === $scope.numPages) {
+		    if($scope.currentPage === $scope.numPages) 
+		    {
 		    	$scope.lastPage=true;
-		    	console.log('bon');
 		    }
-		    else {
+		    else 
+		    {
 		    	$scope.lastPage=false;
-		    	console.log('faux');
 		    }
 		};
 	}

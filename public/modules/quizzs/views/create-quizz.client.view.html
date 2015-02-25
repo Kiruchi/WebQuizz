@@ -1,22 +1,27 @@
 <section data-ng-controller="CreateQuizzController">
+
 	<div class="page-header">
 		<h1>Nouveau Quizz</h1>
 	</div>
+
 	<div class="col-md-12">
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="createInfo()">
 			<fieldset >
+
 				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
 					<label class="control-label" for="title">Titre</label>
 					<div class="controls">
 						<input name="title" type="text" data-ng-model="quizzInfo.name" id="name" class="form-control" placeholder="Titre" autofocus required>
 					</div>
 				</div>
+
 				<div class="form-group" >
 					<label class="control-label" for="content">Description</label>
 					<div class="controls">
 						<textarea name="content" data-ng-model="quizzInfo.description" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
 					</div>
 				</div>
+
 				<div class="form-group">
 					<label class="control-label" for="title">Type</label>
 					<div class="controls">
@@ -27,6 +32,7 @@
 						</select>
 					</div>
 				</div>
+
 				<div ng-controller="RateController">
 					<div class="form-group">
 						<label class="control-label" for="rate">Difficulté</label><br/>
@@ -35,6 +41,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="form-group">
 					<label class="control-label" for="course">Matière</label>
 					<div class="controls">
@@ -45,28 +52,35 @@
 						</select>
 					</div>
 				</div>
+
 				<div ng-controller="DateTimePickerController">
+
 					<div class="form-group">
-
 						<label class="control-label" for="beginDate">Date de début : </label>
-						<!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
-
 						<datetimepicker id="beginDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="quizzInfo.beginDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
 					</div>
-					<div class="form-group">
-						<label class="control-label" for="endDate">Date de fin : </label>
-						<!--<pre>Selected time and date is: <em>{{date | date:'shortTime' }}, {{date | date:'fullDate' }}</em></pre>-->
 
-						<datetimepicker id="endDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="quizzInfo.endDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+					<div>
+						<button type="button" class="btn btn-primary" ng-click="AddEndDate()" ng-model="haveEndDate" >{{buttonEndDate}}</button>
+
+						<div class="form-group" ng-show="haveEndDate">
+							<label class="control-label" for="endDate">Date de fin : </label>
+							<datetimepicker id="endDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="quizzInfo.endDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+						</div>
 					</div>
+
 				</div>
+
 				<div class="form-group">
 					<input type="submit" value="Etape suivante"class="btn btn-default">
 				</div>
+
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
+
 			</fieldset>
 		</form>
 	</div>
+	
 </section>
