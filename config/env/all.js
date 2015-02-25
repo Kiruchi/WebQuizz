@@ -45,7 +45,7 @@ module.exports = {
 		lib: {
 			css: [
 				'public/dist/style.css',
-				'public/lib/components-font-awesome/css/font-awesome.min.css'
+				'public/lib/components-font-awesome/css/font-awesome.min.css',
 			],
 			js: [
 				'public/dist/particleground-master/jquery-1.11.1.min.js',
@@ -56,7 +56,8 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js'
+				'http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js',
+				'public/lib/angular-smart-table/dist/smart-table.min.js'
 			]
 		},
 		css: [
