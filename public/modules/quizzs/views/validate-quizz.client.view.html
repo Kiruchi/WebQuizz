@@ -6,7 +6,7 @@
 
 	<div class="col-md-12">
 		<a href="/#!/quizzs/create/questions" class="btn btn-default" role="button">Etape précédente</a>
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate ng-controller="CreateQuizzController">
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate  data-ng-controller="QuizzsController">
 			<fieldset>
 
 				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
@@ -49,7 +49,7 @@
 									<p>{{answer.label}}</p>
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" ng-model="answer.isCorrect" enabled="false">
+											<input type="checkbox" ng-model="answer.isCorrect" disabled="true">
 											Correct
 										</label>
 									</div>

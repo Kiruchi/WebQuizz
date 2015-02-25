@@ -5,17 +5,17 @@
 	</div>
 
 	<div class="col-md-12">
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="createInfo()">
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="createInfo()" novalidate>
 			<fieldset >
 
-				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
-					<label class="control-label" for="title">Titre</label>
+				<div class="form-group" ng-class="{ 'has-error': quizzForm.name.$dirty && quizzForm.name.$invalid }">
+					<label class="control-label" for="name">Titre</label>
 					<div class="controls">
-						<input name="title" type="text" data-ng-model="quizzInfo.name" id="name" class="form-control" placeholder="Titre" autofocus required>
+						<input name="name" type="text" data-ng-model="quizzInfo.name" id="name" class="form-control" placeholder="Titre" autofocus required>
 					</div>
 				</div>
 
-				<div class="form-group" >
+				<div class="form-group" ng-class="{ 'has-error': quizzForm.content.$dirty && quizzForm.content.$invalid }">
 					<label class="control-label" for="content">Description</label>
 					<div class="controls">
 						<textarea name="content" data-ng-model="quizzInfo.description" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
@@ -25,7 +25,7 @@
 				<div class="form-group">
 					<label class="control-label" for="title">Type</label>
 					<div class="controls">
-						<select name="type" data-ng-model="quizzInfo.typeQuizz" id="type" class="form-control" required="required">
+						<select name="type" data-ng-model="quizzInfo.typeQuizz" id="type" class="form-control" required>
 							<option value="Classique" selected="selected">Classique</option>
 							<option value="TLMVPSP">Tout le monde veut prendre sa place</option>
 							<option value="MotsCroises">Mots croisés</option>

@@ -18,7 +18,7 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 		};
 		$scope.newAnswer={
 			label:'',
-			isTrue:false
+			isCorrect:false
 		};
 
 		//Variables pagination
@@ -28,7 +28,15 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 		$scope.items_per_page = 1;
 
 		$scope.createQuestions = function(){
-			$location.path('/quizzs/create/validate');
+			if($scope.nbQuestion===0)
+			{
+				$scope.error='Veuillez entrer une question.';
+			}
+			else
+			{
+				$scope.error='';
+				$location.path('/quizzs/create/validate');
+			}
 		};
 
 		$scope.removeQuestion = function(index){
@@ -39,29 +47,54 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 			$scope.newQuestion.answers.splice(index,1);
 		};
 
-		$scope.removeAnswerEdit = function(index){
-			$scope.questions[$scope.currentPage-1].answers.splice(index,1);
-		};
-
 		$scope.addAnswer = function() {
-			$scope.newQuestion.answers.push($scope.newAnswer);
-			$scope.newAnswer={
-				label:'',
-				isTrue:false
-			};
+			if(!$scope.newAnswer.label)
+			{
+				$scope.error='Veuillez saisir la proposition.';
+			}
+			else
+			{
+				$scope.newQuestion.answers.push($scope.newAnswer);
+				$scope.newAnswer={
+					label:'',
+					isCorrect:false
+				};
+				$scope.error='';
+			}
 		};
 
 		$scope.addQuestion = function() {
-			$scope.questions.push($scope.newQuestion);
-			$scope.newQuestion={
-				label:'',
-				answers:[]
-			};
-			$scope.newAnswer={
-				label:'',
-				isTrue:false
-			};
-			$scope.currentPage ++;
+			$scope.haveGood=false;
+			for(var id in $scope.newQuestion.answers)
+			{
+				if($scope.newQuestion.answers[id].isCorrect)
+				{
+					$scope.haveGood=true;
+				}
+			}
+			if(!$scope.newQuestion.label)
+			{
+				$scope.error='Veuillez saisir l\'énoncé de la question.';
+			}
+			else if(!$scope.haveGood)
+			{
+				$scope.error='Veuillez cochez une réponse correct.';
+			}
+			else
+			{
+				$scope.questions.push($scope.newQuestion);
+				$scope.newQuestion={
+					label:'',
+					answers:[]
+				};
+				$scope.newAnswer={
+					label:'',
+					isCorrect:false
+				};
+				$scope.currentPage ++;
+				$scope.error='';
+			}
+			
 		};
 
 		$scope.setPage = function (pageNo) {
@@ -97,4 +130,4 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 		    }
 		};
 	}
-]);
+	]);

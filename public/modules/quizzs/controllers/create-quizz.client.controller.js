@@ -3,7 +3,7 @@
 angular.module('quizzs').controller('CreateQuizzController', ['$scope', '$location', 'quizzService',
 	function($scope, $location, quizzService) {
 
-		//init variables pages 
+		//init variables pages
 		$scope.buttonEndDate = 'Ajouter une date de fin';
 		$scope.haveEndDate=false;
 
@@ -17,7 +17,27 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope', '$locati
 		}
 
 		$scope.createInfo = function(){
-			$location.path('/quizzs/create/questions');
+			if(!$scope.quizzInfo.name)
+			{
+				$scope.error='Veuillez saisir un titre.';
+			}
+			else if(!$scope.quizzInfo.typeQuizz)
+			{
+				$scope.error='Veuillez selectionner un type.';
+			}
+			else if(!$scope.quizzInfo.course)
+			{
+				$scope.error='Veuillez selectionner une matière.';
+			}
+			else if(!$scope.quizzInfo.endDate && $scope.haveEndDate)
+			{
+				$scope.error='Veuillez saisir une date de fin.';
+			}
+			else
+			{
+				$scope.error='';
+				$location.path('/quizzs/create/questions');
+			}
 		};
 
 		$scope.AddEndDate = function(){

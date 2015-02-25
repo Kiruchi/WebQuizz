@@ -1,16 +1,16 @@
 'use strict';
 
-angular.module('quizzs').factory('quizzService', [
-	function() {
+angular.module('quizzs').factory('quizzService', ['Quizzs',
+	function(Quizzs) {
 		// Quizzservice service logic
 		var service = {
-			quizz :{
+			quizz : new Quizzs({
 				'infos': {
 					rate : 3,
 					endDate : null
 				},
 				'questions': []
-			},
+			}),
 
 			getQuizzInfo : function(){
 				return service.quizz.infos;

@@ -1,20 +1,24 @@
 'use strict';
 
-angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzs',
-	function($scope, $stateParams, $location, Authentication, Quizzs) {
+angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzs', 'quizzService',
+	function($scope, $stateParams, $location, Authentication, Quizzs, quizzService) {
 		$scope.authentication = Authentication;
+		$scope.quizz = quizzService.getQuizz();
 
 
 		$scope.create = function() {
-			var quizz = new Quizzs({
-				title: this.title,
-				content: this.content
-			});
+			var quizz = new Quizzs($scope.quizz);
 			quizz.$save(function(response) {
 				$location.path('quizzs/' + response._id);
 
-				$scope.title = '';
-				$scope.content = '';
+				// Clean du scope pour un eventuel nouvel ajout
+				$scope.quizz.infos = {
+					rate : 3,
+					endDate : null
+				};
+
+				$scope.quizz.questions =[];
+				
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
