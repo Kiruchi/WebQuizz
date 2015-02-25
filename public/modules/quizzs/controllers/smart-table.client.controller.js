@@ -9,5 +9,5 @@ angular.module('quizzs').controller('TableIntelController', ['$scope',
         if (index !== -1) {
             $scope.rowCollection.splice(index, 1);
         }
-    }
+    };
 }]);
