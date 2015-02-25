@@ -45,13 +45,22 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 
 		$scope.addAnswer = function() {
 			$scope.newQuestion.answers.push($scope.newAnswer);
-			$scope.newAnswer={};
+			$scope.newAnswer={
+				label:'',
+				isTrue:false
+			};
 		};
 
 		$scope.addQuestion = function() {
 			$scope.questions.push($scope.newQuestion);
-			$scope.newQuestion=[];
-			$scope.newAnswer={};
+			$scope.newQuestion={
+				label:'',
+				answers:[]
+			};
+			$scope.newAnswer={
+				label:'',
+				isTrue:false
+			};
 			$scope.currentPage ++;
 		};
 
