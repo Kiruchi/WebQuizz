@@ -62,7 +62,7 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 		$scope.$watch('questions',function(){
 			$scope.nbQuestion=$scope.questions.length;
 			
-			if($scope.currentPage == $scope.nbQuestion+1)
+			if($scope.currentPage === $scope.nbQuestion+1)
 			{
 				$scope.lastPage=true;
 			}
