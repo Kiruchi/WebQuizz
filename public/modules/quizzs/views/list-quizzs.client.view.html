@@ -1,108 +1,70 @@
 <section data-ng-controller="QuizzsController" data-ng-init="find()">
 	<div class="page-header">
-		<h1>Quizzs</h1>
-	</div>
-	<!--<div class="list-group">
-
-		<li data-ng-repeat="quizz in quizzs" class="list-group-item">
-			<span class="list-group-item-text pull-right" data-ng-show="authentication.user._id == quizz.creator._id">
-				<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
-					<i class="glyphicon glyphicon-edit"></i>
-				</a>
-				<a class="btn btn-danger" data-ng-click="remove();">
-					<i class="glyphicon glyphicon-trash"></i>
-				</a>
-			</span>
-			<a class="listQuizzsGroup" data-ng-href="#!/quizzs/{{quizz._id}}">
-				<small class="list-group-item-text">
-					Créé le
-					<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
-					par
-					<span data-ng-bind="quizz.creator.displayName"></span>
-				</small>
-				<h4 class="list-group-item-heading">{{quizz.name}}</h4>
-				<p class="list-group-item-text">{{quizz.questions.length}} questions</p>
+		<h1>Quizzs
+			<a type="button" class="newQuizz pull-right btn btn-sm btn-success">
+				<i class="glyphicon glyphicon-plus">
+				</i> Créer un nouveau quizz
 			</a>
-		</li>
-
-		
-	</div>-->
+		</h1>
+	</div>
 
 	<div ng-controller="TableIntelController">
-
-	<!--<input st-search="" class="form-control" placeholder="global search ..." type="text"/>
-
-		<table st-table="displayed" class="table table-striped table-bordered">
-	<thead>
-	<tr>
-		<th st-ratio="20" st-sort="firstName">first name</th>
-		<th st-ratio="20" st-sort="lastName">last name</th>
-		<th st-ratio="10" st-sort="age">age</th>
-		<th st-ratio="30" st-sort="email">email</th>
-		<th st-ratio="20" st-sort="balance">balance</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr ng-repeat="row in displayed">
-		<td st-ratio="20">{{row.firstName}}</td>
-		<td st-ratio="20">{{row.lastName | uppercase}}</td>
-		<td st-ratio="10">{{row.age}}</td>
-		<td st-ratio="30">{{row.email}}</td>
-		<td st-ratio="20">{{row.balance | currency}}</td>
-	</tr>
-	</tbody>
-	<tfoot>
-	<tr>
-		<td colspan="5" class="text-center">
-			<div  st-items-by-page="20" st-pagination=""></div>
-		</td>
-	</tr>
-	</tfoot>
-</table>
-
-	</div>
-
-	-->
-	<a type="button" class="btn btn-sm btn-success">
-		<i class="glyphicon glyphicon-plus">
-		</i> Créer un nouveau quizz
-	</a>
-	<br/>
-	<table st-table="quizzs" st-safe-src="quizzs" class="table table-striped table-bordered">
-			<thead>
-			</tr>
-				<th colspan="7"><input st-search="" class="form-control" placeholder="Rechercher ..." type="text"/></th>
-			</tr>
-			<tr>
-				<th st-sort="name">Nom</th>
-				<th st-sort="course">Matière</th>
-				<th st-sort="rate">Difficulté</th>
-				<th st-sort="created">Nombre de questions</th>
-				<th st-sort="created">Date de création</th>
-				<th st-sort="created">Auteur</th>
-				<th>Modifier/Supprimer</th>
-			</thead>
-			<tbody>
-			<tr ng-repeat="quizz in quizzs">
-				<td>{{quizz.name}}</td>
-				<td>{{quizz.course}}</td>
-				<td>{{quizz.rate}}</td>
-				<td>{{quizz.questions.length}}</td>
-				<td>{{quizz.created | date:'mediumDate'}}</span></td>
-				<td>{{quizz.creator.displayName}}</td>
-				<td>
-				<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
-					<i class="glyphicon glyphicon-edit"></i>
-				</a>
-				<button type="button" ng-click="" class="btn btn-sm btn-danger">
-					<i class="glyphicon glyphicon-trash">
-					</i>
-				</button>
-				</td>
-			</tr>
-			</tbody>
-		</table>
+		<div data-ng-if="quizzs.length">
+		<div class="panel panel-default"> <!-- Un panel autour d'un tableau rend le tableau arrondi (workaround) -->
+		<table st-table="displayedCollection" st-safe-src="quizzs" class="table table-striped table-bordered tableListQuizzs">
+				<thead>
+					<tr>
+						<th colspan="7">
+							<div class="recherche-nom input-group input-group-justified">
+								<div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+								<input st-search="name" class="form-control" placeholder="Rechercher par nom ..." type="text"/>
+							</div>
+						</th>
+					</tr>
+					<tr class="tableHeaders">
+						<th st-sort="name">Nom</th>
+						<th st-sort="course">Matière</th>
+						<th st-sort="rate">Difficulté</th>
+						<th st-sort="questions">Nombre de questions</th>
+						<th st-sort="created">Date de création</th>
+						<th st-sort="author">Auteur</th>
+						<th>Modifier/Supprimer</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="quizz in displayedCollection" ng-click="showQuizz(quizz)">
+						<td>{{quizz.name}}</td>
+						<td>{{quizz.course}}</td>
+						<td>
+							<div class="stars">
+								<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+							</div>
+						</td>
+						<td>{{quizz.questions.length}}</td>
+						<td>{{quizz.created | date:'mediumDate'}}</span></td>
+						<td>{{quizz.creator.displayName}}</td>
+						<td>
+							<a ng-click="editClick()" class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
+								<i class="glyphicon glyphicon-edit"></i>
+							</a>
+							<button type="button" ng-click="" class="btn btn-sm btn-danger">
+								<i class="glyphicon glyphicon-trash">
+								</i>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="7" class="text-center" >
+							<div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		</div>
 		<div class="alert alert-warning text-center" data-ng-if="quizzs.$resolved && !quizzs.length">
-		Vous n'avez pas encore créé de quizzs ! Pourquoi n'en <a href="/#!/quizzs/create">créez vous</a> pas un ?
-	</div>
-</section>
+			Vous n'avez pas encore créé de quizzs ! Pourquoi n'en <a href="/#!/quizzs/create">créez vous</a> pas un ?
+		</div>
+	</section>

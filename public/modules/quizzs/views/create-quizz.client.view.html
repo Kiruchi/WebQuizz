@@ -3,6 +3,8 @@
 	<div class="page-header">
 		<h1>Nouveau Quizz</h1>
 	</div>
+	
+	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 
 	<div class="col-md-12">
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="createInfo()" novalidate>
@@ -73,10 +75,6 @@
 
 				<div class="form-group">
 					<input type="submit" value="Etape suivante"class="btn btn-default">
-				</div>
-
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
 				</div>
 
 			</fieldset>
