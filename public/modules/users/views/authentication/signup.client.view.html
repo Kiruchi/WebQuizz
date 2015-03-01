@@ -27,9 +27,7 @@
 					<button type="submit" class="btn btn-large btn-primary">S'inscrire</button>&nbsp; ou&nbsp;
 					<a href="/#!/signin" class="show-signup">Se connecter</a>
 				</div>
-				<div data-ng-show="error" class="text-center text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
+				<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 			</fieldset>
 		</form>
 	</div>
