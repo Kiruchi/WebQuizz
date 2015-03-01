@@ -2,11 +2,7 @@
 
 module.exports = {
 	db: {
-		uri: 'mongodb://localhost/webquizz',
-		options: {
-			user: '',
-			pass: ''
-		}
+		uri: 'mongodb://admin:webquizz2015@ds039271.mongolab.com:39271/webquizz'
 	},
 	log: {
 		// Can specify one of 'combined', 'common', 'dev', 'short', 'tiny'
