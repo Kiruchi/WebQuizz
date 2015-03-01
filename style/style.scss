@@ -114,6 +114,14 @@ span, table {
   }
 }
 
+.noStyle {
+  background: none !important;
+  &:hover {
+    cursor: auto;
+  }
+}
+
+
 // NAVBAR
 // Generated from http://twbscolor.smarchal.com/
 // Changed the first .navbar-default to .navbar

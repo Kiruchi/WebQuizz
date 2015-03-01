@@ -4957,6 +4957,11 @@ span, table {
     background: url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIPnI+py+0/hJzz0IruwjsVADs=) 98% center no-repeat !important;
     border-bottom: 2px solid #b00; }
 
+.noStyle {
+  background: none !important; }
+  .noStyle:hover {
+    cursor: auto; }
+
 .navbar .navbar-nav > li > .dropdown-menu {
   margin-right: -2px; }
 
