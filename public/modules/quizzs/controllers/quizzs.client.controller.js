@@ -47,6 +47,15 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 
 			quizz.$update(function() {
 				$location.path('quizzs/' + quizz._id);
+
+				// Clean du scope pour un eventuel nouvel ajout
+				$scope.quizz.infos = {
+					rate : 3,
+					endDate : null
+				};
+
+				$scope.quizz.questions =[];
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

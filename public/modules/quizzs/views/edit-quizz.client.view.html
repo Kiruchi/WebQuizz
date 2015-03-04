@@ -1,36 +1,80 @@
-<section data-ng-controller="QuizzsController" data-ng-init="findOne()">
+<section data-ng-controller="UpdateQuizzController">
+
 	<div class="page-header">
-		<h1>Edit Quizz</h1>
+		<h1>Edition du Quizz</h1>
 	</div>
+	
+	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
+
 	<div class="col-md-12">
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="update(quizzForm.$valid)" novalidate>
-			<fieldset>
-			{{quizz.name}}
-				<div class="form-group" ng-class="{ 'has-error' : submitted && quizzForm.title.$invalid}">
-					<label class="control-label" for="title">Title</label>
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateInfo()" novalidate data-ng-controller="QuizzsController" data-ng-init="findOne()">
+			<fieldset >
+
+				<div class="form-group" ng-class="{ 'has-error': quizzForm.name.$dirty && quizzForm.name.$invalid }">
+					<label class="control-label" for="name">Titre</label>
 					<div class="controls">
-						<input name="title" type="text" data-ng-model="quizz.title" id="title" class="form-control" placeholder="Title" required>
-					</div>
-					<div ng-show="submitted && quizzForm.title.$invalid" class="help-block">
-						<p ng-show="quizzForm.title.$error.required" class="text-danger">Title is required</p>
+						<input name="name" type="text" data-ng-model="quizz.name" id="name" class="form-control" placeholder="Titre" autofocus required>
 					</div>
 				</div>
-				<div class="form-group" ng-class="{ 'has-error' : submitted && quizzForm.content.$invalid}">
-					<label class="control-label" for="content">Content</label>
+
+				<div class="form-group" ng-class="{ 'has-error': quizzForm.content.$dirty && quizzForm.content.$invalid }">
+					<label class="control-label" for="content">Description</label>
 					<div class="controls">
-						<textarea name="content" data-ng-model="quizz.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
-					</div>
-					<div ng-show="submitted && quizzForm.content.$invalid" class="help-block">
-						<p ng-show="quizzForm.content.$error.required" class="text-danger">Content is required</p>
+						<textarea name="content" data-ng-model="quizz.description" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
 					</div>
 				</div>
+
 				<div class="form-group">
-					<input type="submit" value="Update" class="btn btn-default">
+					<label class="control-label" for="title">Type</label>
+					<div class="controls">
+						<select name="type" data-ng-model="quizz.typeQuizz" id="type" class="form-control" required>
+							<option value="Classique" selected="selected">Classique</option>
+							<option value="TLMVPSP">Tout le monde veut prendre sa place</option>
+							<option value="MotsCroises">Mots croisés</option>
+						</select>
+					</div>
 				</div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
+
+				<div ng-controller="RateController">
+					<div class="form-group">
+						<label class="control-label" for="rate">Difficulté</label><br/>
+						<div class="stars">
+							<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null"></rating>
+						</div>
+					</div>
 				</div>
+
+				<div class="form-group">
+					<label class="control-label" for="course">Matière</label>
+					<div class="controls">
+						<input name="name" type="text" data-ng-model="quizz.course" id="course" class="form-control" placeholder="Course" required>
+					</div>
+				</div>
+
+				<div ng-controller="DateTimePickerController">
+
+					<div class="form-group">
+						<label class="control-label" for="beginDate">Date de début : </label>
+						<datetimepicker id="beginDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="quizz.beginDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+					</div>
+
+					<div>
+						<button type="button" class="btn btn-primary" ng-click="AddEndDate()" ng-model="haveEndDate" >{{buttonEndDate}}</button>
+
+						<div class="form-group" ng-show="haveEndDate">
+							<label class="control-label" for="endDate">Date de fin : </label>
+							<datetimepicker id="endDate" min-date="minDate" show-weeks="showWeeks" hour-step="1" minute-step="1" ng-model="quizz.endDate" show-meridian="showMeridian" date-format="dd-MMM-yyyy" date-options="dateOptions" date-disabled="disabled(date, mode)" readonly-time="false"></datetimepicker>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="form-group">
+					<input type="submit" value="Etape suivante"class="btn btn-default">
+				</div>
+
 			</fieldset>
 		</form>
 	</div>
+	
 </section>
