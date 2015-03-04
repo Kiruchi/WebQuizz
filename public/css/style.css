@@ -4897,6 +4897,26 @@ body {
 [ng-click] {
   cursor: pointer; }
 
+.btn-primary {
+  background-color: transparent;
+  border: 2px solid #408DE5;
+  color: #000; }
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #1d73d5;
+    border: 2px solid #175ba8; }
+  .btn-primary:active {
+    color: #fff;
+    background-color: #1d73d5;
+    border: 2px solid #175ba8; }
+  .btn-primary:focus {
+    color: #fff;
+    background-color: #1d73d5;
+    border: 2px solid #175ba8; }
+
+.rowSubmit {
+  margin-top: 20px; }
+
 .pagination > li > a {
   color: #acada5; }
   .pagination > li > a:hover {
@@ -5125,6 +5145,7 @@ span, table {
       height: 4px; } }
 
 .datetimepicker-wrapper {
+  margin-top: -35px !important;
   vertical-align: middle;
   display: inline-block; }
 

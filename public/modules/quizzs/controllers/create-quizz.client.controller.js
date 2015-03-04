@@ -23,11 +23,11 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope', '$locati
 			}
 			else if(!$scope.quizzInfo.typeQuizz)
 			{
-				$scope.error='Veuillez selectionner un type.';
+				$scope.error='Veuillez sélectionner un type.';
 			}
 			else if(!$scope.quizzInfo.course)
 			{
-				$scope.error='Veuillez selectionner une matière.';
+				$scope.error='Veuillez sélectionner une matière.';
 			}
 			else if(!$scope.quizzInfo.endDate && $scope.haveEndDate)
 			{
