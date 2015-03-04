@@ -61,7 +61,7 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 	}
 ]);
 
-angular.module('quizzs').controller('RateController', ['$scope', 'quizzService',
+angular.module('quizzs').controller('RateControllerUp', ['$scope', 'quizzService',
 	function($scope, quizzService) {
 		
 		$scope.max = 5;
@@ -82,7 +82,7 @@ angular.module('quizzs').controller('RateController', ['$scope', 'quizzService',
 	}
 ]);
 
-angular.module('quizzs').controller('DateTimePickerController', ['$scope', 'quizzService',
+angular.module('quizzs').controller('DateTimePickerControllerUp', ['$scope', 'quizzService',
 	function($scope, quizzService) {
 	    
 	    $scope.dateTimeNow = function() {
