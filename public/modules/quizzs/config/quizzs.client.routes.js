@@ -5,6 +5,14 @@ angular.module('quizzs').config(['$stateProvider',
 	function($stateProvider) {
 		// Quizzs state routing
 		$stateProvider.
+		state('/quizzs/:quizzId/edit/validate', {
+			url: '/update-validate',
+			templateUrl: 'modules/quizzs/views/update-validate.client.view.html'
+		}).
+		state('/quizzs/:quizzId/edit/question', {
+			url: '/update-question',
+			templateUrl: 'modules/quizzs/views/update-question.client.view.html'
+		}).
 		state('play-quizz', {
 			url: '/play-quizz',
 			templateUrl: 'modules/quizzs/views/play-quizz.client.view.html'
