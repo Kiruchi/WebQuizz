@@ -65,7 +65,9 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
 	var quizz = req.quizz;
-
+	for (var i = quizz.questions.length - 1; i >= 0; i--) {
+		quizz.questions[i].remove();
+	}
 	quizz.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -108,7 +110,7 @@ exports.quizzByID = function(req, res, next, id) {
  * Quizz authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.quizz.user.id !== req.user.id) {
+	if (req.quizz.creator.id !== req.user.id) {
 		return res.status(403).send({
 			message: 'User is not authorized'
 		});
