@@ -54,7 +54,7 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		$scope.findOne = function() {
-			var quizztmp = Quizzs.get({
+			$scope.quizz = Quizzs.get({
 				quizzId: $stateParams.quizzId
 			});
 		};
