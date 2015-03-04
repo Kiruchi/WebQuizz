@@ -35,6 +35,34 @@ body {
   cursor: pointer;
 }
 
+.btn-primary {
+  background-color: transparent;
+  border: 2px solid $bleu-fonce;
+  color: #000;
+
+  &:hover {
+    color: #fff;
+    background-color: darken($bleu-fonce, 10%);
+    border: 2px solid darken($bleu-fonce, 20%);
+  }
+
+  &:active {
+    color: #fff;
+    background-color: darken($bleu-fonce, 10%);
+    border: 2px solid darken($bleu-fonce, 20%);
+  }
+
+  &:focus {
+    color: #fff;
+    background-color: darken($bleu-fonce, 10%);
+    border: 2px solid darken($bleu-fonce, 20%);
+  }
+}
+
+.rowSubmit {
+  margin-top: 20px;
+}
+
 .pagination > li > a {
   color: $gris-clair-secondaire;
   &:hover {
@@ -342,6 +370,7 @@ span, table {
 
 // DEBUT DATEPICKER
 .datetimepicker-wrapper {
+  margin-top: -35px !important;
   vertical-align: middle;
   display: inline-block;
 }
