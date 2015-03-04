@@ -5,6 +5,7 @@ $bleu-principal:  #3da3ef;
 $bleu-fonce: #408DE5;
 $gris-fonce-principal: #636363;
 $gris-clair-secondaire: #acada5;
+$gris-panel: #ADADAD;
 $fond-liste: #E7E7E7;
 
 // NAVBAR
@@ -33,6 +34,42 @@ body {
 
 [ng-click] {
   cursor: pointer;
+}
+
+.panel-title {
+  color: $gris-panel;
+}
+
+.mapagination {
+  .pagination-sm > li:first-child > a,
+  .pagination-sm > li:first-child > span {
+    border-top-left-radius: 0 !important;
+  }
+
+  .pagination > li:first-child > a,
+  .pagination > li:first-child > span {
+    border-top-left-radius: 0 !important;
+  }
+
+  .pagination-sm > li:last-child > a,
+  .pagination-sm > li:last-child > span {
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .pagination > li:last-child > a,
+  .pagination > li:last-child > span {
+    border-bottom-right-radius: 0 !important;
+  }
+}
+
+.panel {
+  .glyphicon-plus {
+    color: #5A5A5A;
+  }
+}
+
+.is-correct {
+  background-color: #D4E7BF;
 }
 
 .btn-primary {

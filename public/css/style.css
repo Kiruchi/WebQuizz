@@ -4897,6 +4897,24 @@ body {
 [ng-click] {
   cursor: pointer; }
 
+.panel-title {
+  color: #ADADAD; }
+
+.mapagination .pagination-sm > li:first-child > a, .mapagination .pagination-sm > li:first-child > span {
+  border-top-left-radius: 0 !important; }
+.mapagination .pagination > li:first-child > a, .mapagination .pagination > li:first-child > span {
+  border-top-left-radius: 0 !important; }
+.mapagination .pagination-sm > li:last-child > a, .mapagination .pagination-sm > li:last-child > span {
+  border-bottom-right-radius: 0 !important; }
+.mapagination .pagination > li:last-child > a, .mapagination .pagination > li:last-child > span {
+  border-bottom-right-radius: 0 !important; }
+
+.panel .glyphicon-plus {
+  color: #5A5A5A; }
+
+.is-correct {
+  background-color: #D4E7BF; }
+
 .btn-primary {
   background-color: transparent;
   border: 2px solid #408DE5;
