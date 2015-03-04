@@ -54,15 +54,9 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		$scope.findOne = function() {
-			var quizz = Quizzs.get({
+			$scope.quizz = Quizzs.get({
 				quizzId: $stateParams.quizzId
 			});
-		};
-
-		$scope.playQuizz = function(quizz) {
-	    	if(!$scope.clickEdit) {
-	    		$location.path('quizzs/' + quizz._id +'/play');
-	    	}
 		};
 
 	}
