@@ -1,5 +1,5 @@
-<section data-ng-controller="UpdateValidateQuizzController">
-	
+<section data-ng-controller="QuizzsController" data-ng-init="findOne()">
+	<div data-ng-controller="UpdateValidateQuizzController">
 	<div class="page-header">
 		<h1>Nouveau Quizz</h1>
 	</div>
@@ -7,43 +7,43 @@
 	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 
 	<div class="col-md-12">
-		<a href="/#!/quizzs/:quizzId/edit/question" class="btn btn-default" role="button">Etape précédente</a>
+		<a href="/#!/quizzs/{{quizz._id}}/edit/question" class="btn btn-default" role="button">Etape précédente</a>
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="update()" novalidate  data-ng-controller="QuizzsController">
 			<fieldset>
 
 				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
-					<h1>{{quizzInfo.name}}</h1>
-					<p>{{quizzInfo.description}}</p>
+					<h1>{{quizz.name}}</h1>
+					<p>{{quizz.description}}</p>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label" for="title">Type : {{quizzInfo.typeQuizz}}</label>
+					<label class="control-label" for="title">Type : {{quizz.typeQuizz}}</label>
 				</div>
 
 				<div class="form-group">
 					<label class="control-label" for="rate">Difficulté</label>
 					<div class="stars">
-						<rating ng-model="quizzInfo.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+						<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label" for="course">Matière : {{quizzInfo.course}}</label>
+					<label class="control-label" for="course">Matière : {{quizz.course}}</label>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label" for="beginDate">Date de début : {{quizzInfo.beginDate | date : 'dd MMMM yyyy à HH:mm'}}</label>
+					<label class="control-label" for="beginDate">Date de début : {{quizz.beginDate | date : 'dd MMMM yyyy à HH:mm'}}</label>
 				</div>
 
-				<div class="form-group" ng-show ="quizzInfo.endDate">
-					<label class="control-label" for="endDate">Date de fin : {{quizzInfo.endDate | date : 'dd MMMM yyyy à HH:mm'}}</label>
+				<div class="form-group" ng-show ="quizz.endDate">
+					<label class="control-label" for="endDate">Date de fin : {{quizz.endDate | date : 'dd MMMM yyyy à HH:mm'}}</label>
 				</div>
 
 				<div class="form-group">
 					<h2>Questions :</h2>	
 
 					<ul class="list-group">
-						<li ng-repeat="question in quizzQuestions">
+						<li ng-repeat="question in quizz.questions">
 							<p>{{question.label}}</p>
 
 							<ul>
@@ -70,5 +70,5 @@
 			</fieldset>
 		</form>
 	</div>
-
+	</div>
 </section>

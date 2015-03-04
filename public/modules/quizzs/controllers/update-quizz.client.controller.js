@@ -39,8 +39,6 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 				var quizz = $scope.quizz;
 
 				quizz.$update(function() {
-					$location.path('quizzs/' + quizz._id);
-
 					$scope.error='';
 					$location.path('/quizzs/' + $scope.quizz._id + '/edit/question');
 				}, function(errorResponse) {
