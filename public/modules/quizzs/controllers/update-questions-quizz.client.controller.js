@@ -3,13 +3,8 @@
 angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$location','quizzService', '$stateParams', 'Quizzs',
 	function($scope, $location, quizzService, $stateParams, Quizzs) {
 
-		var quizz = Quizzs.get({
-			quizzId: $stateParams.quizzId
-		});
-
-		console.log(quizz);
-		console.log(quizz.name);
-		console.log(quizz.questions);
+		console.log($scope.quizz);
+		console.log($scope.quizz.questions);
 
 		//initialisation des variables de la pagination
 		$scope.lastPage = true;
@@ -42,8 +37,6 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 				var quizz = $scope.quizz;
 
 				quizz.$update(function() {
-					$location.path('quizzs/' + quizz._id);
-
 					$scope.error='';
 					$location.path('/quizzs/'+ $scope.quizz._id +'/edit/validate');
 				}, function(errorResponse) {
