@@ -1,5 +1,6 @@
-<section data-ng-controller="UpdateQuizzController">
+<section data-ng-controller="QuizzsController" data-ng-init="findOne()">
 
+	<div data-ng-controller="UpdateQuizzController">
 	<div class="page-header">
 		<h1>Edition du Quizz</h1>
 	</div>
@@ -7,7 +8,7 @@
 	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 
 	<div class="col-md-12">
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateInfo()" novalidate>
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateInfo()" novalidate >
 			<fieldset >
 
 				<div class="form-group" ng-class="{ 'has-error': quizzForm.name.$dirty && quizzForm.name.$invalid }">
@@ -76,5 +77,5 @@
 			</fieldset>
 		</form>
 	</div>
-	
+	</div>
 </section>

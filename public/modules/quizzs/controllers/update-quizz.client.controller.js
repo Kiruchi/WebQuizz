@@ -7,10 +7,8 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 		$scope.buttonEndDate = 'Ajouter une date de fin';
 		$scope.haveEndDate=false;
 
-		//recuperation des informations de la factory
-		$scope.quizz = Quizzs.get({
-			quizzId: $stateParams.quizzId
-		});
+		console.log($scope.quizz);
+		console.log($scope.quizz.name);
 
 		//test si date de fin deja saisie
 		if ($scope.quizz.endDate!=='') {

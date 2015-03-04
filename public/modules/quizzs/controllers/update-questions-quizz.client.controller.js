@@ -3,16 +3,18 @@
 angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$location','quizzService', '$stateParams', 'Quizzs',
 	function($scope, $location, quizzService, $stateParams, Quizzs) {
 
-		$scope.quizz = Quizzs.get({
+		var quizz = Quizzs.get({
 			quizzId: $stateParams.quizzId
 		});
 
-		console.log($scope.quizz);
+		console.log(quizz);
+		console.log(quizz.name);
+		console.log(quizz.questions);
 
 		//initialisation des variables de la pagination
-		$scope.lastPage=true;
-		$scope.currentPage=$scope.quizz.questions.length+1;
-		$scope.nbQuestion=$scope.quizz.questions.length;
+		$scope.lastPage = true;
+		$scope.currentPage = $scope.quizz.questions.length+1;
+		$scope.nbQuestion = $scope.quizz.questions.length;
 
 		//variables question/reponse
 		$scope.newQuestion={
