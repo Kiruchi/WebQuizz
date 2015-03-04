@@ -59,5 +59,11 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 			});
 		};
 
+		$scope.playQuizz = function(quizz) {
+			if(!$scope.clickEdit) {
+	    		$location.path('quizzs/' + quizz._id + '/play');
+	    	}
+		};
+
 	}
 	]);
