@@ -10,10 +10,10 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 		//recuperation des informations de la factory
 		$scope.quizz=quizzService.getQuizz();
 
-		console.log($scope.quizz);
-
 
 		$scope.updateInfo = function(){
+			console.log($scope.quizz);
+			
 			if(!$scope.quizz.name)
 			{
 				$scope.error='Veuillez saisir un titre.';
@@ -33,7 +33,7 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 			else
 			{
 				$scope.error='';
-				$location.path('/quizzs/create/questions');
+				$location.path('/quizzs/:quizzId/edit/question');
 			}
 		};
 

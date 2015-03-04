@@ -3,9 +3,9 @@
 angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzs', 'quizzService',
 	function($scope, $stateParams, $location, Authentication, Quizzs, quizzService) {
 		$scope.authentication = Authentication;
+		$scope.quizz = quizzService.getQuizz();
 		
 		$scope.create = function() {
-			$scope.quizz = quizzService.getQuizz();
 			var quizz = new Quizzs($scope.quizz);
 			quizz.$save(function(response) {
 				$location.path('quizzs/' + response._id);
@@ -40,7 +40,6 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		$scope.update = function() {
-			$scope.quizz = quizzService.getQuizz();
 			var quizz = $scope.quizz;
 
 			quizz.$update(function() {
@@ -64,9 +63,15 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		$scope.findOne = function() {
-			$scope.quizz = Quizzs.get({
+			var quizztmp = Quizzs.get({
 				quizzId: $stateParams.quizzId
 			});
+
+			$scope.quizz=new Quizzs(quizztmp);
+
+			console.log(quizztmp);
+
+			console.log($scope.quizz);
 		};
 
 	}
