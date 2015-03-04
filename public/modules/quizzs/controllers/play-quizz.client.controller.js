@@ -5,8 +5,13 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 		$scope.authentication = Authentication;
 
 		$scope.actualQuestion = 1;
-		$scope.score =0;
-		$scope.reponse=null;
+		$scope.score = 0;
+		$scope.questions=[
+			{
+				id_question:0,
+				reponse:[]
+			}
+		];
 
 		$scope.remove = function(quizz) {
 			if (quizz) {
@@ -64,6 +69,18 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 	    	if ($scope.actualQuestion < $scope.quizz.questions.length) 
 	    	{
 	    		$scope.actualQuestion ++;
+	    	}
+		};
+
+		$scope.previousQuestion = function(quizz) {
+			
+
+			/*if ($scope.reponse = $scope.quizz.Question[$scope.actualQuestion]) {}
+				$scope.reponse = */
+				
+	    	if ($scope.actualQuestion !== 1) 
+	    	{
+	    		$scope.actualQuestion --;
 	    	}
 		};
 

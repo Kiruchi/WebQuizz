@@ -37,16 +37,17 @@
 		<span> Intitulé : {{quizz.questions[actualQuestion-1].label}} </span>
 		
 		<ul class="list-group">
-			<li ng-repeat="answer in quizz.questions[actualQuestion-1].answers">
-				<input type="checkbox" ng-model = "reponse">
-				<label>{{answer.label}}   {{reponse}}</label>
+			<li ng-repeat="answer in quizz.questions[actualQuestion-1].answers ">
+				<input type="checkbox" ng-model = "questions[actualQuestion-1].reponse[$index]">
+				<label>{{answer.label}}   {{questions[actualQuestion-1].reponse[$index]}} </label>
 			</li>
 		</ul>
 
-		<SPAN>{{reponse[0]}}</SPAN>
+		<SPAN> ceci  est la reponse  {{questions[actualQuestion-1].reponse}}  </SPAN>
 		
 
 	</div>
 
+	<button type="button" class="btn btn-default" ng-click= "previousQuestion()"> Question precedente </button>
 	<button type="button" class="btn btn-default" ng-click= "nextQuestion()"> Question suivante </button>
 </section>
