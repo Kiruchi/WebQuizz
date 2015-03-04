@@ -4,8 +4,6 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 	function($scope, $stateParams, $location, Authentication, Quizzs, quizzService) {
 		$scope.authentication = Authentication;
 		
-
-
 		$scope.create = function() {
 			$scope.quizz = quizzService.getQuizz();
 			var quizz = new Quizzs($scope.quizz);
