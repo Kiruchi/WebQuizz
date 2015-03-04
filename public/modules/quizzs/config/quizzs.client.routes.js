@@ -14,7 +14,7 @@ angular.module('quizzs').config(['$stateProvider',
 			templateUrl: 'modules/quizzs/views/update-question.client.view.html'
 		}).
 		state('play-quizz', {
-			url: '/play-quizz',
+			url: '/quizzs/:quizzId/play',
 			templateUrl: 'modules/quizzs/views/play-quizz.client.view.html'
 		}).
 		state('listQuizzs', {

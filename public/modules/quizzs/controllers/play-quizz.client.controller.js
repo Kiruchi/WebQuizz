@@ -1,27 +1,12 @@
 'use strict';
 
-angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzs', 'quizzService',
+angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzs', 'quizzService',
 	function($scope, $stateParams, $location, Authentication, Quizzs, quizzService) {
 		$scope.authentication = Authentication;
-		$scope.quizz = quizzService.getQuizz();
-		
-		$scope.create = function() {
-			var quizz = new Quizzs($scope.quizz);
-			quizz.$save(function(response) {
-				$location.path('quizzs/' + response._id);
 
-				// Clean du scope pour un eventuel nouvel ajout
-				$scope.quizz.infos = {
-					rate : 3,
-					endDate : null
-				};
-
-				$scope.quizz.questions =[];
-				
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+		$scope.actualQuestion = 1;
+		$scope.score =0;
+		$scope.reponse=null;
 
 		$scope.remove = function(quizz) {
 			if (quizz) {
@@ -40,10 +25,20 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		$scope.update = function() {
+			$scope.quizz = quizzService.getQuizz();
 			var quizz = $scope.quizz;
 
 			quizz.$update(function() {
 				$location.path('quizzs/' + quizz._id);
+
+				// Clean du scope pour un eventuel nouvel ajout
+				$scope.quizz.infos = {
+					rate : 3,
+					endDate : null
+				};
+
+				$scope.quizz.questions =[];
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -54,16 +49,24 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		$scope.findOne = function() {
-			var quizz = Quizzs.get({
+			$scope.quizz = Quizzs.get({
 				quizzId: $stateParams.quizzId
 			});
+			console.log($scope.quizz);
 		};
 
-		$scope.playQuizz = function(quizz) {
-	    	if(!$scope.clickEdit) {
-	    		$location.path('quizzs/' + quizz._id +'/play');
+		$scope.nextQuestion = function(quizz) {
+			
+
+			/*if ($scope.reponse = $scope.quizz.Question[$scope.actualQuestion]) {}
+				$scope.reponse = */
+				
+	    	if ($scope.actualQuestion < $scope.quizz.questions.length) 
+	    	{
+	    		$scope.actualQuestion ++;
 	    	}
 		};
 
+		
 	}
 	]);

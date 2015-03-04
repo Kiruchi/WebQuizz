@@ -27,21 +27,5 @@
 			<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
 		</div>
 	</p>
-	<h2>Questions :</h2>						
-	<ul class="list-group">
-		<li ng-repeat="question in quizz.questions">
-			<p>{{question.label}}</p>
-			<ul>
-				<li ng-repeat="answer in question.answers">
-					<p>{{answer.label}}</p>
-					<div class="checkbox">
-						<p>
-							<input type="checkbox" ng-model="answer.isCorrect" disabled="true">
-							Correct
-						</p>
-					</div>
-				</li>
-			</ul>
-		</li>
-	</ul>
+	<button type="button" class="btn btn-default" ng-click= "playQuizz(quizz)"> Lancer le Quizz </button>
 </section>
