@@ -1,15 +1,18 @@
 'use strict';
 
-angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$location','quizzService',
-	function($scope, $location, quizzService) {
+angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$location','quizzService', '$stateParams', 'Quizzs',
+	function($scope, $location, quizzService, $stateParams, Quizzs) {
 
-		//recuperation des donnée de la factory
-		$scope.questions=quizzService.getQuizzQuestions();
+		$scope.quizz = Quizzs.get({
+			quizzId: $stateParams.quizzId
+		});
+
+		console.log($scope.quizz);
 
 		//initialisation des variables de la pagination
 		$scope.lastPage=true;
-		$scope.currentPage=$scope.questions.length+1;
-		$scope.nbQuestion=$scope.questions.length;
+		$scope.currentPage=$scope.quizz.questions.length+1;
+		$scope.nbQuestion=$scope.quizz.questions.length;
 
 		//variables question/reponse
 		$scope.newQuestion={
@@ -34,13 +37,21 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 			}
 			else
 			{
-				$scope.error='';
-				$location.path('/quizzs/:quizzId/edit/validate');
+				var quizz = $scope.quizz;
+
+				quizz.$update(function() {
+					$location.path('quizzs/' + quizz._id);
+
+					$scope.error='';
+					$location.path('/quizzs/'+ $scope.quizz._id +'/edit/validate');
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
 			}
 		};
 
 		$scope.removeQuestion = function(index){
-			$scope.questions.splice(index,1);
+			$scope.quizz.questions.splice(index,1);
 		};
 
 		$scope.removeAnswer = function(index){
@@ -82,7 +93,7 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 			}
 			else
 			{
-				$scope.questions.push($scope.newQuestion);
+				$scope.quizz.questions.push($scope.newQuestion);
 				$scope.newQuestion={
 					label:'',
 					answers:[]
@@ -102,7 +113,7 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 		};
 
 		$scope.$watch('questions',function(){
-			$scope.nbQuestion=$scope.questions.length;
+			$scope.nbQuestion=$scope.quizz.questions.length;
 			
 			if($scope.currentPage === $scope.nbQuestion+1)
 			{

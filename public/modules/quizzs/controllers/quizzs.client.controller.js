@@ -67,7 +67,8 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 				quizzId: $stateParams.quizzId
 			});
 
-			$scope.quizz=new Quizzs(quizztmp);
+			$scope.quizz.name=quizztmp.name;
+			$scope.quizz.questions=quizztmp.questions;
 
 			console.log(quizztmp);
 

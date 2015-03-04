@@ -7,7 +7,7 @@
 	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 
 	<div class="col-md-12">
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateInfo()" novalidate data-ng-controller="QuizzsController" data-ng-init="findOne()">
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateInfo()" novalidate>
 			<fieldset >
 
 				<div class="form-group" ng-class="{ 'has-error': quizzForm.name.$dirty && quizzForm.name.$invalid }">

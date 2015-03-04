@@ -7,7 +7,7 @@
 	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 	
 	<div class="col-md-12">
-		<a href="/#!/quizzs/:quizzId/edit" class="btn btn-default" role="button">Etape précédente</a>
+		<a href="/#!/quizzs/{{quizz._id}}/edit" class="btn btn-default" role="button">Etape précédente</a>
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateQuestions()">
 			<fieldset >
 

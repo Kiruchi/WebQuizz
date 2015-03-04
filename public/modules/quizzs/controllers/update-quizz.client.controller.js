@@ -1,18 +1,24 @@
 'use strict';
 
-angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$location', 'quizzService',
-	function($scope, $location, quizzService) {
+angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$location', 'quizzService', '$stateParams', 'Quizzs',
+	function($scope, $location, quizzService, $stateParams, Quizzs) {
 
 		//init variables pages
 		$scope.buttonEndDate = 'Ajouter une date de fin';
 		$scope.haveEndDate=false;
 
 		//recuperation des informations de la factory
-		$scope.quizz=quizzService.getQuizz();
+		$scope.quizz = Quizzs.get({
+			quizzId: $stateParams.quizzId
+		});
 
+		//test si date de fin deja saisie
+		if ($scope.quizz.endDate!=='') {
+			$scope.haveEndDate=true;
+			$scope.buttonEndDate = 'Supprimer la date de fin';
+		}
 
 		$scope.updateInfo = function(){
-			console.log($scope.quizz);
 			
 			if(!$scope.quizz.name)
 			{
@@ -32,8 +38,16 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 			}
 			else
 			{
-				$scope.error='';
-				$location.path('/quizzs/:quizzId/edit/question');
+				var quizz = $scope.quizz;
+
+				quizz.$update(function() {
+					$location.path('quizzs/' + quizz._id);
+
+					$scope.error='';
+					$location.path('/quizzs/' + $scope.quizz._id + '/edit/question');
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
 			}
 		};
 
