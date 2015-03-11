@@ -11,7 +11,7 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 			console.log($scope.quizz.questions);
 			//initialisation des variables de la pagination
 			$scope.lastPage = true;
-			$scope.currentPage = $scope.quizz.questions.length+1;
+			$scope.currentPage = 1;
 			$scope.nbQuestion = $scope.quizz.questions.length;
 
 			//variables question/reponse
