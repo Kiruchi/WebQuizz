@@ -3,8 +3,6 @@
 angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$location',
 	function($scope, $location) {
 
-		console.log($scope.quizz);
-		console.log($scope.quizz.questions);
 
 		$scope.init = function() {
 
