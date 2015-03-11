@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$location', 'quizzService', '$stateParams', 'Quizzs',
+angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$q', '$location', 'quizzService', '$stateParams', 'Quizzs',
 	function($scope, $location, quizzService, $stateParams, Quizzs) {
 
 		//init variables pages
@@ -8,66 +8,70 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 		$scope.haveEndDate=false;
 
 		console.log($scope.quizz);
-		console.log($scope.quizz.name);
 
-		//test si date de fin deja saisie
-		if ($scope.quizz.endDate!=='') {
-			$scope.haveEndDate=true;
-			$scope.buttonEndDate = 'Supprimer la date de fin';
-		}
+		$scope.leQuizz.$promise.then(function(data) {
+			$scope.quizz = data;
 
-		$scope.updateInfo = function(){
-			
-			if(!$scope.quizz.name)
-			{
-				$scope.error='Veuillez saisir un titre.';
-			}
-			else if(!$scope.quizz.typeQuizz)
-			{
-				$scope.error='Veuillez selectionner un type.';
-			}
-			else if(!$scope.quizz.course)
-			{
-				$scope.error='Veuillez selectionner une matière.';
-			}
-			else if(!$scope.quizz.endDate && $scope.haveEndDate)
-			{
-				$scope.error='Veuillez saisir une date de fin.';
-			}
-			else
-			{
-				var quizz = $scope.quizz;
-
-				quizz.$update(function() {
-					$scope.error='';
-					$location.path('/quizzs/' + $scope.quizz._id + '/edit/question');
-				}, function(errorResponse) {
-					$scope.error = errorResponse.data.message;
-				});
-			}
-		};
-
-		$scope.AddEndDate = function(){
-			$scope.haveEndDate =! $scope.haveEndDate;
-
-			if ($scope.haveEndDate ) 
-			{
-				$scope.buttonEndDate = 'Supprimer la date de fin';
-			}
-			else
-			{
-				$scope.quizz.endDate=null;
-				$scope.buttonEndDate = 'Ajouter une date de fin';
-			}
-		};
-
-		$scope.$watch('quizz',function(){
 			//test si date de fin deja saisie
-			if ($scope.quizz.endDate && $scope.quizz.endDate!==null) {
+			if ($scope.quizz.endDate!=='') {
 				$scope.haveEndDate=true;
 				$scope.buttonEndDate = 'Supprimer la date de fin';
 			}
-		},true);
+
+			$scope.updateInfo = function(){
+				
+				if(!$scope.quizz.name)
+				{
+					$scope.error='Veuillez saisir un titre.';
+				}
+				else if(!$scope.quizz.typeQuizz)
+				{
+					$scope.error='Veuillez selectionner un type.';
+				}
+				else if(!$scope.quizz.course)
+				{
+					$scope.error='Veuillez selectionner une matière.';
+				}
+				else if(!$scope.quizz.endDate && $scope.haveEndDate)
+				{
+					$scope.error='Veuillez saisir une date de fin.';
+				}
+				else
+				{
+					var quizz = $scope.quizz;
+
+					quizz.$update(function() {
+						$scope.error='';
+						$location.path('/quizzs/' + $scope.quizz._id + '/edit/question');
+					}, function(errorResponse) {
+						$scope.error = errorResponse.data.message;
+					});
+				}
+			};
+
+			$scope.AddEndDate = function(){
+				$scope.haveEndDate =! $scope.haveEndDate;
+
+				if ($scope.haveEndDate ) 
+				{
+					$scope.buttonEndDate = 'Supprimer la date de fin';
+				}
+				else
+				{
+					$scope.quizz.endDate=null;
+					$scope.buttonEndDate = 'Ajouter une date de fin';
+				}
+			};
+
+			$scope.$watch('quizz',function(){
+				//test si date de fin deja saisie
+				if ($scope.quizz.endDate && $scope.quizz.endDate!==null) {
+					$scope.haveEndDate=true;
+					$scope.buttonEndDate = 'Supprimer la date de fin';
+				}
+			},true);
+
+		});
 	}
 ]);
 
@@ -83,28 +87,28 @@ angular.module('quizzs').controller('RateControllerUp', ['$scope', 'quizzService
 		};
 
 		$scope.ratingStates = [
-			{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
-			{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
-			{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
-			{stateOn: 'glyphicon-heart'},
-			{stateOff: 'glyphicon-off'}
+		{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+		{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+		{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+		{stateOn: 'glyphicon-heart'},
+		{stateOff: 'glyphicon-off'}
 		];
 	}
-]);
+	]);
 
 angular.module('quizzs').controller('DateTimePickerControllerUp', ['$scope', 'quizzService',
 	function($scope, quizzService) {
-	    
-	    $scope.dateTimeNow = function() {
+
+		$scope.dateTimeNow = function() {
 			$scope.quizz.beginDate = new Date();
 		};
 		$scope.dateTimeNow();
-	    $scope.hourStep = 1;
-	    $scope.minuteStep = 1;
-  
-	    $scope.dateOptions = {
-	  	  startingDay: 1,
-	  	  showWeeks: false
-	    };
+		$scope.hourStep = 1;
+		$scope.minuteStep = 1;
+
+		$scope.dateOptions = {
+			startingDay: 1,
+			showWeeks: false
+		};
 	}
-]);
+	]);

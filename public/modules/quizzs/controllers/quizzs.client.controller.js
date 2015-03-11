@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzs', 'quizzService',
-	function($scope, $stateParams, $location, Authentication, Quizzs, quizzService) {
+angular.module('quizzs').controller('QuizzsController', ['$scope', '$q', '$stateParams', '$location', 'Authentication', 'Quizzs', 'quizzService',
+	function($scope, $q, $stateParams, $location, Authentication, Quizzs, quizzService) {
 		$scope.authentication = Authentication;
 		
 		$scope.create = function() {
@@ -56,15 +56,15 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$stateParams
 		};
 
 		$scope.findOne = function() {
-			$scope.quizz = Quizzs.get({
+			$scope.leQuizz = Quizzs.get({
 				quizzId: $stateParams.quizzId
 			});
 		};
 
 		$scope.playQuizz = function(quizz) {
 			if(!$scope.clickEdit) {
-	    		$location.path('quizzs/' + quizz._id + '/play');
-	    	}
+				$location.path('quizzs/' + quizz._id + '/play');
+			}
 		};
 
 	}
