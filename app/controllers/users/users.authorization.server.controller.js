@@ -15,7 +15,7 @@ exports.userByID = function(req, res, next, id) {
 		_id: id
 	}).exec(function(err, user) {
 		if (err) return next(err);
-		if (!user) return next(new Error('Failed to load User ' + id));
+		if (!user) return next(new Error('Erreur en chargeant l\'utilisateur ' + id));
 		req.profile = user;
 		next();
 	});
@@ -27,7 +27,7 @@ exports.userByID = function(req, res, next, id) {
 exports.requiresLogin = function(req, res, next) {
 	if (!req.isAuthenticated()) {
 		return res.status(401).send({
-			message: 'User is not logged in'
+			message: 'L\'utilisateur n\'est pas connecté'
 		});
 	}
 
@@ -46,7 +46,7 @@ exports.hasAuthorization = function(roles) {
 				return next();
 			} else {
 				return res.status(403).send({
-					message: 'User is not authorized'
+					message: 'L\'utilisateur n\'a pas les droits'
 				});
 			}
 		});

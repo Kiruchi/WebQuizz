@@ -35,11 +35,11 @@ exports.forgot = function(req, res, next) {
 				}, '-salt -password', function(err, user) {
 					if (!user) {
 						return res.status(400).send({
-							message: 'No account with that username has been found'
+							message: 'Ce nom d\'utilisateur n\'existe pas'
 						});
 					} else if (user.provider !== 'local') {
 						return res.status(400).send({
-							message: 'It seems like you signed up using your ' + user.provider + ' account'
+							message: 'Vous vous êtes connecté en utilisant ' + user.provider
 						});
 					} else {
 						user.resetPasswordToken = token;
@@ -52,7 +52,7 @@ exports.forgot = function(req, res, next) {
 				});
 			} else {
 				return res.status(400).send({
-					message: 'Username field must not be blank'
+					message: 'Le champ nom d\'utilisateur ne doit pas être vide'
 				});
 			}
 		},
@@ -76,11 +76,11 @@ exports.forgot = function(req, res, next) {
 			smtpTransport.sendMail(mailOptions, function(err) {
 				if (!err) {
 					res.send({
-						message: 'An email has been sent to ' + user.email + ' with further instructions.'
+						message: 'Un email a été envoyé à ' + user.email + ' avec la démarche à suivre.'
 					});
 				} else {
 					return res.status(400).send({
-						message: 'Failure sending email'
+						message: 'Erreur dans l\'envoi de l\'email'
 					});
 				}
 

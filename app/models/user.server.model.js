@@ -29,13 +29,13 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+		validate: [validateLocalStrategyProperty, 'Entrez votre prénom']
 	},
 	lastName: {
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+		validate: [validateLocalStrategyProperty, 'Entrez votre nom']
 	},
 	displayName: {
 		type: String,
@@ -45,19 +45,19 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		match: [/.+\@.+\..+/, 'Please fill a valid email address']
+		validate: [validateLocalStrategyProperty, 'Entre votre email'],
+		match: [/.+\@.+\..+/, 'Entrez un email valide']
 	},
 	username: {
 		type: String,
-		unique: 'Username already exists',
-		required: 'Please fill in a username',
+		unique: 'Ce nom d\'utilisateur existe déjà',
+		required: 'Entrez un nom d\'utilisateur',
 		trim: true
 	},
 	password: {
 		type: String,
 		default: '',
-		validate: [validateLocalStrategyPassword, 'Password should be longer']
+		validate: [validateLocalStrategyPassword, 'Le mot de passe doit être plus long']
 	},
 	salt: {
 		type: String
