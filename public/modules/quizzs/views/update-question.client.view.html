@@ -1,9 +1,9 @@
 <section data-ng-controller="QuizzsController" data-ng-init="findOne()">
 
-<div data-ng-controller="UpdateQuestionsController">
+<div data-ng-controller="UpdateQuestionsController" data-ng-init="init()">
 
 	<div class="page-header">
-		<h1>Nouveau Quizz</h1>
+		<h1>Edition Quizz</h1>
 	</div>
 
 	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
@@ -57,7 +57,7 @@
 					<button type="button" class="btn btn-default"ng-click="removeQuestion(currentPage-1)">Supprimer</button>
 
 					<ul class="list-group">
-						<li ng-repeat="answer in questions[currentPage-1].answers">
+						<li ng-repeat="answer in quizz.questions[currentPage-1].answers">
 							<p>{{answer.label}}</p>
 
 							<div class="checkbox">

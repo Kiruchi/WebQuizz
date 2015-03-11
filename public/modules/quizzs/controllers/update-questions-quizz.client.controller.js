@@ -1,31 +1,37 @@
 'use strict';
 
-angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$location','quizzService', '$stateParams', 'Quizzs',
-	function($scope, $location, quizzService, $stateParams, Quizzs) {
+angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$location',
+	function($scope, $location) {
 
 		console.log($scope.quizz);
 		console.log($scope.quizz.questions);
 
-		//initialisation des variables de la pagination
-		$scope.lastPage = true;
-		$scope.currentPage = $scope.quizz.questions.length+1;
-		$scope.nbQuestion = $scope.quizz.questions.length;
+		$scope.init = function() {
 
-		//variables question/reponse
-		$scope.newQuestion={
-			label:'',
-			answers:[]
-		};
-		$scope.newAnswer={
-			label:'',
-			isCorrect:false
+			console.log($scope.quizz.questions);
+			//initialisation des variables de la pagination
+			$scope.lastPage = true;
+			$scope.currentPage = $scope.quizz.questions.length+1;
+			$scope.nbQuestion = $scope.quizz.questions.length;
+
+			//variables question/reponse
+			$scope.newQuestion={
+				label:'',
+				answers:[]
+			};
+			$scope.newAnswer={
+				label:'',
+				isCorrect:false
+			};
+
+			//Variables pagination
+			$scope.maxSize = 5;
+			$scope.TotalItems = 50;
+			$scope.currentPage = 1;
+			$scope.items_per_page = 1;
 		};
 
-		//Variables pagination
-		$scope.maxSize = 5;
-		$scope.TotalItems = 50;
-		$scope.currentPage = 1;
-		$scope.items_per_page = 1;
+		
 
 		$scope.updateQuestions = function(){
 			if($scope.nbQuestion===0)
