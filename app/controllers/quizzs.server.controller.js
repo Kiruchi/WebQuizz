@@ -83,7 +83,7 @@ exports.delete = function(req, res) {
  * List of Quizzs
  */
 exports.list = function(req, res) {
-	Quizz.find().sort('-created').populate('creator', 'displayName').populate('questions').exec(function(err, quizzs) {
+	Quizz.find().sort('-created').populate('creator', 'displayName').exec(function(err, quizzs) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
