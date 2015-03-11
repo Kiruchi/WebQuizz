@@ -3,6 +3,7 @@
 angular.module('quizzs').controller('TableIntelController', ['$scope', '$location',
 	function($scope, $location) {
 		$scope.clickEdit = false;
+		
 		$scope.displayedCollection = [].concat($scope.quizzs);
 
 	    //remove to the real data holder

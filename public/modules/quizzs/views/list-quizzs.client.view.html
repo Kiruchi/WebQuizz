@@ -1,6 +1,6 @@
 <section data-ng-controller="QuizzsController" data-ng-init="find()">
 	<div class="page-header">
-		<h1>Quizzs
+		<h1>Liste des quizzs <small>Cliquez sur une ligne pour jouer</small>
 			<a type="button" class="newQuizz pull-right btn btn-sm btn-success" href="/#!/quizzs/create">
 				<i class="glyphicon glyphicon-plus">
 				</i> Créer un nouveau quizz
@@ -28,7 +28,7 @@
 						<th st-sort="questions">Nombre de questions</th>
 						<th st-sort="created">Date de création</th>
 						<th st-sort="creator.displayName">Auteur</th>
-						<th class="noStyle">Modifier/Supprimer</th>
+						<th class="noStyle"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,13 +44,16 @@
 						<td>{{quizz.created | date:'mediumDate'}}</span></td>
 						<td>{{quizz.creator.displayName}}</td>
 						<td>
-							<a ng-click="editClick()" class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
+							<a tooltip="Modifier" ng-click="editClick()" class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit" data-ng-show="authentication.user._id == quizz.creator._id">
 								<i class="glyphicon glyphicon-edit"></i>
 							</a>
-							<button type="button" data-ng-click="remove(quizz);" class="btn btn-sm btn-danger">
+							<button tooltip="Supprimer" type="button" data-ng-click="remove(quizz);" class="btn btn-sm btn-danger" data-ng-show="authentication.user._id == quizz.creator._id">
 								<i class="glyphicon glyphicon-trash">
 								</i>
 							</button>
+							<a tooltip="Jouer" class="btn btn-success" href="/#!/quizzs/{{quizz._id}}" data-ng-hide="authentication.user._id == quizz.creator._id">
+								<i class="glyphicon glyphicon-play"></i>
+							</a>
 						</td>
 					</tr>
 				</tbody>
