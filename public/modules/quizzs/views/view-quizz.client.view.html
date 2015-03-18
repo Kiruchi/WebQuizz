@@ -1,9 +1,9 @@
 <section data-ng-controller="QuizzsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="quizz.name"></h1>
+		<h1 data-ng-bind="leQuizz.name"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == quizz.creator._id">
-		<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
+	<div class="pull-right" data-ng-show="authentication.user._id == leQuizz.creator._id">
+		<a class="btn btn-default" href="/#!/leQuizzs/{{leQuizz._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
 		<a class="btn btn-danger" data-ng-click="remove();">
@@ -13,19 +13,19 @@
 	<small>
 		<em class="text-muted">
 			Créé le
-			<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
+			<span data-ng-bind="leQuizz.created | date:'mediumDate'"></span>
 			par
-			<span data-ng-bind="quizz.creator.displayName"></span>
+			<span data-ng-bind="leQuizz.creator.displayName"></span>
 		</em>
 	</small>
-	<h1 class="lead"><small>{{quizz.description}}</small></h1>
-	<p>Date de début : {{quizz.beginDate | date:'shortTime' }}, {{quizz.beginDate | date:'fullDate' }}</p>
-	<p ng-if="quizz.endDate">Date de fin : {{quizz.endDate | date:'shortTime' }}, {{quizz.endDate | date:'fullDate' }}</p>
-	<p>Matière : {{quizz.course}}</p>
+	<h1 class="lead"><small>{{leQuizz.description}}</small></h1>
+	<p>Date de début : {{leQuizz.beginDate | date:'shortTime' }}, {{leQuizz.beginDate | date:'fullDate' }}</p>
+	<p ng-if="leQuizz.endDate">Date de fin : {{leQuizz.endDate | date:'shortTime' }}, {{leQuizz.endDate | date:'fullDate' }}</p>
+	<p>Matière : {{leQuizz.course}}</p>
 	<p>Difficulté : 
 		<div class="stars">
-			<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+			<rating ng-model="leQuizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
 		</div>
 	</p>
-	<button type="button" class="btn btn-default" ng-click= "playQuizz(quizz)"> Lancer le Quizz </button>
+	<button type="button" class="btn btn-default" ng-click= "playQuizz(leQuizz)"> Lancer le Quizz </button>
 </section>

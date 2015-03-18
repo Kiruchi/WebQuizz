@@ -1,16 +1,15 @@
 'use strict';
 
-angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$q', '$location', 'quizzService', '$stateParams', 'Quizzs',
+angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$location', 'quizzService', '$stateParams', 'Quizzs',
 	function($scope, $location, quizzService, $stateParams, Quizzs) {
 
 		//init variables pages
 		$scope.buttonEndDate = 'Ajouter une date de fin';
 		$scope.haveEndDate=false;
 
-		console.log($scope.quizz);
-
 		$scope.leQuizz.$promise.then(function(data) {
 			$scope.quizz = data;
+			console.log($scope.quizz.questions);
 
 			//test si date de fin deja saisie
 			if ($scope.quizz.endDate!=='') {
@@ -87,22 +86,17 @@ angular.module('quizzs').controller('RateControllerUp', ['$scope', 'quizzService
 		};
 
 		$scope.ratingStates = [
-		{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
-		{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
-		{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
-		{stateOn: 'glyphicon-heart'},
-		{stateOff: 'glyphicon-off'}
+			{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+			{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+			{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+			{stateOn: 'glyphicon-heart'},
+			{stateOff: 'glyphicon-off'}
 		];
 	}
-	]);
+]);
 
 angular.module('quizzs').controller('DateTimePickerControllerUp', ['$scope', 'quizzService',
 	function($scope, quizzService) {
-
-		$scope.dateTimeNow = function() {
-			$scope.quizz.beginDate = new Date();
-		};
-		$scope.dateTimeNow();
 		$scope.hourStep = 1;
 		$scope.minuteStep = 1;
 
@@ -111,4 +105,4 @@ angular.module('quizzs').controller('DateTimePickerControllerUp', ['$scope', 'qu
 			showWeeks: false
 		};
 	}
-	]);
+]);

@@ -1,86 +1,86 @@
 <section data-ng-controller="QuizzsController" data-ng-init="findOne()">
 
-<div data-ng-controller="UpdateQuestionsController" data-ng-init="init()">
+	<div data-ng-controller="UpdateQuestionsController">
 
-	<div class="page-header">
-		<h1>Edition du Quizz : {{quizz.name}}</h1>
-	</div>
+		<div class="page-header">
+			<h1>Edition du Quizz : {{quizz.name}}</h1>
+		</div>
 
-	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
-	
-	<div class="col-md-12">
-		<a href="/#!/quizzs/{{quizz._id}}/edit" class="btn btn-default" role="button">Etape précédente</a>
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateQuestions()">
-			<fieldset >
+		<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 
-				<h1>Questions du quizz</h1>    
+		<div class="col-md-12">
+			<a href="/#!/quizzs/{{quizz._id}}/edit" class="btn btn-default" role="button">Etape précédente</a>
+			<form name="quizzForm" class="form-horizontal" data-ng-submit="updateQuestions()">
+				<fieldset >
 
-				<div>
-					<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ></pagination>
-				</div>
+					<h1>Questions du quizz</h1>    
 
-				<div ng-show="lastPage">
+					<div>
+						<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ></pagination>
+					</div>
 
-					<input id="new-question" placeholder="Question" autofocus autocomplete="off" ng-model="newQuestion.label">
+					<div ng-show="lastPage">
 
-					<ul class="list-group">
-						<li ng-repeat="answer in newQuestion.answers">
-							<p>{{answer.label}}</p>
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" ng-model="answer.isCorrect">
-									Correct
-								</label>
-							</div>
-							<button type="button" class="btn btn-default" ng-click="removeAnswer($index)">Supprimer</button>
-						</li>
-						<li>
-							<input type="text" id="new-answer" placeholder="Proposition" ng-model="newAnswer.label">
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" ng-model="newAnswer.isCorrect">
-									Correct
-								</label>
-							</div>
-							<button type="button" class="btn btn-default" ng-click="addAnswer()">Ajouter une proposition</button>
-						</li>
-					</ul>
+						<input id="new-question" placeholder="Question" autofocus autocomplete="off" ng-model="newQuestion.label">
 
-					<button type="button" class="btn btn-default" ng-click="addQuestion()">Ajouter la question</button>
+						<ul class="list-group">
+							<li ng-repeat="answer in newQuestion.answers">
+								<p>{{answer.label}}</p>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="answer.isCorrect">
+										Correct
+									</label>
+								</div>
+								<button type="button" class="btn btn-default" ng-click="removeAnswer($index)">Supprimer</button>
+							</li>
+							<li>
+								<input type="text" id="new-answer" placeholder="Proposition" ng-model="newAnswer.label">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="newAnswer.isCorrect">
+										Correct
+									</label>
+								</div>
+								<button type="button" class="btn btn-default" ng-click="addAnswer()">Ajouter une proposition</button>
+							</li>
+						</ul>
 
-				</div>
+						<button type="button" class="btn btn-default" ng-click="addQuestion()">Ajouter la question</button>
 
-				<div ng-hide="lastPage">
+					</div>
 
-					<p>{{questions[currentPage-1].label}}</p>
+					<div ng-hide="lastPage">
 
-					<button type="button" class="btn btn-default"ng-click="removeQuestion(currentPage-1)">Supprimer</button>
+						<p>{{questions[currentPage-1].label}}</p>
 
-					<ul class="list-group">
-						<li ng-repeat="answer in quizz.questions[currentPage-1].answers">
-							<p>{{answer.label}}</p>
+						<button type="button" class="btn btn-default"ng-click="removeQuestion(currentPage-1)">Supprimer</button>
 
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" ng-model="answer.isCorrect" disabled="true">
-									Correct
-								</label>
-							</div>
+						<ul class="list-group">
+							<li ng-repeat="answer in quizz.questions[currentPage-1].answers">
+								<p>{{answer.label}}</p>
 
-						</li>
-					</ul>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="answer.isCorrect" disabled="true">
+										Correct
+									</label>
+								</div>
 
-				</div>
+							</li>
+						</ul>
 
-				<h4><small>{{nbQuestion}} question(s) créée(s)</small></h4>
+					</div>
 
-				<div class="form-group">
-					<input type="submit" value="Etape suivante"class="btn btn-default">
-				</div>
+					<h4><small>{{nbQuestion}} question(s) créée(s)</small></h4>
 
-			</fieldset>
-		</form>
+					<div class="form-group">
+						<input type="submit" value="Etape suivante"class="btn btn-default">
+					</div>
 
-	</div>
+				</fieldset>
+			</form>
+
+		</div>
 	</div>
 </section>

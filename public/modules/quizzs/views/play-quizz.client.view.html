@@ -1,53 +1,56 @@
-<section data-ng-controller="PlayQuizzController" data-ng-init="findOne(quizz)">
+<section data-ng-controller="QuizzsController" data-ng-init="findOne()">
 
-	<div class="page-header">
-		<h1 data-ng-bind="quizz.name"></h1>
-	</div>
+	<div data-ng-controller="PlayQuizzController">
 
-	<div class="pull-right" data-ng-show="authentication.user._id == quizz.creator._id">
-
-		<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-danger" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-
-	</div>
-
-	<small>
-		<em class="text-muted">
-			Créé le
-			<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
-			par
-			<span data-ng-bind="quizz.creator.displayName"></span>
-		</em>
-	</small>
-
-
-	<h1 class="lead"><small>{{quizz.description}}</small></h1>
-	<p>Difficulté : 
-		<div class="stars">
-			<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+		<div class="page-header">
+			<h1 data-ng-bind="quizz.name"></h1>
 		</div>
-	</p>
 
-	<div>
-		<h1> Question n°{{actualQuestion}}  sur {{quizz.questions.length}}</h1>
-		<span> Intitulé : {{quizz.questions[actualQuestion-1].label}} </span>
-		
-		<ul class="list-group">
-			<li ng-repeat="answer in quizz.questions[actualQuestion-1].answers ">
-				<input type="checkbox" ng-model = "questions[actualQuestion-1].reponse[$index]">
-				<label>{{answer.label}}   {{questions[actualQuestion-1].reponse[$index]}} </label>
-			</li>
-		</ul>
+		<div class="pull-right" data-ng-show="authentication.user._id == quizz.creator._id">
 
-		<SPAN> ceci  est la reponse  {{questions[actualQuestion-1].reponse}}  </SPAN>
-		
+			<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-danger" data-ng-click="remove();">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
 
+		</div>
+
+		<small>
+			<em class="text-muted">
+				Créé le
+				<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
+				par
+				<span data-ng-bind="quizz.creator.displayName"></span>
+			</em>
+		</small>
+
+
+		<h1 class="lead"><small>{{quizz.description}}</small></h1>
+		<p>Difficulté : 
+			<div class="stars">
+				<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+			</div>
+		</p>
+
+		<div>
+			<h1> Question n°{{actualQuestion}}  sur {{quizz.questions.length}}</h1>
+			<span> Intitulé : {{quizz.questions[actualQuestion-1].label}} </span>
+			
+			<ul class="list-group">
+				<li ng-repeat="answer in quizz.questions[actualQuestion-1].answers ">
+					<input type="checkbox" ng-model = "questions[actualQuestion-1].reponse[$index]">
+					<label>{{answer.label}}   {{questions[actualQuestion-1].reponse[$index]}} </label>
+				</li>
+			</ul>
+
+			<SPAN> ceci  est la reponse  {{questions[actualQuestion-1].reponse}}  </SPAN>
+			
+
+		</div>
+
+		<button type="button" class="btn btn-default" ng-click= "previousQuestion()"> Question precedente </button>
+		<button type="button" class="btn btn-default" ng-click= "nextQuestion()"> Question suivante </button>
 	</div>
-
-	<button type="button" class="btn btn-default" ng-click= "previousQuestion()"> Question precedente </button>
-	<button type="button" class="btn btn-default" ng-click= "nextQuestion()"> Question suivante </button>
 </section>
