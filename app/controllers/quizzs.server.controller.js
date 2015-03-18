@@ -49,6 +49,12 @@ exports.update = function(req, res) {
 
 	quizz = _.extend(quizz, req.body);
 
+	for (var i = quizz.questions.length - 1; i >= 0; i--) {
+		var laQuestion = new Question(quizz.questions[i]);
+		quizz.questions.push(laQuestion);
+		laQuestion.save();
+	}
+
 	quizz.save(function(err) {
 		if (err) {
 			return res.status(400).send({
