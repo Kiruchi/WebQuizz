@@ -23,7 +23,7 @@
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="answer in newQuestion.answers" ng-class="{ 'is-correct': answer.isCorrect }">
 									<div class="input-group">
-										<p>{{answer.label}}</p>
+										<input type="text" id="new-answer" class="form-control" placeholder="Nouvelle proposition" ng-model="answer.label">
 										<div class="input-group-addon">
 											<input type="checkbox" ng-model="answer.isCorrect">
 											<span>Correcte</span>
