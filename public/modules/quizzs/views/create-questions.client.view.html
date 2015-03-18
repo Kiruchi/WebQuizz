@@ -58,17 +58,40 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3>{{questions[currentPage-1].label}}</h3>
+								<input id="new-question" class="form-control" placeholder="Nouvelle question" autofocus autocomplete="off" ng-model="questions[currentPage-1].label">
 							</div>
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="answer in questions[currentPage-1].answers" ng-class="{ 'is-correct': answer.isCorrect }">
-									<p>{{answer.label}}</p>
+									<div class="input-group">
+										<input type="text" id="new-answer" class="form-control" placeholder="Nouvelle proposition" ng-model="answer.label">
+										<div class="input-group-addon">
+											<input type="checkbox" ng-model="answer.isCorrect">
+											<span>Correcte</span>
+										</div>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-danger" ng-click="removeAnswerBis($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="input-group">
+										<input type="text" id="new-answer" class="form-control" placeholder="Nouvelle proposition" ng-model="newAnswer.label">
+										<div class="input-group-addon">
+											<input type="checkbox" ng-model="newAnswer.isCorrect">
+											<span>Correcte</span>
+										</div>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-success" ng-click="addAnswerBis()"><span class="ajoutProposition glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+										</div>
+									</div>
 								</li>
 							</ul>
+							
 							<div class="panel-footer text-center">
 								<button type="button" class="btn btn-danger" ng-click="removeQuestion(currentPage-1)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Supprimer la question</button>
 							</div>
 						</div>
+
 
 					</div>
 

@@ -3,25 +3,26 @@
 	<div data-ng-controller="UpdateQuestionsController">
 
 		<div class="page-header">
-		<a href="/#!/quizzs/{{quizz._id}}/edit" class="pull-right btn btn-primary" role="button"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Etape précédente</a>
-		<h1>Questions du quizz <small>({{currentPage}}/{{numPages}})</small></h1>
-	</div>
+			<a href="/#!/quizzs/{{quizz._id}}/edit" class="pull-right btn btn-primary" role="button"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Etape précédente</a>
+			<h1>Questions du quizz <small>({{currentPage}}/{{numPages}})</small></h1>
+		</div>
 
-	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
-	
-	<div class="container">
-		
-		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateQuestions()">
-			<fieldset class="form-group">
-				<div class="mapagination pull-right">
-					<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" first-text="Premier" last-text="Dernier" previous-text="Précédent" next-text="Suivant" ></pagination>
-				</div>
+		<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 
-				<div ng-show="lastPage">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">Nouvelle question</h3>
-							<input id="new-question" class="form-control" placeholder="Nouvelle question" autofocus autocomplete="off" ng-model="newQuestion.label"></div>
+		<div class="container">
+
+			<form name="quizzForm" class="form-horizontal" data-ng-submit="updateQuestions()">
+				<fieldset class="form-group">
+					<div class="mapagination pull-right">
+						<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" first-text="Premier" last-text="Dernier" previous-text="Précédent" next-text="Suivant" ></pagination>
+					</div>
+
+					<div ng-show="lastPage">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Nouvelle question</h3>
+								<input id="new-question" class="form-control" placeholder="Nouvelle question" autofocus autocomplete="off" ng-model="newQuestion.label">
+							</div>
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="answer in newQuestion.answers" ng-class="{ 'is-correct': answer.isCorrect }">
 									<div class="input-group">
@@ -49,7 +50,7 @@
 
 								</li>
 							</ul>
-							
+
 							<div class="panel-footer text-center">
 								<button type="button" class="btn btn-primary" ng-click="addQuestion()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter la question</button>
 							</div>
@@ -60,13 +61,35 @@
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3>{{quizz.questions[currentPage-1].label}}</h3>
+								<input id="new-question" class="form-control" placeholder="Nouvelle question" autofocus autocomplete="off" ng-model="quizz.questions[currentPage-1].label">
 							</div>
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="answer in quizz.questions[currentPage-1].answers" ng-class="{ 'is-correct': answer.isCorrect }">
-									<p>{{answer.label}}</p>
+									<div class="input-group">
+										<input type="text" id="new-answer" class="form-control" placeholder="Nouvelle proposition" ng-model="answer.label">
+										<div class="input-group-addon">
+											<input type="checkbox" ng-model="answer.isCorrect">
+											<span>Correcte</span>
+										</div>
+										<div class="input-group-btn">
+										<button type="button" class="btn btn-danger" ng-click="removeAnswerBis($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="input-group">
+										<input type="text" id="new-answer" class="form-control" placeholder="Nouvelle proposition" ng-model="newAnswer.label">
+										<div class="input-group-addon">
+											<input type="checkbox" ng-model="newAnswer.isCorrect">
+											<span>Correcte</span>
+										</div>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-success" ng-click="addAnswerBis()"><span class="ajoutProposition glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+										</div>
+									</div>
 								</li>
 							</ul>
+
 							<div class="panel-footer text-center">
 								<button type="button" class="btn btn-danger" ng-click="removeQuestion(currentPage-1)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Supprimer la question</button>
 							</div>

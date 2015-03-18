@@ -5,7 +5,7 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 		
 		$scope.leQuizz.$promise.then(function(data) {
 			$scope.quizz = data;
-			console.log($scope.quizz.questions);
+			
 			//initialisation des variables de la pagination
 			$scope.lastPage = true;
 			$scope.currentPage = 1;
@@ -39,7 +39,7 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 
 					quizz.$update(function() {
 						$scope.error='';
-						$location.path('/quizzs/'+ $scope.quizz._id +'/edit/validate');
+						$location.path('/quizzs/' + $scope.quizz._id + '/edit/validate');
 					}, function(errorResponse) {
 						$scope.error = errorResponse.data.message;
 					});
@@ -53,6 +53,9 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 			$scope.removeAnswer = function(index){
 				$scope.newQuestion.answers.splice(index,1);
 			};
+			$scope.removeAnswerBis = function(index){
+				$scope.quizz.questions[$scope.currentPage-1].answers.splice(index,1);
+			};
 
 			$scope.addAnswer = function() {
 				if(!$scope.newAnswer.label)
@@ -62,6 +65,22 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 				else
 				{
 					$scope.newQuestion.answers.push($scope.newAnswer);
+					$scope.newAnswer={
+						label:'',
+						isCorrect:false
+					};
+					$scope.error='';
+				}
+			};
+
+			$scope.addAnswerBis = function() {
+				if(!$scope.newAnswer.label)
+				{
+					$scope.error='Veuillez saisir la proposition.';
+				}
+				else
+				{
+					$scope.quizz.questions[$scope.currentPage-1].answers.push($scope.newAnswer);
 					$scope.newAnswer={
 						label:'',
 						isCorrect:false
@@ -114,11 +133,11 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 				if($scope.currentPage === $scope.nbQuestion+1)
 				{
 					$scope.lastPage=true;
-				}
-				else
-				{
-					$scope.lastPage=false;
-				}
+			    }
+			    else 
+			    {
+			    	$scope.lastPage=false;
+			    }
 			},true);
 
 			$scope.setPage = function (pageNo) {

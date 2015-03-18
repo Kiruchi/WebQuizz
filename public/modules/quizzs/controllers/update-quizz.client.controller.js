@@ -9,7 +9,7 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 
 		$scope.leQuizz.$promise.then(function(data) {
 			$scope.quizz = data;
-			console.log($scope.quizz.questions);
+			
 
 			//test si date de fin deja saisie
 			if ($scope.quizz.endDate!=='' && $scope.quizz.endDate!==null) {

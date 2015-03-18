@@ -47,6 +47,10 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 			$scope.newQuestion.answers.splice(index,1);
 		};
 
+		$scope.removeAnswerBis = function(index){
+			$scope.questions[$scope.currentPage-1].answers.splice(index,1);
+		};
+
 		$scope.addAnswer = function() {
 			if(!$scope.newAnswer.label)
 			{
@@ -55,6 +59,22 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 			else
 			{
 				$scope.newQuestion.answers.push($scope.newAnswer);
+				$scope.newAnswer={
+					label:'',
+					isCorrect:false
+				};
+				$scope.error='';
+			}
+		};
+
+		$scope.addAnswerBis = function() {
+			if(!$scope.newAnswer.label)
+			{
+				$scope.error='Veuillez saisir la proposition.';
+			}
+			else
+			{
+				$scope.questions[$scope.currentPage-1].answers.push($scope.newAnswer);
 				$scope.newAnswer={
 					label:'',
 					isCorrect:false
@@ -107,11 +127,11 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 			if($scope.currentPage === $scope.nbQuestion+1)
 			{
 				$scope.lastPage=true;
-			}
-			else
-			{
-				$scope.lastPage=false;
-			}
+		    }
+		    else 
+		    {
+		    	$scope.lastPage=false;
+		    }
 		},true);
 
 		$scope.setPage = function (pageNo) {
