@@ -29,6 +29,10 @@ angular.module('quizzs').controller('QuizzsController', ['$scope', '$q', '$state
 			if (quizz) {
 				quizz.$remove();
 
+				if($scope.quizzs === undefined) {
+					$location.path('quizzs');
+				}
+
 				for (var i in $scope.quizzs) {
 					if ($scope.quizzs[i] === quizz) {
 						$scope.quizzs.splice(i, 1);
