@@ -32,12 +32,37 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+a {
+  color: $bleu-fonce;
+
+  &:hover {
+    color: darken($bleu-fonce, 10%);
+  }
+
+  &:active {
+    color: darken($bleu-fonce, 10%);
+  }
+
+  &:focus {
+    color: darken($bleu-fonce, 10%);
+  }
+}
+
 [ng-click] {
   cursor: pointer;
 }
 
 .panel-title {
   color: $gris-panel;
+}
+
+.titrePanel {
+  color: $gris-fonce-principal !important;
+  font-weight: bold;
+}
+
+.panelType {
+  margin-top: 50px;
 }
 
 .mapagination {

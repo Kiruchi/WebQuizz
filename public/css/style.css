@@ -4894,11 +4894,27 @@ body {
   font-family: "Roboto", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased; }
 
+a {
+  color: #408DE5; }
+  a:hover {
+    color: #1d73d5; }
+  a:active {
+    color: #1d73d5; }
+  a:focus {
+    color: #1d73d5; }
+
 [ng-click] {
   cursor: pointer; }
 
 .panel-title {
   color: #ADADAD; }
+
+.titrePanel {
+  color: #636363 !important;
+  font-weight: bold; }
+
+.panelType {
+  margin-top: 50px; }
 
 .mapagination .pagination-sm > li:first-child > a, .mapagination .pagination-sm > li:first-child > span {
   border-top-left-radius: 0 !important; }
