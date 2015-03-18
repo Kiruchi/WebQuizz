@@ -46,14 +46,12 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var quizz = req.quizz;
+	console.log(quizz);
 
-	quizz = _.extend(quizz, req.body);
-
-	for (var i = quizz.questions.length - 1; i >= 0; i--) {
-		var laQuestion = new Question(quizz.questions[i]);
-		quizz.questions.push(laQuestion);
-		laQuestion.save();
-	}
+	/*for (var i = req.quizz.questions.length - 1; i >= 0; i--) {
+		var question = _.extend(req.quizz.questions[i], req.body);
+		question.save();
+	}*/
 
 	quizz.save(function(err) {
 		if (err) {
