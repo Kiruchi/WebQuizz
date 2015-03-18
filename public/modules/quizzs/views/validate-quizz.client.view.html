@@ -1,18 +1,17 @@
 <section data-ng-controller="ValidateQuizzController">
 	
 	<div class="page-header">
-		<h1>Nouveau Quizz</h1>
+		<a href="/#!/quizzs/create/questions" class="pull-right btn btn-primary" role="button"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Etape précédente</a>
+		<h1>{{quizzInfo.name}}</h1>
 	</div>
 
 	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
 
-	<div class="col-md-12">
-		<a href="/#!/quizzs/create/questions" class="btn btn-default" role="button">Etape précédente</a>
+	<div class="container">
 		<form name="quizzForm" class="form-horizontal" data-ng-submit="create()" novalidate  data-ng-controller="QuizzsController">
 			<fieldset>
 
-				<div class="form-group" ng-class="{ 'has-error': quizzForm.title.$dirty && quizzForm.title.$invalid }">
-					<h1>{{quizzInfo.name}}</h1>
+				<div class="form-group">
 					<p>{{quizzInfo.description}}</p>
 				</div>
 
@@ -41,26 +40,17 @@
 
 				<div class="form-group">
 					<h2>Questions :</h2>	
-
-					<ul class="list-group">
-						<li ng-repeat="question in quizzQuestions">
-							<p>{{question.label}}</p>
-
-							<ul>
-								<li ng-repeat="answer in question.answers">
-									<p>{{answer.label}}</p>
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" ng-model="answer.isCorrect" disabled="true">
-											Correct
-										</label>
-									</div>
-								</li>
-							</ul>
-
-						</li>
-					</ul>
-
+					
+					<div class="panel panel-default" ng-repeat="question in quizzQuestions">
+						<div class="panel-heading">
+							<h3 class="panel-title titrePanel">{{question.label}}</h3>
+						</div>
+						<ul class="list-group">
+							<li class="list-group-item" ng-repeat="answer in question.answers" ng-class="{ 'is-correct': answer.isCorrect }">
+								<p>{{answer.label}}</p>
+							</li>
+						</ul>
+					</div>
 				</div>
 
 				<div class="form-group">
