@@ -32,7 +32,10 @@ angular.module('quizzs').controller('CreateQuizzController', ['$scope', '$locati
 			else if(!$scope.quizzInfo.endDate && $scope.haveEndDate)
 			{
 				$scope.error='Veuillez saisir une date de fin.';
-			}
+			}else if($scope.quizzInfo.endDate && $scope.haveEndDate && $scope.quizzInfo.endDate <= $scope.quizzInfo.beginDate)
+				{
+					$scope.error='Veuillez saisir une date de fin posterieur à la date de début.';
+				}
 			else
 			{
 				$scope.error='';

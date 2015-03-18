@@ -108,7 +108,7 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 				$scope.currentPage = pageNo;
 			};
 
-			$scope.$watch('questions',function(){
+			$scope.$watch('quizz.questions',function(){
 				$scope.nbQuestion=$scope.quizz.questions.length;
 				
 				if($scope.currentPage === $scope.nbQuestion+1)

@@ -12,7 +12,7 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 			console.log($scope.quizz.questions);
 
 			//test si date de fin deja saisie
-			if ($scope.quizz.endDate!=='') {
+			if ($scope.quizz.endDate!=='' && $scope.quizz.endDate!==null) {
 				$scope.haveEndDate=true;
 				$scope.buttonEndDate = 'Supprimer la date de fin';
 			}
@@ -34,6 +34,9 @@ angular.module('quizzs').controller('UpdateQuizzController', ['$scope', '$locati
 				else if(!$scope.quizz.endDate && $scope.haveEndDate)
 				{
 					$scope.error='Veuillez saisir une date de fin.';
+				}else if($scope.quizz.endDate && $scope.haveEndDate && $scope.quizz.endDate <= $scope.quizz.beginDate)
+				{
+					$scope.error='Veuillez saisir une date de fin posterieur à la date de début.';
 				}
 				else
 				{

@@ -3,80 +3,78 @@
 	<div data-ng-controller="UpdateQuestionsController">
 
 		<div class="page-header">
-			<h1>Edition du Quizz : {{quizz.name}}</h1>
-		</div>
+		<a href="/#!/quizzs/{{quizz._id}}/edit" class="pull-right btn btn-primary" role="button"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Etape précédente</a>
+		<h1>Questions du quizz <small>({{currentPage}}/{{numPages}})</small></h1>
+	</div>
 
-		<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
+	<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
+	
+	<div class="container">
+		
+		<form name="quizzForm" class="form-horizontal" data-ng-submit="updateQuestions()">
+			<fieldset class="form-group">
+				<div class="mapagination pull-right">
+					<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" first-text="Premier" last-text="Dernier" previous-text="Précédent" next-text="Suivant" ></pagination>
+				</div>
 
-		<div class="col-md-12">
-			<a href="/#!/quizzs/{{quizz._id}}/edit" class="btn btn-default" role="button">Etape précédente</a>
-			<form name="quizzForm" class="form-horizontal" data-ng-submit="updateQuestions()">
-				<fieldset >
+				<div ng-show="lastPage">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Nouvelle question</h3>
+							<input id="new-question" class="form-control" placeholder="Nouvelle question" autofocus autocomplete="off" ng-model="newQuestion.label"></div>
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="answer in newQuestion.answers" ng-class="{ 'is-correct': answer.isCorrect }">
+									<div class="input-group">
+										<p>{{answer.label}}</p>
+										<div class="input-group-addon">
+											<input type="checkbox" ng-model="answer.isCorrect">
+											<span>Correcte</span>
+										</div>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-danger" ng-click="removeAnswer($index)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+										</div>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="input-group">
+										<input type="text" id="new-answer" class="form-control" placeholder="Nouvelle proposition" ng-model="newAnswer.label">
+										<div class="input-group-addon">
+											<input type="checkbox" ng-model="newAnswer.isCorrect">
+											<span>Correcte</span>
+										</div>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-success" ng-click="addAnswer()"><span class="ajoutProposition glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+										</div>
+									</div>
 
-					<h1>Questions du quizz</h1>    
-
-					<div>
-						<pagination ng-change = "pageChanged()" total-items="nbQuestion+1" items-per-page="items_per_page" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="true" num-pages="numPages" ></pagination>
-					</div>
-
-					<div ng-show="lastPage">
-
-						<input id="new-question" placeholder="Question" autofocus autocomplete="off" ng-model="newQuestion.label">
-
-						<ul class="list-group">
-							<li ng-repeat="answer in newQuestion.answers">
-								<p>{{answer.label}}</p>
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" ng-model="answer.isCorrect">
-										Correct
-									</label>
-								</div>
-								<button type="button" class="btn btn-default" ng-click="removeAnswer($index)">Supprimer</button>
-							</li>
-							<li>
-								<input type="text" id="new-answer" placeholder="Proposition" ng-model="newAnswer.label">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" ng-model="newAnswer.isCorrect">
-										Correct
-									</label>
-								</div>
-								<button type="button" class="btn btn-default" ng-click="addAnswer()">Ajouter une proposition</button>
-							</li>
-						</ul>
-
-						<button type="button" class="btn btn-default" ng-click="addQuestion()">Ajouter la question</button>
-
+								</li>
+							</ul>
+							
+							<div class="panel-footer text-center">
+								<button type="button" class="btn btn-primary" ng-click="addQuestion()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter la question</button>
+							</div>
+						</div>
 					</div>
 
 					<div ng-hide="lastPage">
 
-						<p>{{questions[currentPage-1].label}}</p>
-
-						<button type="button" class="btn btn-default"ng-click="removeQuestion(currentPage-1)">Supprimer</button>
-
-						<ul class="list-group">
-							<li ng-repeat="answer in quizz.questions[currentPage-1].answers">
-								<p>{{answer.label}}</p>
-
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" ng-model="answer.isCorrect" disabled="true">
-										Correct
-									</label>
-								</div>
-
-							</li>
-						</ul>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3>{{quizz.questions[currentPage-1].label}}</h3>
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="answer in quizz.questions[currentPage-1].answers" ng-class="{ 'is-correct': answer.isCorrect }">
+									<p>{{answer.label}}</p>
+								</li>
+							</ul>
+							<div class="panel-footer text-center">
+								<button type="button" class="btn btn-danger" ng-click="removeQuestion(currentPage-1)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Supprimer la question</button>
+							</div>
+						</div>
 
 					</div>
 
-					<h4><small>{{nbQuestion}} question(s) créée(s)</small></h4>
-
-					<div class="form-group">
-						<input type="submit" value="Etape suivante"class="btn btn-default">
-					</div>
+					<button type="submit" class="btn btn-primary"> Etape suivante <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 
 				</fieldset>
 			</form>

@@ -4,7 +4,8 @@ angular.module('quizzs').controller('UpdateValidateQuizzController', ['$scope','
 	function($scope, quizzService) {
 		
 		//recuperation des informations
-		$scope.quizzInfo=quizzService.getQuizzInfo();
-		$scope.quizzQuestions=quizzService.getQuizzQuestions();
+		$scope.leQuizz.$promise.then(function(data) {
+			$scope.quizz = data;
+		});
 	}
 ]);
