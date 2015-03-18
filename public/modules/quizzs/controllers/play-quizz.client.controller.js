@@ -4,40 +4,89 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 	function($scope, $stateParams, $location, Authentication, Quizzs, quizzService) {
 		$scope.authentication = Authentication;
 
-		$scope.actualQuestion = 1;
-		$scope.score = 0;
-		$scope.questions=[
+		$scope.leQuizz.$promise.then(function(data) 
 		{
-			id_question:0,
-			reponse:[]
-		}
-		];
-		$scope.leQuizz.$promise.then(function(data) {
 			$scope.quizz = data;
+			$scope.fin = false;
+			$scope.debut = true;
 
-			$scope.nextQuestion = function(quizz) {
+			$scope.actualQuestion = 0;
+			$scope.score = 0;
+			$scope.questions=[
+			{
+				id_question:0,
+				reponse:[],
+				valider:false
+			}
+			];
+
+			window.onbeforeunload = function(event) {
+				event.returnValue = 'ATTENTION !!!! Vous allez perdre les réponses de ce quizz si vous ne les validez pas';
+			};
 
 
-				/*if ($scope.reponse = $scope.quizz.Question[$scope.actualQuestion]) {}
-				$scope.reponse = */
 
-				if ($scope.actualQuestion < $scope.quizz.questions.length) 
+			for(var i = 0; i < $scope.quizz.questions.length; i++ )
+			{
+				$scope.questions[i]={
+					id_question:i,
+					reponse:[],
+					valider:false
+				};
+
+				for (var j = 0; j < $scope.quizz.questions[i].answers.length; j++) 
 				{
+					$scope.questions[i].reponse[j] = false ;
+				}
+			}
+
+			$scope.nextQuestion = function() {
+
+				$scope.debut = false;
+
+				if ($scope.actualQuestion+1 < $scope.quizz.questions.length) 
+				{
+					var correct = true;
+					for(var i=0 ; i < $scope.quizz.questions[$scope.actualQuestion].answers.length; i++)
+					{			
+						if ($scope.quizz.questions[$scope.actualQuestion].answers[i].isCorrect !== $scope.questions[$scope.actualQuestion].reponse[i]) 
+						{
+							correct = false;
+							$scope.questions[$scope.actualQuestion].valider = false;
+						}
+					}
+
+					if (!$scope.questions[$scope.actualQuestion].valider) 
+					{
+						if (correct) 
+						{
+							$scope.questions[$scope.actualQuestion].valider = true;
+						}
+					}
+					$scope.fin = false;
 					$scope.actualQuestion ++;
+				}
+
+				if ($scope.actualQuestion+1 === $scope.quizz.questions.length) 
+				{
+					$scope.fin =true;
 				}
 			};
 
-			$scope.previousQuestion = function(quizz) {
-				
+			$scope.previousQuestion = function() {
 
-				/*if ($scope.reponse = $scope.quizz.Question[$scope.actualQuestion]) {}
-				$scope.reponse = */
+				$scope.fin = false;
 
-				if ($scope.actualQuestion !== 1) 
+				if ($scope.actualQuestion !== 0) 
 				{
 					$scope.actualQuestion --;
 				}
+				
+				if($scope.actualQuestion === 0)
+				{
+					$scope.debut = true;
+				}
 			};
 		});
-	}
-	]);
+}
+]);
