@@ -3,7 +3,7 @@
 		<h1 data-ng-bind="leQuizz.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == leQuizz.creator._id">
-		<a class="btn btn-default" href="/#!/leQuizzs/{{leQuizz._id}}/edit">
+		<a class="btn btn-default" href="/#!/quizzs/{{leQuizz._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
 		<a class="btn btn-danger" data-ng-click="remove();">
