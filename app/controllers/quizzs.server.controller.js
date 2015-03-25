@@ -46,30 +46,26 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var quizz = req.quizz;
-	var quizz1 = req.quizz;
 
 	quizz = _.extend(quizz, req.body);
 
 	for (var i = quizz.questions.length - 1; i >= 0; i--) {
-		var question=quizz.questions[i];
-
-		question = _.extend(question, req.body);
-
-		quizz1.questions[i]=question;
-		console.log('HERE');
-		console.log(question);
-		question.save();
+		var maQ = new Question(quizz.questions[i]).toObject();
+		//Question.findByIdAndUpdate(maQ._id, maQ, console.log);
+		/*quizz.questions[i].remove();
+		maQ.save(console.log);
+		quizz.questions.push(maQ);*/
 	}
 
-	quizz1 = _.extend(quizz1, req.body);
+	quizz = _.extend(quizz, req.body);
 	
-	quizz1.save(function(err) {
+	quizz.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(quizz1);
+			res.json(quizz);
 		}
 	});
 };

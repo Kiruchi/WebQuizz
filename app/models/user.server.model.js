@@ -45,7 +45,7 @@ var UserSchema = new Schema({
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Entre votre email'],
+		validate: [validateLocalStrategyProperty, 'Entrez votre email'],
 		match: [/.+\@.+\..+/, 'Entrez un email valide']
 	},
 	username: {
