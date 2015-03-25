@@ -46,20 +46,30 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var quizz = req.quizz;
-	console.log(quizz);
+	var quizz1 = req.quizz;
 
-	/*for (var i = req.quizz.questions.length - 1; i >= 0; i--) {
-		var question = _.extend(req.quizz.questions[i], req.body);
+	quizz = _.extend(quizz, req.body);
+
+	for (var i = quizz.questions.length - 1; i >= 0; i--) {
+		var question=quizz.questions[i];
+
+		question = _.extend(question, req.body);
+
+		quizz1.questions[i]=question;
+		console.log('HERE');
+		console.log(question);
 		question.save();
-	}*/
+	}
 
-	quizz.save(function(err) {
+	quizz1 = _.extend(quizz1, req.body);
+	
+	quizz1.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(quizz);
+			res.json(quizz1);
 		}
 	});
 };
