@@ -152,12 +152,12 @@ exports.reset = function(req, res, next) {
 						});
 					} else {
 						return res.status(400).send({
-							message: 'Passwords do not match'
+							message: 'Les mots de passe ne correspondent pas.'
 						});
 					}
 				} else {
 					return res.status(400).send({
-						message: 'Password reset token is invalid or has expired.'
+						message: 'Le jeton pour changer votre mot de passe est invalide ou a expiré.'
 					});
 				}
 			});
@@ -175,7 +175,7 @@ exports.reset = function(req, res, next) {
 			var mailOptions = {
 				to: user.email,
 				from: config.mailer.from,
-				subject: 'Your password has been changed',
+				subject: 'Votre mot de passe a été modifié',
 				html: emailHTML
 			};
 
@@ -214,7 +214,7 @@ exports.changePassword = function(req, res) {
 											res.status(400).send(err);
 										} else {
 											res.send({
-												message: 'Password changed successfully'
+												message: 'Votre mot de passe a été changé avec succès.'
 											});
 										}
 									});
@@ -222,28 +222,28 @@ exports.changePassword = function(req, res) {
 							});
 						} else {
 							res.status(400).send({
-								message: 'Passwords do not match'
+								message: 'Les mots de passe ne correspondent pas.'
 							});
 						}
 					} else {
 						res.status(400).send({
-							message: 'Current password is incorrect'
+							message: 'Le mot de passe courant est incorrect.'
 						});
 					}
 				} else {
 					res.status(400).send({
-						message: 'User is not found'
+						message: 'Impossible de trouver l\'utilisateur.'
 					});
 				}
 			});
 		} else {
 			res.status(400).send({
-				message: 'Please provide a new password'
+				message: 'Fournissez un nouveau mot de passe.'
 			});
 		}
 	} else {
 		res.status(400).send({
-			message: 'User is not signed in'
+			message: 'L\'utilisateur n\'est pas authentifié'
 		});
 	}
 };
