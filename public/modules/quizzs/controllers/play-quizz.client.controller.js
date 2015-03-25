@@ -20,12 +20,6 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 			}
 			];
 
-			window.onbeforeunload = function(event) {
-				event.returnValue = 'ATTENTION !!!! Vous allez perdre les réponses de ce quizz si vous ne les validez pas';
-			};
-
-
-
 			for(var i = 0; i < $scope.quizz.questions.length; i++ )
 			{
 				$scope.questions[i]={
@@ -39,6 +33,19 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 					$scope.questions[i].reponse[j] = false ;
 				}
 			}
+
+			//gestion des évenements de la page
+
+			window.onbeforeunload = function (event) {
+				event.returnValue = 'ATTENTION !!!! Vous allez perdre les réponses de ce quizz si vous ne les validez pas';
+			};
+
+
+			$scope.$on('$locationChangeStart', function(event, next, current) {
+				if(!confirm('ATTENTION !!!! Vous allez perdre les réponses de ce quiz si vous ne les validez pas \n\n Voulez-vous vraiment quitter cette page ?')) {
+					event.preventDefault();
+				}
+			});
 
 			$scope.nextQuestion = function() {
 
