@@ -13,7 +13,7 @@
 	<small>
 		<em class="text-muted">
 			Créé le
-			<span data-ng-bind="leQuizz.created | date:'mediumDate'"></span>
+			<span>{{leQuizz.created | date:'mediumDate'}} à {{leQuizz.created | date:'shortTime'}}</span>
 			par
 			<span data-ng-bind="leQuizz.creator.displayName"></span>
 		</em>

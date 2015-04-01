@@ -41,7 +41,7 @@
 							</div>
 						</td>
 						<td>{{quizz.questions.length}}</td>
-						<td>{{quizz.created | date:'mediumDate'}}</span></td>
+						<td>{{quizz.created | date:'mediumDate'}} à {{quizz.created | date:'shortTime'}}</span></td>
 						<td>{{quizz.creator.displayName}}</td>
 						<td>
 							<a tooltip="Modifier" ng-click="editClick()" class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit" data-ng-show="authentication.user._id == quizz.creator._id">
