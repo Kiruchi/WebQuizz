@@ -19,7 +19,7 @@
  			type: Schema.ObjectId,
  			ref: 'Question'
  		},
- 		reponsesQ: [{
+ 		reponse: [{
  			type: Boolean,
  			default: false,
  			required: 'Veuillez donner une réponse.'

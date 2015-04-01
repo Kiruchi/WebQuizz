@@ -73,7 +73,7 @@ exports.delete = function(req, res) {
  * List of Resultats
  */
 exports.list = function(req, res) { 
-	Resultat.find().sort('-created').populate('user', 'displayName').exec(function(err, resultats) {
+	Resultat.find().sort('-played').populate('user', 'displayName').populate('quizz', 'name rate').exec(function(err, resultats) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -88,7 +88,7 @@ exports.list = function(req, res) {
  * Resultat middleware
  */
 exports.resultatByID = function(req, res, next, id) { 
-	Resultat.findById(id).populate('user', 'displayName').exec(function(err, resultat) {
+	Resultat.findById(id).populate('user', 'displayName').populate('quizz', 'name rate').exec(function(err, resultat) {
 		if (err) return next(err);
 		if (! resultat) return next(new Error('Failed to load Resultat ' + id));
 		req.resultat = resultat ;

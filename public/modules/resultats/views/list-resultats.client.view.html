@@ -1,6 +1,6 @@
 <section data-ng-controller="ResultatsController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Resultats</h1>
+        <h1>Résultats</h1>
     </div>
     <div class="list-group">
         <a data-ng-repeat="resultat in resultats" data-ng-href="#!/resultats/{{resultat._id}}" class="list-group-item">
@@ -14,6 +14,6 @@
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!resultats.$resolved || resultats.length">
-    	No Resultats yet, why don't you <a href="/#!/resultats/create">create one</a>?
+    	Vous n'avez pas encore joué à un quizz : <a href="/#!/quizzs">Jouer</a>
     </div>
 </section>
