@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzs', 'quizzService',
-	function($scope, $stateParams, $location, Authentication, Quizzs, quizzService) {
+angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$stateParams', '$location', 'Authentication', 'Quizzs', 'Resultats', 'quizzService',
+	function($scope, $stateParams, $location, Authentication, Quizzs, Resultats, quizzService) {
 		$scope.authentication = Authentication;
 
 		$scope.leQuizz.$promise.then(function(data) 
@@ -13,21 +13,21 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 			$scope.actualQuestion = 0;
 			$scope.questions=[
 			{
-				idQuestion:0,
-				reponses:[]
+				question:0,
+				reponse:[]
 			}
 			];
 
 			for(var i in $scope.quizz.questions )
 			{
 				$scope.questions[i]={
-					idQuestion:$scope.quizz.questions[i]._id,
-					reponses:[]
+					question:$scope.quizz.questions[i]._id,
+					reponse:[]
 				};
 
 				for (var j in $scope.quizz.questions[i].answers) 
 				{
-					$scope.questions[i].reponses[j] = false ;
+					$scope.questions[i].reponse[j] = false ;
 				}
 			}
 
@@ -78,16 +78,38 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 
 			$scope.terminerQuizz =function() {
 
-				/*var resultat = new Resultat({
-					idQuizz:$scope.quizz._id,
-					reponses:$scope.reponses
+				var reponseCorrect =0;
+				for (var i in $scope.quizz.questions) 
+				{
+					var correct=true;
+
+					for(var j in $scope.quizz.questions[i].answers)
+					{
+						if($scope.quizz.questions[i].answers[j].isCorrect !== $scope.questions[i].reponse[j])
+						{
+							correct = false;
+						}
+					}
+
+					if(correct)
+					{
+						reponseCorrect++;
+					}
+				}
+				var ratio = (reponseCorrect/$scope.questions.length)*100;
+				console.log(ratio);
+
+				var resultat = new Resultats({
+					quizz:$scope.quizz._id,
+					pourcentage:ratio,
+					reponses:$scope.questions
 				});
 				resultat.$save(function(response) {
-					$location.path('/quizzs/resultat/' + response._id);
+					$location.path('/resultats/' + response._id);
 
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
-				});*/
+				});
 			};
 
 
