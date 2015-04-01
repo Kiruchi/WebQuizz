@@ -11,26 +11,23 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 			$scope.debut = true;
 
 			$scope.actualQuestion = 0;
-			$scope.score = 0;
 			$scope.questions=[
 			{
-				id_question:0,
-				reponse:[],
-				valider:false
+				idQuestion:0,
+				reponses:[]
 			}
 			];
 
-			for(var i = 0; i < $scope.quizz.questions.length; i++ )
+			for(var i in $scope.quizz.questions )
 			{
 				$scope.questions[i]={
-					id_question:i,
-					reponse:[],
-					valider:false
+					idQuestion:$scope.quizz.questions[i]._id,
+					reponses:[]
 				};
 
-				for (var j = 0; j < $scope.quizz.questions[i].answers.length; j++) 
+				for (var j in $scope.quizz.questions[i].answers) 
 				{
-					$scope.questions[i].reponse[j] = false ;
+					$scope.questions[i].reponses[j] = false ;
 				}
 			}
 
@@ -53,30 +50,14 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 
 				if ($scope.actualQuestion+1 < $scope.quizz.questions.length) 
 				{
-					var correct = true;
-					for(var i=0 ; i < $scope.quizz.questions[$scope.actualQuestion].answers.length; i++)
-					{			
-						if ($scope.quizz.questions[$scope.actualQuestion].answers[i].isCorrect !== $scope.questions[$scope.actualQuestion].reponse[i]) 
-						{
-							correct = false;
-							$scope.questions[$scope.actualQuestion].valider = false;
-						}
-					}
-
-					if (!$scope.questions[$scope.actualQuestion].valider) 
-					{
-						if (correct) 
-						{
-							$scope.questions[$scope.actualQuestion].valider = true;
-						}
-					}
+					
 					$scope.fin = false;
 					$scope.actualQuestion ++;
 				}
 
 				if ($scope.actualQuestion+1 === $scope.quizz.questions.length) 
 				{
-					$scope.fin =true;
+					$scope.fin = true;
 				}
 			};
 
@@ -94,6 +75,22 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 					$scope.debut = true;
 				}
 			};
+
+			$scope.terminerQuizz =function() {
+
+				var resultat = new Resultat({
+					idQuizz:$scope.quizz._id,
+					reponses:$scope.reponses
+				});
+				resultat.$save(function(response) {
+					$location.path('/quizzs/resultat/' + response._id);
+
+				}, function(errorResponse) {
+					$scope.error = errorResponse.data.message;
+				});
+			};
+
+
 		});
 }
 ]);
