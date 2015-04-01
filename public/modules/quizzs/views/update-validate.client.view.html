@@ -2,7 +2,7 @@
 	<div data-ng-controller="UpdateValidateQuizzController">
 		<div class="page-header">
 			<a href="/#!/quizzs/{{quizz._id}}/edit/question" class="pull-right btn btn-primary" role="button"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Etape précédente</a>
-			<h1>{{quizz.name}}</h1>
+			<h1>Quizz modifié : {{quizz.name}}</h1>
 		</div>
 
 		<div class="alert alert-danger" role="alert" data-ng-show="error" data-ng-bind="error"></div>
@@ -54,7 +54,7 @@
 					</div>
 
 					<div class="form-group">
-						<input type="submit" value="Valider"class="btn btn-default">
+						<a href="/#!/quizzs" class="btn btn-primary" role="button">Retourner aux quizzs</a>
 					</div>
 
 				</fieldset>
