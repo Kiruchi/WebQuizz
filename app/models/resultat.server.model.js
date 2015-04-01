@@ -3,27 +3,40 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+ var mongoose = require('mongoose'),
+ Schema = mongoose.Schema;
 
 /**
  * Resultat Schema
  */
-var ResultatSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Resultat name',
-		trim: true
-	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
-});
+ var ResultatSchema = new Schema({
+ 	pourcentage: {
+ 		type: String,
+ 		default: 'undefined'
+ 	},
+ 	reponses: [{
+ 		question: {
+ 			type: Schema.ObjectId,
+ 			ref: 'Question'
+ 		},
+ 		reponsesQ: [{
+ 			type: Boolean,
+ 			default: false,
+ 			required: 'Veuillez donner une réponse.'
+ 		}]
+ 	}],
+ 	played: {
+ 		type: Date,
+ 		default: Date.now
+ 	},
+ 	user: {
+ 		type: Schema.ObjectId,
+ 		ref: 'User'
+ 	},
+ 	quizz: {
+ 		type: Schema.ObjectId,
+ 		ref: 'Quizz'
+ 	}
+ });
 
-mongoose.model('Resultat', ResultatSchema);
+ mongoose.model('Resultat', ResultatSchema);
