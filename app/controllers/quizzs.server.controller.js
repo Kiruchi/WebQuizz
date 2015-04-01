@@ -16,7 +16,7 @@ exports.create = function(req, res) {
 	var quizz = new Quizz(req.body.infos);
 
 	for (var j = 0; j < req.body.questions.length; j++) {
-		var laQuestion = new Question(req.body.questions[i]);
+		var laQuestion = new Question(req.body.questions[j]);
 		quizz.questions.push(laQuestion);
 		laQuestion.save();
 	}

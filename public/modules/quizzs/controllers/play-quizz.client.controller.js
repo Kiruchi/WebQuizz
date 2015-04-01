@@ -78,7 +78,7 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 
 			$scope.terminerQuizz =function() {
 
-				var resultat = new Resultat({
+				/*var resultat = new Resultat({
 					idQuizz:$scope.quizz._id,
 					reponses:$scope.reponses
 				});
@@ -87,7 +87,7 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
-				});
+				});*/
 			};
 
 
