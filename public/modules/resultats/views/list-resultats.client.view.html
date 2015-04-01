@@ -1,17 +1,76 @@
 <section data-ng-controller="ResultatsController" data-ng-init="find()">
-    <div class="page-header">
+    <!--<div class="page-header">
         <h1>Résultats</h1>
     </div>
     <div class="list-group">
         <a data-ng-repeat="resultat in resultats" data-ng-href="#!/resultats/{{resultat._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="resultat.created | date:'medium'"></span>
-				by
+				Joué le 
+				<span data-ng-bind="resultat.played | date:'medium'"></span>
+				par
 				<span data-ng-bind="resultat.user.displayName"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="resultat.name"></h4>
+            <p>Quizz : {{resultat.quizz}}</p>
+            <p>Quizz : {{resultat.quizz.name}}</p>
+            <pre>Quizz : {{resultat.quizz.questions}}</pre>
+            <p>Difficulté du quizz : {{resultat.quizz.rate}}</p>
+            <p>Pourcentage : {{resultat.pourcentage}}</p>
+			<pre>Réponses : {{resultat.reponses}}</pre>
         </a>
+    </div>-->
+    <div class="page-header">
+        <h1>Résultats
+            <a type="button" class="newQuizz pull-right btn btn-sm btn-success" href="/#!/quizzs">
+                <i class="glyphicon glyphicon-plus">
+                </i> Jouer à un quizz
+            </a>
+        </h1>
+    </div>
+
+    <div ng-controller="TableresultController">
+        <div data-ng-if="resultats.length">
+            <div class="panel panel-default">
+                <table st-table="displayedCollection" st-safe-src="resultats" class="table table-striped table-bordered tableListQuizzs">
+                    <thead>
+                        <tr>
+                            <th colspan="7">
+                                <div class="recherche-nom input-group input-group-justified">
+                                    <div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+                                    <input st-search="name" class="form-control" placeholder="Rechercher..." type="text"/>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="tableHeaders">
+                            <th st-sort="quizz.name">Nom du quizz</th>
+                            <th st-sort="rate">Difficulté</th>
+                            <th st-sort="pourcentage">Résultat</th>
+                            <th st-sort="played">Joué le</th>
+                            <th st-sort="user.displayName">Joueur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="resultat in displayedCollection" ng-click="showResult(resultat)">
+                            <td>{{resultat.quizz.name}}</td>
+                            <td>
+                                <div class="stars">
+                                    <rating ng-model="resultat.quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+                                </div>
+                            </td>
+                            <td>{{resultat.pourcentage}}%</td>
+                            <td>{{resultat.played | date:'mediumDate'}}</td>
+                            <td>{{resultat.user.displayName}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7" class="text-center" >
+                                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!resultats.$resolved || resultats.length">
     	Vous n'avez pas encore joué à un quizz : <a href="/#!/quizzs">Jouer</a>

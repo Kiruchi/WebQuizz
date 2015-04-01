@@ -2,20 +2,21 @@
 	<div class="page-header">
 		<h1 data-ng-bind="resultat.name"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == resultat.user._id))">
-		<a class="btn btn-primary" href="/#!/resultats/{{resultat._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
 	<small>
-		<em class="text-muted">
-			Joué le
-			<span data-ng-bind="resultat.played | date:'mediumDate'"></span>
-			by
+			Joué le 
+			<span data-ng-bind="resultat.played | date:'medium'"></span>
+			par
 			<span data-ng-bind="resultat.user.displayName"></span>
-		</em>
+			</small>
+            <p>Quizz : {{resultat.quizz}}</p>
+            <p>Quizz : {{resultat.quizz.name}}</p>
+            <pre>Quizz : {{resultat.quizz.questions}}</pre>
+            <ul data-ng-repeat="question in resultat.quizz.questions">
+                <li>{{question.label}}</li>
+                <li>{{question.answers}}</li>
+            </ul>
+            <p>Difficulté du quizz : {{resultat.quizz.rate}}</p>
+            <p>Pourcentage : {{resultat.pourcentage}}</p>
+			<pre>Réponses : {{resultat.reponses}}</pre>
 	</small>
 </section>
