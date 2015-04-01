@@ -27,6 +27,33 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 		$scope.currentPage = 1;
 		$scope.items_per_page = 1;
 
+		$scope.verificationQuestions = function(){
+			for(var idQ in $scope.questions)
+			{
+				var c = false;
+				if($scope.questions[idQ].label==='')
+				{
+					return 'La question n°'+idQ+' n\'a pas d\'énoncé';
+				}
+				for(var idA in $scope.questions[idQ].answers)
+				{
+					if($scope.questions[idQ].answers[idA].label==='')
+					{
+						return 'La proposition '+idA+' de la question n°'+idQ+' n\'a pas d\'énoncé';
+					}
+					if($scope.questions[idQ].answers[idA].isCorrect===true)
+					{
+						c=true;
+					}
+				}
+				if(!c)
+				{
+					return 'La question n°'+idQ+' n\'a pas de reponse correct';
+				}
+			}
+			return '';
+		};
+
 		$scope.createQuestions = function(){
 			if($scope.nbQuestion===0)
 			{
@@ -34,8 +61,11 @@ angular.module('quizzs').controller('CreateQuestionsController', ['$scope', '$lo
 			}
 			else
 			{
-				$scope.error='';
-				$location.path('/quizzs/create/validate');
+				$scope.error=$scope.verificationQuestions();
+				if($scope.error==='')
+				{
+					$location.path('/quizzs/create/validate');
+				}
 			}
 		};
 

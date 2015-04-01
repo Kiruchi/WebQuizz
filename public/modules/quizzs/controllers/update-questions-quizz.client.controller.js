@@ -26,7 +26,34 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 			$scope.maxSize = 5;
 			$scope.TotalItems = 50;
 			$scope.currentPage = 1;
-			$scope.items_per_page = 1;	
+			$scope.items_per_page = 1;
+
+			$scope.verificationQuestions = function(){
+				for(var idQ in $scope.quizz.questions)
+				{
+					var c = false;
+					if($scope.quizz.questions[idQ].label==='')
+					{
+						return 'La question n°'+idQ+' n\'a pas d\'énoncé';
+					}
+					for(var idA in $scope.quizz.questions[idQ].answers)
+					{
+						if($scope.quizz.questions[idQ].answers[idA].label==='')
+						{
+							return 'La proposition '+idA+' de la question n°'+idQ+' n\'a pas d\'énoncé';
+						}
+						if($scope.quizz.questions[idQ].answers[idA].isCorrect===true)
+						{
+							c=true;
+						}
+					}
+					if(!c)
+					{
+						return 'La question n°'+idQ+' n\'a pas de reponse correct';
+					}
+				}
+				return '';
+			};
 
 			$scope.updateQuestions = function(){
 				if($scope.nbQuestion===0)
@@ -35,14 +62,18 @@ angular.module('quizzs').controller('UpdateQuestionsController', ['$scope', '$lo
 				}
 				else
 				{
-					var quizz = $scope.quizz;
+					$scope.error=$scope.verificationQuestions();
+					if($scope.error==='')
+					{
+						var quizz = $scope.quizz;
 
-					quizz.$update(function() {
-						$scope.error='';
-						$location.path('/quizzs/' + $scope.quizz._id + '/edit/validate');
-					}, function(errorResponse) {
-						$scope.error = errorResponse.data.message;
-					});
+						quizz.$update(function() {
+							$scope.error='';
+							$location.path('/quizzs/' + $scope.quizz._id + '/edit/validate');
+						}, function(errorResponse) {
+							$scope.error = errorResponse.data.message;
+						});
+					}
 				}
 			};
 
