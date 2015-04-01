@@ -4963,6 +4963,10 @@ a {
     background-color: #408DE5;
     border-color: #3da3ef; }
 
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+  background-color: #408DE5;
+  border-color: #3da3ef; }
+
 .icon-left-navbar {
   margin-right: 8px; }
 

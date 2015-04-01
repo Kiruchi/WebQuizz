@@ -141,6 +141,11 @@ a {
   }
 }
 
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+  background-color: $bleu-fonce;
+  border-color: $bleu-principal;
+}
+
 .icon-left-navbar {
   margin-right: 8px;
 }

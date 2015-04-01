@@ -15,7 +15,7 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var quizz = new Quizz(req.body.infos);
 
-	for (var i = req.body.questions.length - 1; i >= 0; i--) {
+	for (var j = 0; j < req.body.questions.length; j++) {
 		var laQuestion = new Question(req.body.questions[i]);
 		quizz.questions.push(laQuestion);
 		laQuestion.save();
@@ -46,27 +46,42 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var quizz = req.quizz;
-
-	quizz = _.extend(quizz, req.body);
-
-	for (var i = quizz.questions.length - 1; i >= 0; i--) {
-		var maQ = new Question(quizz.questions[i]).toObject();
-		//Question.findByIdAndUpdate(maQ._id, maQ, console.log);
-		/*quizz.questions[i].remove();
-		maQ.save(console.log);
-		quizz.questions.push(maQ);*/
-	}
+	
+	var monQuizz = _.extend({}, req.body);
 
 	quizz = _.extend(quizz, req.body);
 	
-	quizz.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.json(quizz);
+	// Récupération du quizz actuel et suppression des questions
+	Quizz.findById(quizz._id).populate('questions').exec(function(err, leQuizz) {
+		// Début suppression des questions
+		for (var i = leQuizz.questions.length - 1; i >= 0; i--) {
+			leQuizz.questions[i].remove();
 		}
+		// Fin suppression des questions
+
+		// Clean des id questions
+		quizz.questions = [];
+		// Fin clean des id questions
+
+		// Ajout des nouvelles questions
+		for (var j = 0; j < monQuizz.questions.length; j++) {
+			var maQ = new Question(monQuizz.questions[j]);
+			quizz.questions.push(maQ);
+			console.log('Dans la boucle');
+			console.log(quizz.questions);
+			maQ.save(console.log);
+		}
+		// Fin d'ajout des nouvelles questions
+		
+		quizz.save(function(err) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.json(quizz);
+			}
+		});
 	});
 };
 
