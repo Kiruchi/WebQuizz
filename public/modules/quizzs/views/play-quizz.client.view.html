@@ -3,51 +3,49 @@
 	<div data-ng-controller="PlayQuizzController">
 
 		<div class="page-header">
+			<small>
+				<em class="pull-right text-muted">
+					Créé le
+					<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
+					par
+					<span data-ng-bind="quizz.creator.displayName"></span>
+				</em>
+			</small>
+
 			<h1 data-ng-bind="quizz.name"></h1>
+			<div class="stars">
+				<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+			</div>
+			<div class="pull-right" data-ng-show="authentication.user._id == quizz.creator._id">
+				<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
+					<i class="glyphicon glyphicon-edit"></i>
+				</a>
+				<a class="btn btn-danger" data-ng-click="remove();">
+					<i class="glyphicon glyphicon-trash"></i>
+				</a>
+			</div>
+			<br>
 		</div>
 
-		<div class="pull-right" data-ng-show="authentication.user._id == quizz.creator._id">
+		<progressbar max="quizz.questions.length" value="actualQuestion+1" ng-if="quizz.questions.length">
+			<i>{{actualQuestion+1}}/{{quizz.questions.length}}</i>
+		</progressbar>
 
-			<a class="btn btn-default" href="/#!/quizzs/{{quizz._id}}/edit">
-				<i class="glyphicon glyphicon-edit"></i>
-			</a>
-			<a class="btn btn-danger" data-ng-click="remove();">
-				<i class="glyphicon glyphicon-trash"></i>
-			</a>
-
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<p>{{quizz.questions[actualQuestion].label}}</p>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item reponseTab" ng-repeat="answer in quizz.questions[actualQuestion].answers" ng-class="{ 'is-correct': questions[actualQuestion].reponse[$index] }">
+					<input type="checkbox" ng-model="questions[actualQuestion].reponse[$index]">
+					<span class="reponseTab2">{{answer.label}}</span>
+				</li>
+			</ul>
 		</div>
-
-		<small>
-			<em class="text-muted">
-				Créé le
-				<span data-ng-bind="quizz.created | date:'mediumDate'"></span>
-				par
-				<span data-ng-bind="quizz.creator.displayName"></span>
-			</em>
-		</small>
-
-
-		<h1 class="lead"><small>{{quizz.description}}</small></h1>
-	<p>Difficulté : 
-		<div class="stars">
-			<rating ng-model="quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+		<div class="text-center">
+			<button type="button" class="btn btn-default" ng-click= "previousQuestion()" ng-hide ="debut"> Question précédente </button>
+			<button type="button" class="btn btn-default" ng-click= "nextQuestion()" ng-hide = "fin"> Question suivante </button>
+			<button type="button" class="btn btn-default" ng-click= "terminerQuizz()" ng-show = "fin"> Terminer le quizz </button>
 		</div>
-	</p>
-
-	<div>
-		<h1> Question n°{{actualQuestion+1}}  sur {{quizz.questions.length}}  </h1>
-		<span> Intitulé : {{quizz.questions[actualQuestion].label}} </span>
-		
-		<ul class="list-group">
-			<li ng-repeat="answer in quizz.questions[actualQuestion].answers ">
-				<input type="checkbox" ng-model = "questions[actualQuestion].reponse[$index]">
-				<label>{{answer.label}}</label>
-			</li>
-		</ul>
-
 	</div>
-
-	<button type="button" class="btn btn-default" ng-click= "previousQuestion()" ng-hide ="debut"> Question precedente </button>
-	<button type="button" class="btn btn-default" ng-click= "nextQuestion()" ng-hide = "fin"> Question suivante </button>
-	<button type="button" class="btn btn-default" ng-click= "terminerQuizz()" ng-show = "fin"> Terminer le quizz </button>
 </section>

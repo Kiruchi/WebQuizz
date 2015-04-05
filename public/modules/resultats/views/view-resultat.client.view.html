@@ -2,21 +2,30 @@
 	<div class="page-header">
 		<h1 data-ng-bind="resultat.name"></h1>
 	</div>
-	<small>
-			Joué le 
-			<span data-ng-bind="resultat.played | date:'medium'"></span>
-			par
-			<span data-ng-bind="resultat.user.displayName"></span>
-			</small>
-            <p>Quizz : {{resultat.quizz}}</p>
-            <p>Quizz : {{resultat.quizz.name}}</p>
-            <pre>Quizz : {{resultat.quizz.questions}}</pre>
-            <ul data-ng-repeat="question in resultat.quizz.questions">
-                <li>{{question.label}}</li>
-                <li>{{question.answers}}</li>
-            </ul>
-            <p>Difficulté du quizz : {{resultat.quizz.rate}}</p>
-            <p>Pourcentage : {{resultat.pourcentage}}</p>
-			<pre>Réponses : {{resultat.reponses}}</pre>
+	<small class="pull-right">
+		Joué le 
+		<span>{{resultat.played | date:'shortDate'}} à {{resultat.played | date:'shortTime'}}</span>
+		par
+		<span data-ng-bind="resultat.user.displayName"></span>
 	</small>
+	<h1>{{resultat.quizz.name}}</h1>
+	<div class="stars">
+		<rating ng-model="resultat.quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+	</div>
+	<h1 class="text-center"><span class="label resultatBold" ng-class="{ 'label-danger': resultat.pourcentage<25, 'label-warning': resultat.pourcentage<75, 'label-success': resultat.pourcentage>=75}">{{resultat.pourcentage | number:2}}%</span></h1>
+
+	<div class="form-group">
+		<h2>Questions <small>Réponses données en gras, bonnes réponses sur fond vert</small></h2>	
+
+		<div class="panel panel-default" ng-repeat="question in resultat.quizz.questions">
+			<div class="panel-heading">
+				<h3 class="panel-title titrePanel">{{question.label}}</h3>
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="answer in question.answers" ng-class="{ 'is-correct': answer.isCorrect, 'myAnswer': resultat.reponses[$parent.$index].reponse[$index] }">
+					<p>{{answer.label}}</p>
+				</li>
+			</ul>
+		</div>
+	</div>
 </section>

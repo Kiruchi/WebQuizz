@@ -1,31 +1,54 @@
 <section data-ng-controller="QuizzsController" data-ng-init="findOne()">
 	<div class="page-header">
+		<small>
+			<em class="pull-right">
+				Créé le
+				<span>{{leQuizz.created | date:'mediumDate'}} à {{leQuizz.created | date:'shortTime'}}</span>
+				par
+				<span data-ng-bind="leQuizz.creator.displayName"></span>
+			</em>
+		</small>
 		<h1 data-ng-bind="leQuizz.name"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="authentication.user._id == leQuizz.creator._id">
-		<a class="btn btn-default" href="/#!/quizzs/{{leQuizz._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-danger" data-ng-click="remove(leQuizz);">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Créé le
-			<span>{{leQuizz.created | date:'mediumDate'}} à {{leQuizz.created | date:'shortTime'}}</span>
-			par
-			<span data-ng-bind="leQuizz.creator.displayName"></span>
-		</em>
-	</small>
-	<h1 class="lead"><small>{{leQuizz.description}}</small></h1>
-	<p>Date de début : {{leQuizz.beginDate | date:'shortTime' }}, {{leQuizz.beginDate | date:'fullDate' }}</p>
-	<p ng-if="leQuizz.endDate">Date de fin : {{leQuizz.endDate | date:'shortTime' }}, {{leQuizz.endDate | date:'fullDate' }}</p>
-	<p>Matière : {{leQuizz.course}}</p>
-	<p>Difficulté : 
-		<div class="stars">
-			<rating ng-model="leQuizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+
+
+	
+	<div class="panel panel-default">
+
+		<div class="panel-heading">
+			<div class="pull-right" data-ng-show="authentication.user._id == leQuizz.creator._id">
+				<a class="btn btn-default" href="/#!/quizzs/{{leQuizz._id}}/edit">
+					<i class="glyphicon glyphicon-edit"></i>
+				</a>
+				<a class="btn btn-danger" data-ng-click="remove(leQuizz);">
+					<i class="glyphicon glyphicon-trash"></i>
+				</a>
+			</div>
+			<h1 class="lead"><small>{{leQuizz.description}}</small></h1>
 		</div>
-	</p>
-	<button type="button" class="btn btn-default" ng-click= "playQuizz(leQuizz)"> Lancer le Quizz </button>
+		<table class="table table-bordered">
+			<tr>
+				<td>Difficulté</td>
+				<td><div class="stars">
+					<rating ng-model="leQuizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+				</div></td>
+			</tr>
+			<tr>
+				<td>Matière</td>
+				<td>{{leQuizz.course}}</td>
+			</tr>
+			<tr>
+				<td>Date de début</td>
+				<td>{{leQuizz.beginDate | date:'mediumDate' }} à {{leQuizz.beginDate | date:'shortTime' }}</td>
+			</tr>
+			<tr ng-if="leQuizz.endDate">
+				<td>Date de fin</td>
+				<td>{{leQuizz.endDate | date:'mediumDate' }} à {{leQuizz.endDate | date:'shortTime' }}</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="text-center">
+		<button type="button" class="btn btn-primary" ng-click= "playQuizz(leQuizz)"> Lancer le Quizz </button>
+	</div>
 </section>

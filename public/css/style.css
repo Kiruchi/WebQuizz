@@ -4906,6 +4906,27 @@ a {
 [ng-click] {
   cursor: pointer; }
 
+.reponseTab {
+  vertical-align: center; }
+
+.reponseTab2 {
+  margin-left: 5px; }
+
+.progress-bar {
+  background-color: #408DE5; }
+
+.myAnswer {
+  font-weight: bold;
+  font-style: italic; }
+
+.resultat {
+  font-size: 15px;
+  font-weight: normal; }
+
+.resultatBold {
+  font-size: 25px;
+  font-weight: normal; }
+
 .panel-title {
   color: #ADADAD; }
 

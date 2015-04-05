@@ -74,7 +74,7 @@
  * List of Resultats
  */
  exports.list = function(req, res) { 
-	Resultat.find().populate('user', 'displayName').populate('quizz', 'name rate questions').exec(function(err, resultat) {
+	Resultat.find().sort('-played').populate('user', 'displayName').populate('quizz', 'name rate questions').exec(function(err, resultat) {
  		if (err) {
  			return res.status(400).send({
  				message: errorHandler.getErrorMessage(err)

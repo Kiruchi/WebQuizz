@@ -33,17 +33,19 @@ angular.module('quizzs').controller('PlayQuizzController', ['$scope', '$statePar
 
 			//gestion des évenements de la page
 
+			/*
+			// A REMETTRE QUAND CE SERA FONCTIONNEL
 			window.onbeforeunload = function (event) {
 				event.returnValue = 'ATTENTION !!!! Vous allez perdre les réponses de ce quizz si vous ne les validez pas';
 			};
 
 
 			$scope.$on('$locationChangeStart', function(event, next, current) {
-				if(!confirm('ATTENTION !!!! Vous allez perdre les réponses de ce quiz si vous ne les validez pas \n\n Voulez-vous vraiment quitter cette page ?')) {
+				if(!confirm('ATTENTION !!!! Vous allez perdre les réponses de ce quizz si vous ne les validez pas \n\n Voulez-vous vraiment quitter cette page ?')) {
 					event.preventDefault();
 				}
 			});
-
+			*/
 			$scope.nextQuestion = function() {
 
 				$scope.debut = false;
