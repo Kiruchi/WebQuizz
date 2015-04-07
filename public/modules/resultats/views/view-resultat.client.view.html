@@ -1,16 +1,15 @@
 <section data-ng-controller="ResultatsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="resultat.name"></h1>
-	</div>
-	<small class="pull-right">
-		Joué le 
-		<span>{{resultat.played | date:'shortDate'}} à {{resultat.played | date:'shortTime'}}</span>
-		par
-		<span data-ng-bind="resultat.user.displayName"></span>
-	</small>
-	<h1>{{resultat.quizz.name}}</h1>
-	<div class="stars">
-		<rating ng-model="resultat.quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+		<small class="pull-right">
+			Joué le 
+			<span>{{resultat.played | date:'shortDate'}} à {{resultat.played | date:'shortTime'}}</span>
+			par
+			<span data-ng-bind="resultat.user.displayName"></span>
+		</small>
+		<h1>{{resultat.quizz.name}}</h1>
+		<div class="stars">
+			<rating ng-model="resultat.quizz.rate" max="5" state-on="overstar" state-off="overstar = null" enable="false" readonly="true"></rating>
+		</div>
 	</div>
 	<h1 class="text-center"><span class="label resultatBold" ng-class="{ 'label-danger': resultat.pourcentage<25, 'label-warning': resultat.pourcentage<75, 'label-success': resultat.pourcentage>=75}">{{resultat.pourcentage | number:2}}%</span></h1>
 
