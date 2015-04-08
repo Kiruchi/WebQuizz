@@ -4917,7 +4917,8 @@ a {
 
 .myAnswer {
   font-weight: bold;
-  font-style: italic; }
+  font-style: italic;
+  color: #408DE5; }
 
 .resultat {
   font-size: 15px;

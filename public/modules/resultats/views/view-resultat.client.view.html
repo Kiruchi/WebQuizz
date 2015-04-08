@@ -14,7 +14,7 @@
 	<h1 class="text-center"><span class="label resultatBold" ng-class="{ 'label-danger': resultat.pourcentage<25, 'label-warning': resultat.pourcentage<75, 'label-success': resultat.pourcentage>=75}">{{resultat.pourcentage | number:2}}%</span></h1>
 
 	<div class="form-group">
-		<h2>Questions <small>Réponses données en gras, bonnes réponses sur fond vert</small></h2>	
+		<h2>Questions <small>Réponses données en bleu, bonnes réponses sur fond vert</small></h2>	
 
 		<div class="panel panel-default" ng-repeat="question in resultat.quizz.questions">
 			<div class="panel-heading">
